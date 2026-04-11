@@ -7,12 +7,19 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "type-check": "tsc --noEmit",
+    "sass:watch": "sass --watch src/styles/main.scss:src/styles/main.css"
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-helmet-async": "^3.0.0",
+    "react-router-dom": "^7.14.0",
+    "sass": "^1.99.0",
     "vite-plugin-svgr": "^5.2.0"
   },
   "devDependencies": {
