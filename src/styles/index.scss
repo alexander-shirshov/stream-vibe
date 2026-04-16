@@ -1,6 +1,9 @@
 //core
+@forward './normalize';
 @forward './core';
 //basic
 @forward './fonts';
 @forward './globals';
 @forward './utils';
+//ui
+@forward './ui/icon';

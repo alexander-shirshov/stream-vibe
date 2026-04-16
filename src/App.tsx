@@ -1,14 +1,16 @@
 import { Routes, Route } from 'react-router-dom';
-import Home from '@/pages/Home';
+import { linkItems } from '@/constants/linkItems';
+import { getTypedEntries } from '@/utils/typedEntries';
 import PageLayout from '@/layouts/PageLayout';
-import About from '@/pages/About';
 
 function App() {
   return (
     <Routes>
       <Route element={<PageLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        {getTypedEntries(linkItems).map(([label, item]) => {
+          const Component = item.component;
+          return <Route key={label} path={item.path} element={<Component />} />;
+        })}
       </Route>
     </Routes>
   );

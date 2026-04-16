@@ -1,3 +1,102 @@
+import Logo from '@/components/Logo/Logo';
+import { linkItems } from '@/constants/linkItems';
+import { NavLink } from 'react-router-dom';
+import './Header.scss';
+import clsx from 'clsx';
+import SearchIcon from '@/assets/icons/lens.svg?react';
+import NotificationIcon from '@/assets/icons/bell.svg?react';
+
+import { getTypedEntries } from '@/utils/typedEntries';
+import { useLanguage } from '@/i18n/LanguageProvider';
+import LinkButton from '@/components/Button';
+import BurgerButton from '@/components/BurgerButton';
+import { useState, useEffect } from 'react';
+
 export default function Header() {
-  return <header>Header</header>;
+  const { t } = useLanguage();
+
+  const [dialogState, setDialogState] = useState(false);
+
+  const toggleDialog = () => {
+    setDialogState(prev => !prev);
+  };
+
+  const handleMenuClick = (e: React.MouseEvent<HTMLUListElement>) => {
+    const target = e.target as HTMLElement;
+
+    if (target.closest('a')) {
+      setDialogState(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!dialogState) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setDialogState(false);
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [dialogState]);
+
+  useEffect(() => {
+    if (dialogState) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+
+    return () => {
+      document.body.classList.remove('no-scroll');
+    };
+  }, [dialogState]);
+
+  return (
+    <header className="header">
+      <div className="header__inner container">
+        <Logo />
+        <dialog className="header__overlay-menu-dialog" open={dialogState}>
+          <nav className="header__menu">
+            <ul className="header__menu-list" onClick={handleMenuClick}>
+              {getTypedEntries(linkItems).map(([label, item]) => {
+                const isEnd = item.path === '/';
+                if (item.inMenu) {
+                  return (
+                    <li className="header__menu-item" key={label}>
+                      <NavLink
+                        to={item.path}
+                        end={isEnd}
+                        className={({ isActive }) =>
+                          clsx('header__menu-link', isActive && 'is-active')
+                        }
+                      >
+                        {t(`link.${label}`)}
+                      </NavLink>
+                    </li>
+                  );
+                }
+                return null;
+              })}
+            </ul>
+          </nav>
+          <div className="header__actions">
+            <LinkButton variant="transparent" ariaLabel={t('headerActions.search')}>
+              <SearchIcon className="icon button__icon" />
+            </LinkButton>
+
+            <LinkButton variant="transparent" ariaLabel={t('headerActions.notifications')}>
+              <NotificationIcon className="icon button__icon" />
+            </LinkButton>
+          </div>
+        </dialog>
+        <BurgerButton
+          customClass={clsx('header__burger-button visible-tablet', dialogState && 'is-active')}
+          onClick={toggleDialog}
+          isExpanded={dialogState}
+        />
+      </div>
+    </header>
+  );
 }

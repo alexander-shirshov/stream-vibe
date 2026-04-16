@@ -1,10 +1,14 @@
 import { Helmet } from 'react-helmet-async';
+import { getTitle } from '@/utils/seo';
+import { useLanguage } from '@/i18n/LanguageProvider';
 
 export default function Home() {
+  const { t } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Stream Vibe | Home</title>
+        <title>{getTitle(t('main.pageTitle'))}</title>
         <meta name="description" content="Главная страница Stream Vibe" />
       </Helmet>
 

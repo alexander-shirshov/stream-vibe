@@ -1,0 +1,9 @@
+@use '@/styles/helpers' as *;
+
+.logo {
+  &__image {
+    width: fluid(199, 116);
+    height: auto;
+    // height: 60px;
+  }
+}

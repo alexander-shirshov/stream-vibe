@@ -1,0 +1,11 @@
+@use '@/styles/helpers' as *;
+
+.icon {
+  color: var(--color-white);
+
+  --iconSize: #{fluid-to-laptop(28, 24)};
+
+  @include square(var(--iconSize));
+
+  display: flex;
+}
