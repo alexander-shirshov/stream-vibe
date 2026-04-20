@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { getTitle } from '@/utils/seo';
 import { useLanguage } from '@/i18n/LanguageProvider';
+import { Hero } from '@/pages/Home/sections/';
 
 export default function Home() {
   const { t } = useLanguage();
@@ -12,7 +13,7 @@ export default function Home() {
         <meta name="description" content="Главная страница Stream Vibe" />
       </Helmet>
 
-      <h1>Главная</h1>
+      <Hero />
     </>
   );
 }

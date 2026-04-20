@@ -6,6 +6,7 @@ import './Header.scss';
 import clsx from 'clsx';
 import SearchIcon from '@/assets/icons/lens.svg?react';
 import NotificationIcon from '@/assets/icons/bell.svg?react';
+import { useLocation } from 'react-router-dom';
 
 import { useLanguage } from '@/i18n/LanguageProvider';
 import LinkButton from '@/components/Button';
@@ -13,6 +14,8 @@ import BurgerButton from '@/components/BurgerButton';
 import { useState, useEffect } from 'react';
 
 export default function Header() {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   const { t } = useLanguage();
 
   const [dialogState, setDialogState] = useState(false);
@@ -54,7 +57,7 @@ export default function Header() {
   }, [dialogState]);
 
   return (
-    <header className="header">
+    <header className={clsx('header', isHome && 'header--fixed')}>
       <div className="header__inner container">
         <Logo />
         <dialog className="header__overlay-menu-dialog" open={dialogState}>

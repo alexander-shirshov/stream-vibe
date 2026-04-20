@@ -1,0 +1,82 @@
+@use '@/styles/helpers' as *;
+
+.hero {
+  min-height: 100vh;
+  padding-bottom: var(--section-padding-y);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  @include mobile {
+    min-height: 639px;
+  }
+
+  &__pano {
+    --heroGradientColorStart: var(--color-black-08);
+    --heroGradientColorEnd: rgb(20 20 20 / 0);
+
+    --heroGradientHeight: 67.5%;
+
+    --heroGradientTop: linear-gradient(
+        to bottom,
+        var(--heroGradientColorStart) 0%,
+        var(--heroGradientColorEnd) 100%
+      )
+      50% 0/100.5% var(--heroGradientHeight);
+    //направление
+    //цвет в начале
+    //цвет в конце
+    //положение по горизонтали положение по вертикали/ширина высота
+
+    --heroGradientBottom: linear-gradient(
+        to top,
+        var(--heroGradientColorStart) 0%,
+        var(--heroGradientColorEnd) 100%
+      )
+      50% 100.5%/1100.5% var(--heroGradientHeight);
+
+    @include flex-center;
+
+    flex-grow: 1;
+
+    padding-top: fluid(195, 150);
+    padding-bottom: fluid(131, 50);
+
+    background:
+      var(--heroGradientTop),
+      var(--heroGradientBottom),
+      url('../../../../assets/images/hero/bg.png') 50% / cover;
+    background-repeat: no-repeat;
+  }
+
+  &__play-button {
+    @include square(fluid(470, 200));
+    padding: 0;
+    background-color: transparent;
+    border: none;
+  }
+
+  &__title {
+    margin-top: -0.5em;
+    margin-bottom: fluid-to-laptop(14, 10);
+  }
+
+  &__decription {
+    margin-bottom: fluid(50, 30);
+  }
+
+  &__cta {
+    display: flex;
+    align-items: center;
+    column-gap: 9px;
+
+    & svg {
+      color: var(--color-white);
+      @include square(19px);
+    }
+  }
+
+  &__body {
+    padding-bottom: fluid(50, 20);
+  }
+}

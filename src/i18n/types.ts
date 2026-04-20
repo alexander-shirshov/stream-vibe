@@ -1,4 +1,4 @@
-export const SUPPORTED_LANGUAGES = ['ru'] as const;
+export const SUPPORTED_LANGUAGES = ['ru', 'en'] as const;
 
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
 
@@ -65,5 +65,15 @@ export interface Messages {
 
   main: {
     pageTitle: string;
+  };
+
+  playButton: {
+    title: string;
+  };
+
+  hero: {
+    title: string;
+    descr: string;
+    cta: string;
   };
 }
