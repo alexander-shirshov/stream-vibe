@@ -23,9 +23,44 @@ export interface Messages {
 
   link: {
     home: string;
+    catalog: string;
     movies: string;
+    shows: string;
     support: string;
     subscriptions: string;
+  };
+
+  footerLink: {
+    home: string;
+    homeCategories: string;
+    homeDevices: string;
+    homePricing: string;
+    homeFaq: string;
+    movies: string;
+    moviesGenres: string;
+    moviesTrending: string;
+    moviesNew: string;
+    moviesPopular: string;
+    shows: string;
+    showsGenres: string;
+    showsTrending: string;
+    showsNew: string;
+    showsPopular: string;
+    support: string;
+    supportContact: string;
+    subscriptions: string;
+    subscriptionsPlans: string;
+    subscriptionsFeatures: string;
+    termsOfUse: string;
+    privacyPolicy: string;
+    cookiePolicy: string;
+  };
+
+  socials: {
+    title: string;
+    facebook: string;
+    x: string;
+    linkedin: string;
   };
 
   main: {

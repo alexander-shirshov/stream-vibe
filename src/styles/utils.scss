@@ -6,6 +6,12 @@
   padding-inline: var(--container-padding-x);
 }
 
+.page-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .visually-hidden {
   @include visually-hidden;
 }

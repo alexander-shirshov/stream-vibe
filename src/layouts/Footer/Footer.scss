@@ -1,0 +1,80 @@
+@use '@/styles/helpers' as *;
+
+.footer {
+  background-color: var(--color-black-06);
+
+  &__menu {
+    --footerMenuColumns: 6;
+
+    display: grid;
+    grid-template-columns: repeat(var(--footerMenuColumns), 1fr);
+    gap: 30px fluid(30, 10);
+    padding-block: fluid(100, 50);
+    border-bottom: var(--border);
+
+    @include laptop {
+      --footerMenuColumns: 3;
+    }
+
+    @include mobile {
+      --footerMenuColumns: 2;
+    }
+
+    &-column {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      row-gap: fluid(24, 16);
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      row-gap: fluid(14, 8);
+    }
+
+    &-link {
+      & svg {
+        @include square(24px);
+        color: var(--color-white);
+      }
+    }
+  }
+
+  &__extra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: fluid-to-laptop(24, 20);
+    padding-bottom: fluid(50, 20);
+
+    &-links {
+      display: flex;
+      column-gap: 16px;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      row-gap: 20px;
+    }
+  }
+}
+
+.soc1als {
+  &__list {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px fluid-to-laptop(14, 10);
+  }
+
+  &__item {
+    align-self: flex-start;
+  }
+}
+
+.footer__social-link {
+  display: inline-flex;
+}

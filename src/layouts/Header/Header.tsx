@@ -1,12 +1,12 @@
 import Logo from '@/components/Logo/Logo';
-import { linkItems } from '@/constants/linkItems';
+import { headerNav } from '@/constants/navConfig';
+import { getPath } from '@/router/routes';
 import { NavLink } from 'react-router-dom';
 import './Header.scss';
 import clsx from 'clsx';
 import SearchIcon from '@/assets/icons/lens.svg?react';
 import NotificationIcon from '@/assets/icons/bell.svg?react';
 
-import { getTypedEntries } from '@/utils/typedEntries';
 import { useLanguage } from '@/i18n/LanguageProvider';
 import LinkButton from '@/components/Button';
 import BurgerButton from '@/components/BurgerButton';
@@ -60,33 +60,35 @@ export default function Header() {
         <dialog className="header__overlay-menu-dialog" open={dialogState}>
           <nav className="header__menu">
             <ul className="header__menu-list" onClick={handleMenuClick}>
-              {getTypedEntries(linkItems).map(([label, item]) => {
-                const isEnd = item.path === '/';
-                if (item.inMenu) {
-                  return (
-                    <li className="header__menu-item" key={label}>
-                      <NavLink
-                        to={item.path}
-                        end={isEnd}
-                        className={({ isActive }) =>
-                          clsx('header__menu-link', isActive && 'is-active')
-                        }
-                      >
-                        {t(`link.${label}`)}
-                      </NavLink>
-                    </li>
-                  );
-                }
-                return null;
+              {headerNav.map(item => {
+                const path = getPath(item.route);
+                const isEnd = path === '/';
+                return (
+                  <li className="header__menu-item" key={item.labelKey}>
+                    <NavLink
+                      to={path}
+                      end={isEnd}
+                      className={({ isActive }) =>
+                        clsx('header__menu-link', isActive && 'is-active')
+                      }
+                    >
+                      {t(`link.${item.labelKey}`)}
+                    </NavLink>
+                  </li>
+                );
               })}
             </ul>
           </nav>
           <div className="header__actions">
-            <LinkButton variant="transparent" ariaLabel={t('headerActions.search')}>
+            <LinkButton mode="button" variant="transparent" ariaLabel={t('headerActions.search')}>
               <SearchIcon className="icon button__icon" />
             </LinkButton>
 
-            <LinkButton variant="transparent" ariaLabel={t('headerActions.notifications')}>
+            <LinkButton
+              mode="button"
+              variant="transparent"
+              ariaLabel={t('headerActions.notifications')}
+            >
               <NotificationIcon className="icon button__icon" />
             </LinkButton>
           </div>
