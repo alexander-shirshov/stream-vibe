@@ -76,6 +76,19 @@ const en: Messages = {
       'StreamVibe is the best way to watch your favorite movies and shows on demand, anytime, anywhere. Enjoy a vast library of content, including the latest blockbusters, classic films, popular TV shows, and more. Create your own watchlists and easily find what you want to watch.',
     cta: 'Start Watching Now',
   },
+
+  categories: {
+    title: 'Explore our wide variety of categories',
+    descr: `Whether you're looking for a comedy to make you laugh, a drama to make you think, or a documentary to learn something new`,
+  },
+
+  categoryCard: {
+    action: 'Action',
+    adventure: 'Adventure',
+    comedy: 'Comedy',
+    drama: 'Drama',
+    horror: 'Horror',
+  },
 };
 
 export default en;

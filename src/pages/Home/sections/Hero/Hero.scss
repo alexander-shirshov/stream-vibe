@@ -54,6 +54,8 @@
     padding: 0;
     background-color: transparent;
     border: none;
+
+    -webkit-tap-highlight-color: transparent;
   }
 
   &__title {
@@ -61,7 +63,7 @@
     margin-bottom: fluid-to-laptop(14, 10);
   }
 
-  &__decription {
+  &__description {
     margin-bottom: fluid(50, 30);
   }
 
@@ -79,4 +81,59 @@
   &__body {
     padding-bottom: fluid(50, 20);
   }
+}
+
+//glass play button
+
+.hero__play-icon {
+  transition: transform 0.35s ease;
+  transform-origin: center;
+}
+
+.hero__play-icon .play-glass-icon__ring-fill-stop-1,
+.hero__play-icon .play-glass-icon__ring-fill-stop-2,
+.hero__play-icon .play-glass-icon__ring-stroke-stop-1,
+.hero__play-icon .play-glass-icon__ring-stroke-stop-2,
+.hero__play-icon .play-glass-icon__triangle-fill-stop-1,
+.hero__play-icon .play-glass-icon__triangle-fill-stop-2,
+.hero__play-icon .play-glass-icon__triangle-fill-stop-3,
+.hero__play-icon .play-glass-icon__triangle-stroke-stop-1,
+.hero__play-icon .play-glass-icon__triangle-stroke-stop-2,
+.hero__play-icon .play-glass-icon__ring-stroke,
+.hero__play-icon .play-glass-icon__triangle-stroke {
+  transition:
+    stop-color 0.35s ease,
+    stroke-opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.hero__play-button:hover .hero__play-icon {
+  transform: scale(1.03);
+}
+
+.hero__play-button:hover .play-glass-icon__ring-fill-stop-1,
+.hero__play-button:hover .play-glass-icon__triangle-fill-stop-1 {
+  stop-color: rgb(255 255 255 / 0.92);
+}
+
+.hero__play-button:hover .play-glass-icon__ring-fill-stop-2,
+.hero__play-button:hover .play-glass-icon__triangle-fill-stop-2 {
+  stop-color: rgb(255 51 51 / 0.55);
+}
+
+.hero__play-button:hover .play-glass-icon__triangle-fill-stop-3 {
+  stop-color: rgb(255 51 51 / 0);
+}
+
+.hero__play-button:hover .play-glass-icon__ring-stroke-stop-2,
+.hero__play-button:hover .play-glass-icon__triangle-stroke-stop-2 {
+  stop-color: rgb(255 120 120 / 0.95);
+}
+
+.hero__play-button:hover .play-glass-icon__ring-stroke,
+.hero__play-button:hover .play-glass-icon__triangle-stroke {
+  stroke-opacity: 0.72;
+}
+.hero__play-button:active .hero__play-icon {
+  transform: scale(0.98);
 }

@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { getTitle } from '@/utils/seo';
 import { useLanguage } from '@/i18n/LanguageProvider';
 import { Hero } from '@/pages/Home/sections/';
+import { Categories } from './sections/Categories/Categories';
 
 export default function Home() {
   const { t } = useLanguage();
@@ -14,6 +15,7 @@ export default function Home() {
       </Helmet>
 
       <Hero />
+      <Categories />
     </>
   );
 }

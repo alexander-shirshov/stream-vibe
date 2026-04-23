@@ -76,4 +76,17 @@ export interface Messages {
     descr: string;
     cta: string;
   };
+
+  categories: {
+    title: string;
+    descr: string;
+  };
+
+  categoryCard: {
+    action: string;
+    adventure: string;
+    comedy: string;
+    drama: string;
+    horror: string;
+  };
 }

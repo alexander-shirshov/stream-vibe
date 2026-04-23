@@ -14,7 +14,7 @@ export function Hero() {
       <div className="hero__pano">
         <div className="hero__pano-inner container">
           <button className="hero__play-button" type="button" aria-label="" title="">
-            <PlayHero />
+            <PlayHero className="hero__play-icon" />
           </button>
         </div>
       </div>
