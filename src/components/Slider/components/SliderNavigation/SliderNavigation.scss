@@ -1,0 +1,35 @@
+@use '@/styles/helpers' as *;
+
+.slider-navigation {
+  display: flex;
+  align-items: center;
+
+  column-gap: fluid-to-laptop(16, 12);
+  padding: fluid-to-laptop(16, 12);
+  background-color: var(--color-black-06);
+  border: var(--border);
+  border-radius: var(--border-radius-l);
+
+  &__icon {
+    width: 17px;
+    height: auto;
+    color: var(--color-white);
+    transition: transform var(--transition-duration) ease;
+  }
+
+  &__arrow-button {
+    &--prev {
+      rotate: 180deg;
+    }
+
+    @include hover {
+      .slider-navigation__icon {
+        transform: translateX(4px);
+      }
+    }
+  }
+
+  @include laptop {
+    border-radius: var(--border-radius-m);
+  }
+}

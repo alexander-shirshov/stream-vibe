@@ -84,6 +84,11 @@ const ru: Messages = {
     drama: 'Драмы',
     horror: 'Ужасы',
   },
+
+  slider: {
+    nextButton: 'Следующий слайд',
+    prevButton: 'Предыдущий слайд',
+  },
 };
 
 export default ru;

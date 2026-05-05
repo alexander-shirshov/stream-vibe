@@ -21,6 +21,7 @@
     "react-helmet-async": "^3.0.0",
     "react-router-dom": "^7.14.0",
     "sass": "^1.99.0",
+    "swiper": "^12.1.4",
     "vite-plugin-svgr": "^5.2.0"
   },
   "devDependencies": {

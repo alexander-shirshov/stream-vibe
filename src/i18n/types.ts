@@ -89,4 +89,9 @@ export interface Messages {
     drama: string;
     horror: string;
   };
+
+  slider: {
+    nextButton: string;
+    prevButton: string;
+  };
 }

@@ -5,6 +5,7 @@
 
   display: inline-flex;
   flex-direction: column;
+  gap: 1em;
   padding: fluid(30, 20);
   background-color: var(--color-black-10);
   border: var(--border);
@@ -15,6 +16,14 @@
 
     color: var(--color-red-50);
     border-color: var(--color-white);
+
+    .category-card__images {
+      transform: scale(1.02);
+    }
+
+    .category-card__icon {
+      transform: translateX(4px);
+    }
   }
 
   @include laptop {
@@ -26,6 +35,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
+    transition: transform var(--transition-duration) cubic-bezier(0.2, 0.9, 0.4, 1.1);
 
     &::after {
       position: absolute;
@@ -79,5 +89,7 @@
     // color: var(--color-white);
 
     @include square(fluid(18, 12));
+
+    transition: transform var(--transition-duration) ease;
   }
 }

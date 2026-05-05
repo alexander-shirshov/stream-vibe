@@ -89,6 +89,11 @@ const en: Messages = {
     drama: 'Drama',
     horror: 'Horror',
   },
+
+  slider: {
+    nextButton: 'Next slide',
+    prevButton: 'Previous slide',
+  },
 };
 
 export default en;
