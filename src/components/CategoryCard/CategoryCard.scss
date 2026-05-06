@@ -36,6 +36,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
     transition: transform var(--transition-duration) cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    user-select: none;
 
     &::after {
       position: absolute;

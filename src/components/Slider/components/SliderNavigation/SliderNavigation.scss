@@ -27,9 +27,53 @@
         transform: translateX(4px);
       }
     }
+
+    &.is-clicked {
+      .slider-navigation__icon {
+        animation: arrow-click 0.35s ease;
+      }
+    }
+
+    &:disabled {
+      .slider-navigation__icon {
+        color: var(--color-gray-65);
+      }
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    column-gap: 3px;
+
+    &-bullet {
+      width: 16px;
+      height: 4px;
+      background-color: var(--color-black-20);
+      border-radius: 100px;
+      transition-duration: var(--transition-duration);
+
+      &.is-active {
+        width: 23px;
+        background-color: var(--color-red-45);
+      }
+    }
   }
 
   @include laptop {
     border-radius: var(--border-radius-m);
+  }
+}
+
+@keyframes arrow-click {
+  0% {
+    transform: translateX(4px) scale(1);
+  }
+
+  50% {
+    transform: translateX(8px) scale(0.92);
+  }
+
+  100% {
+    transform: translateX(4px) scale(1);
   }
 }
