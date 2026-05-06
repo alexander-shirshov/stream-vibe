@@ -15,6 +15,7 @@ export function Categories() {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const paginationRef = useRef<HTMLDivElement>(null);
+  const scrollbarRef = useRef<HTMLDivElement>(null);
 
   return (
     <Section
@@ -37,6 +38,7 @@ export function Categories() {
         prevRef={prevRef}
         nextRef={nextRef}
         paginationRef={paginationRef}
+        scrollbarRef={scrollbarRef}
         onLockChange={setIsLocked}
       >
         {categoryItems.map(cat => {

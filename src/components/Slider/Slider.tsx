@@ -3,7 +3,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './Slider.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
+import 'swiper/css/scrollbar';
 
 import React, { Children } from 'react';
 
@@ -12,6 +13,7 @@ type SliderProps = {
   prevRef: React.RefObject<HTMLButtonElement | null>;
   nextRef: React.RefObject<HTMLButtonElement | null>;
   paginationRef?: React.RefObject<HTMLDivElement | null>;
+  scrollbarRef?: React.RefObject<HTMLDivElement | null>;
   onLockChange?: (locked: boolean) => void;
 };
 
@@ -20,6 +22,7 @@ export default function Slider({
   prevRef,
   nextRef,
   paginationRef,
+  scrollbarRef,
   onLockChange,
 }: SliderProps) {
   const handleLockChange = (swiper: { isLocked: boolean }) => {
@@ -29,25 +32,65 @@ export default function Slider({
   return (
     <div className="slider">
       <Swiper
-        modules={[Navigation, Pagination]}
+        modules={[Navigation, Pagination, Scrollbar]}
         navigation
         pagination
+        scrollbar={{
+          el: scrollbarRef?.current,
+          draggable: true,
+          dragClass: 'slider__scrollbar-drag',
+        }}
         slidesPerView={5}
         slidesPerGroup={5}
         spaceBetween={30}
+        allowTouchMove={false}
+        watchOverflow
+        freeMode={false}
         breakpoints={{
-          0: { slidesPerView: 2, slidesPerGroup: 1, spaceBetween: 20 },
-          481: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 20 },
-          768: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 20 },
-          1024: { spaceBetween: 20, allowTouchMove: false },
-          1441: { spaceBetween: 30, allowTouchMove: false },
+          0: {
+            slidesPerView: 2,
+            slidesPerGroup: 1,
+            spaceBetween: 20,
+            allowTouchMove: true,
+          },
+          481: {
+            slidesPerView: 3,
+            slidesPerGroup: 1,
+            spaceBetween: 20,
+            allowTouchMove: true,
+          },
+          768: {
+            slidesPerView: 4,
+            slidesPerGroup: 1,
+            spaceBetween: 20,
+            allowTouchMove: true,
+          },
+          1024: {
+            slidesPerView: 5,
+            slidesPerGroup: 5,
+            spaceBetween: 20,
+            allowTouchMove: false,
+          },
+          1441: {
+            slidesPerView: 5,
+            slidesPerGroup: 5,
+            spaceBetween: 30,
+            allowTouchMove: false,
+          },
         }}
-        // className="slider__swiper"
-
         onInit={handleLockChange}
         onBreakpoint={handleLockChange}
         onResize={handleLockChange}
         onBeforeInit={swiper => {
+          if (typeof swiper.params.scrollbar !== 'boolean') {
+            swiper.params.scrollbar = {
+              ...swiper.params.scrollbar,
+              el: scrollbarRef?.current,
+              draggable: true,
+              dragClass: 'slider__scrollbar-drag',
+            };
+          }
+
           if (typeof swiper.params.navigation !== 'boolean') {
             swiper.params.navigation = {
               ...swiper.params.navigation,
@@ -68,6 +111,20 @@ export default function Slider({
         }}
         onSwiper={swiper => {
           setTimeout(() => {
+            if (typeof swiper.params.scrollbar !== 'boolean' && scrollbarRef?.current) {
+              swiper.params.scrollbar = {
+                ...swiper.params.scrollbar,
+                el: scrollbarRef.current,
+                draggable: true,
+                dragClass: 'slider__scrollbar-drag',
+              };
+
+              swiper.scrollbar.destroy();
+              swiper.scrollbar.init();
+              swiper.scrollbar.updateSize();
+              swiper.scrollbar.setTranslate();
+            }
+
             if (typeof swiper.params.pagination !== 'boolean' && paginationRef?.current) {
               swiper.params.pagination = {
                 ...swiper.params.pagination,
@@ -103,6 +160,7 @@ export default function Slider({
           <SwiperSlide key={index}>{slide}</SwiperSlide>
         ))}
       </Swiper>
+      <div ref={scrollbarRef} className="slider__scrollbar visible-mobile" />
     </div>
   );
 }
