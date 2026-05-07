@@ -98,6 +98,50 @@ const en: Messages = {
     nextButton: 'Next slide',
     prevButton: 'Previous slide',
   },
+
+  devices: {
+    title: 'We Provide you streaming experience across various devices',
+    descr:
+      'With StreamVibe, you can enjoy your favorite movies and TV shows anytime, anywhere. Our platform is designed to be compatible with a wide range of devices, ensuring that you never miss a moment of entertainment.',
+  },
+
+  deviceCard: {
+    smartphone: {
+      title: 'Smartphones',
+      descr:
+        'StreamVibe is fully optimized for Android and iOS smartphones. Download our app and enjoy seamless streaming wherever you go.',
+    },
+
+    console: {
+      title: 'Gaming Consoles',
+      descr:
+        'Enjoy your favorite movies and shows directly on your gaming console with smooth performance and a cinematic viewing experience.',
+    },
+
+    laptop: {
+      title: 'Laptops',
+      descr:
+        'Watch your favorite content on laptops with maximum comfort. StreamVibe works smoothly across all modern browsers and devices.',
+    },
+
+    tablet: {
+      title: 'Tablets',
+      descr:
+        'Stream movies and shows on your tablet anytime, anywhere. Our intuitive interface makes watching even more enjoyable.',
+    },
+
+    tv: {
+      title: 'Smart TV',
+      descr:
+        'Turn your living room into a home theater with StreamVibe and enjoy your favorite entertainment on the big screen.',
+    },
+
+    vr: {
+      title: 'VR Headsets',
+      descr:
+        'Experience a new level of entertainment with VR device support and immerse yourself in a more engaging viewing experience.',
+    },
+  },
 };
 
 export default en;

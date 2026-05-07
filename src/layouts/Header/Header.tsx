@@ -58,6 +58,26 @@ export default function Header() {
     };
   }, [dialogState]);
 
+  useEffect(() => {
+    const desktopMediaQuery = window.matchMedia('(min-width: 1024px)');
+
+    const closeMenuOnDesktop = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        setDialogState(false);
+      }
+    };
+
+    if (desktopMediaQuery.matches) {
+      setDialogState(false);
+    }
+
+    desktopMediaQuery.addEventListener('change', closeMenuOnDesktop);
+
+    return () => {
+      desktopMediaQuery.removeEventListener('change', closeMenuOnDesktop);
+    };
+  }, []);
+
   return (
     <header className={clsx('header', isHome && 'header--fixed')}>
       <div className="header__inner container">

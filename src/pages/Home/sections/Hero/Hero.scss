@@ -56,6 +56,18 @@
     border: none;
 
     -webkit-tap-highlight-color: transparent;
+
+    &.is-clicked {
+      .hero__play-icon {
+        animation: hero-play-click 0.56s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+    }
+  }
+
+  &__play-icon-hover {
+    display: block;
+    transition: transform 0.35s ease;
+    transform-origin: center;
   }
 
   &__title {
@@ -86,7 +98,9 @@
 //glass play button
 
 .hero__play-icon {
-  transition: transform 0.35s ease;
+  display: block;
+  transform-origin: center;
+  // transition: transform 0.35s ease;
   transform-origin: center;
 }
 
@@ -107,9 +121,9 @@
     transform 0.35s ease;
 }
 
-.hero__play-button:hover .hero__play-icon {
-  transform: scale(1.03);
-}
+// .hero__play-button:hover .hero__play-icon {
+//   transform: scale(1.03);
+// }
 
 .hero__play-button:hover .play-glass-icon__ring-fill-stop-1,
 .hero__play-button:hover .play-glass-icon__triangle-fill-stop-1 {
@@ -134,6 +148,24 @@
 .hero__play-button:hover .play-glass-icon__triangle-stroke {
   stroke-opacity: 0.72;
 }
-.hero__play-button:active .hero__play-icon {
-  transform: scale(0.98);
+
+.hero__play-button:hover .hero__play-icon-hover {
+  transform: scale(1.03);
+}
+
+.hero__play-button.is-clicked .hero__play-icon {
+  animation: hero-play-click 0.42s ease-out;
+}
+@keyframes hero-play-click {
+  0% {
+    transform: scale(1);
+  }
+
+  28% {
+    transform: scale(0.955);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }

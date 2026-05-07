@@ -3,18 +3,39 @@ import PlayHero from '@/assets/icons/playHero.svg?react';
 import Play from '@/assets/icons/play.svg?react';
 import { useLanguage } from '@/i18n/LanguageProvider';
 import LinkButton from '@/components/Button';
+import { useState } from 'react';
+import clsx from 'clsx';
 
 export function Hero() {
   const titelId = 'hero-title';
 
   const { t } = useLanguage();
 
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = () => {
+    setIsClicked(false);
+
+    requestAnimationFrame(() => {
+      setIsClicked(true);
+    });
+  };
+
   return (
     <section className="hero" aria-labelledby={titelId}>
       <div className="hero__pano">
         <div className="hero__pano-inner container">
-          <button className="hero__play-button" type="button" aria-label="" title="">
-            <PlayHero className="hero__play-icon" />
+          <button
+            className={clsx('hero__play-button', isClicked && 'is-clicked')}
+            onClick={handleClick}
+            onAnimationEnd={() => setIsClicked(false)}
+            type="button"
+            aria-label=""
+            title=""
+          >
+            <span className="hero__play-icon-hover">
+              <PlayHero className="hero__play-icon" />
+            </span>
           </button>
         </div>
       </div>

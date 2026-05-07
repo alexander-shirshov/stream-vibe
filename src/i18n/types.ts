@@ -98,4 +98,36 @@ export interface Messages {
     nextButton: string;
     prevButton: string;
   };
+
+  devices: {
+    title: string;
+    descr: string;
+  };
+
+  deviceCard: {
+    smartphone: {
+      title: string;
+      descr: string;
+    };
+    console: {
+      title: string;
+      descr: string;
+    };
+    laptop: {
+      title: string;
+      descr: string;
+    };
+    tablet: {
+      title: string;
+      descr: string;
+    };
+    tv: {
+      title: string;
+      descr: string;
+    };
+    vr: {
+      title: string;
+      descr: string;
+    };
+  };
 }
