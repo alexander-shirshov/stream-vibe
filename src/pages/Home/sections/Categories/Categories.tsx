@@ -23,6 +23,7 @@ export function Categories() {
       titleId="categories-title"
       description={t('categories.descr')}
       isActionsHiddenOnMobile
+      id="categories"
       actions={
         <SliderNavigation
           prevRef={prevRef}

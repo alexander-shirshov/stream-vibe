@@ -5,6 +5,7 @@ type SectionProps = {
   className?: string;
   title?: string;
   titleId?: string;
+  id?: string;
   children: React.ReactNode;
   actions?: React.ReactNode;
   description?: React.ReactNode;
@@ -15,13 +16,14 @@ export default function Section({
   className,
   title,
   titleId,
+  id,
   children,
   actions,
   description,
   isActionsHiddenOnMobile,
 }: SectionProps) {
   return (
-    <section className={clsx(className, 'section container')} aria-labelledby={titleId}>
+    <section id={id} className={clsx(className, 'section container')} aria-labelledby={titleId}>
       <header className="section__header">
         <div className="section__info">
           {title && (

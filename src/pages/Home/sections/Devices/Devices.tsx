@@ -11,6 +11,7 @@ export default function Devices() {
     <Section
       title={t('devices.title')}
       titleId="devices-title"
+      id="devices"
       description={t('devices.descr')}
       isActionsHiddenOnMobile
     >

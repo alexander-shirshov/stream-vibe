@@ -21,12 +21,17 @@ export default function Footer({ navSections, socialSection, extraSection }: Foo
   const { t } = useLanguage();
 
   function renderNavLink(link: FooterNavLink, className: string) {
+    if ('href' in link) {
+      return (
+        <a href={link.href} className={className}>
+          {t(`footerLink.${link.labelKey}`)}
+        </a>
+      );
+    }
+
     const path = getPathFromFooterNavLink(link);
-    return 'href' in link ? (
-      <a href={link.href} className="footer__menu-title h6">
-        {t(`footerLink.${link.labelKey}`)}
-      </a>
-    ) : (
+
+    return (
       <NavLink
         to={path}
         end={path === '/'}
@@ -75,7 +80,6 @@ export default function Footer({ navSections, socialSection, extraSection }: Foo
                 {section.links.length > 0 && (
                   <ul className="footer__menu-list">
                     {section.links.map(link => {
-                      // const linkRoute = getPathFromFooterNavLink(link);
                       const linkLabel = link.labelKey;
 
                       return (
