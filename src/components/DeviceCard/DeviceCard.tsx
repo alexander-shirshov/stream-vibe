@@ -19,7 +19,7 @@ export default function DeviceCard({ device, icon: Icon }: DeviceCardProps) {
         <h3 className="device-card__title h4">{t(`deviceCard.${device}.title`)}</h3>
       </header>
       <div className="device-card__description">
-        <p>{t(`deviceCard.${device}.descr`)}</p>
+        <p className="device-card__description-text">{t(`deviceCard.${device}.descr`)}</p>
       </div>
     </div>
   );

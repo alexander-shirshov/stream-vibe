@@ -12,20 +12,20 @@ export const deviceItems: DeviceCardProps[] = [
     icon: Phone,
   },
   {
-    device: 'console',
-    icon: Console,
-  },
-  {
-    device: 'laptop',
-    icon: Laptop,
-  },
-  {
     device: 'tablet',
     icon: Tablet,
   },
   {
     device: 'tv',
     icon: Tv,
+  },
+  {
+    device: 'laptop',
+    icon: Laptop,
+  },
+  {
+    device: 'console',
+    icon: Console,
   },
   {
     device: 'vr',
