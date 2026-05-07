@@ -28,6 +28,8 @@ type LinkButtonProps =
       variant?: ButtonVariants;
       customClass?: string;
       ariaLabel?: string;
+      ariaExpanded?: boolean;
+      ariaHaspopup?: React.AriaAttributes['aria-haspopup'];
     };
 
 const LinkButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, LinkButtonProps>(
@@ -67,7 +69,17 @@ const LinkButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, LinkButtonP
         </NavLink>
       );
     } else {
-      const { children, onClick, onAnimationEnd, type, variant, customClass, ariaLabel } = props;
+      const {
+        children,
+        onClick,
+        onAnimationEnd,
+        type,
+        variant,
+        customClass,
+        ariaLabel,
+        ariaExpanded,
+        ariaHaspopup,
+      } = props;
       return (
         <button
           ref={ref as React.Ref<HTMLButtonElement>}
@@ -76,6 +88,8 @@ const LinkButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, LinkButtonP
           onClick={onClick}
           onAnimationEnd={onAnimationEnd}
           aria-label={ariaLabel}
+          aria-expanded={ariaExpanded}
+          aria-haspopup={ariaHaspopup}
         >
           {children}
         </button>

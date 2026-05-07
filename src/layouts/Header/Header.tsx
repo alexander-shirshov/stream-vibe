@@ -8,6 +8,8 @@ import SearchIcon from '@/assets/icons/lens.svg?react';
 import NotificationIcon from '@/assets/icons/bell.svg?react';
 import { useLocation } from 'react-router-dom';
 
+import LangToggle from '@/components/LangToggle/LangToggle';
+
 import { useLanguage } from '@/i18n/LanguageProvider';
 import LinkButton from '@/components/Button';
 import BurgerButton from '@/components/BurgerButton';
@@ -83,6 +85,8 @@ export default function Header() {
             </ul>
           </nav>
           <div className="header__actions">
+            <LangToggle />
+
             <LinkButton mode="button" variant="transparent" ariaLabel={t('headerActions.search')}>
               <SearchIcon className="icon button__icon" />
             </LinkButton>

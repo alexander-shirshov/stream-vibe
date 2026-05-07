@@ -7,6 +7,10 @@ export function isLanguage(value: string): value is Language {
 }
 
 export interface Messages {
+  lang: {
+    ariaLabel: string;
+  };
+
   header: {
     logoTitle: string;
     header: string;

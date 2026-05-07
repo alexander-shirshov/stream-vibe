@@ -1,6 +1,10 @@
 import type { Messages } from '../types';
 
 const ru: Messages = {
+  lang: {
+    ariaLabel: 'Переключить язык',
+  },
+
   header: {
     logoTitle: 'Главная',
     header: 'Хедер',

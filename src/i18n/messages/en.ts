@@ -1,6 +1,10 @@
 import type { Messages } from '../types';
 
 const en: Messages = {
+  lang: {
+    ariaLabel: 'Toggle language',
+  },
+
   header: {
     logoTitle: 'Home',
     header: 'Header',
