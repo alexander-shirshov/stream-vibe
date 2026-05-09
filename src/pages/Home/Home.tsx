@@ -4,6 +4,7 @@ import { useLanguage } from '@/i18n/LanguageProvider';
 import { Hero } from '@/pages/Home/sections/';
 import { Categories } from './sections/Categories/Categories';
 import Devices from './sections/Devices';
+import Questions from '@/pages/Home/sections/Questions';
 
 export default function Home() {
   const { t } = useLanguage();
@@ -18,6 +19,7 @@ export default function Home() {
       <Hero />
       <Categories />
       <Devices />
+      <Questions />
     </>
   );
 }

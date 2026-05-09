@@ -142,6 +142,66 @@ const en: Messages = {
         'Experience a new level of entertainment with VR device support and immerse yourself in a more engaging viewing experience.',
     },
   },
+
+  questions: {
+    title: 'Frequently Asked Questions',
+    descr: `Got questions? We've got answers! Check out our FAQ section to find answers to the most common questions about StreamVibe.`,
+    action: 'Ask a Question',
+
+    items: {
+      whatIsStreamVibe: {
+        question: 'What is StreamVibe?',
+        answer:
+          'StreamVibe is a streaming service that lets you watch movies and shows on demand anytime and on any device.',
+      },
+
+      cost: {
+        question: 'How much does StreamVibe cost?',
+        answer:
+          'StreamVibe offers several subscription plans with different features and pricing options to fit your needs.',
+      },
+
+      content: {
+        question: 'What content is available on StreamVibe?',
+        answer:
+          'StreamVibe features the latest movies, popular TV shows, classic films, documentaries, and much more.',
+      },
+
+      howToWatch: {
+        question: 'How can I watch StreamVibe?',
+        answer:
+          'You can watch StreamVibe through your browser or app on smartphones, tablets, laptops, Smart TVs, and gaming consoles.',
+      },
+
+      sign: {
+        question: 'How do I sign up for StreamVibe?',
+        answer:
+          'Creating an account is easy — just enter your email, create a password, and choose the subscription plan that works best for you.',
+      },
+
+      trial: {
+        question: 'Does StreamVibe offer a free trial?',
+        answer:
+          'Yes, new users can enjoy a free trial to explore the platform and discover its features.',
+      },
+
+      support: {
+        question: 'How do I contact StreamVibe customer support?',
+        answer: 'You can reach our support team anytime through the contact form or via email.',
+      },
+
+      payment: {
+        question: 'What payment methods does StreamVibe support?',
+        answer:
+          'We support payments via credit cards, digital wallets, and other popular payment methods.',
+      },
+      duplicate: {
+        question: 'What payment methods does StreamVibe support?',
+        answer:
+          'We support payments via credit cards, digital wallets, and other popular payment methods.',
+      },
+    },
+  },
 };
 
 export default en;

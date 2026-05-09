@@ -130,4 +130,49 @@ export interface Messages {
       descr: string;
     };
   };
+
+  questions: {
+    title: string;
+    descr: string;
+    action: string;
+
+    items: {
+      whatIsStreamVibe: {
+        question: string;
+        answer: string;
+      };
+      cost: {
+        question: string;
+        answer: string;
+      };
+      content: {
+        question: string;
+        answer: string;
+      };
+      howToWatch: {
+        question: string;
+        answer: string;
+      };
+      sign: {
+        question: string;
+        answer: string;
+      };
+      trial: {
+        question: string;
+        answer: string;
+      };
+      support: {
+        question: string;
+        answer: string;
+      };
+      payment: {
+        question: string;
+        answer: string;
+      };
+      duplicate: {
+        question: string;
+        answer: string;
+      };
+    };
+  };
 }

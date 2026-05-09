@@ -111,7 +111,14 @@ export default function Slider({
         }}
         onSwiper={swiper => {
           setTimeout(() => {
-            if (typeof swiper.params.scrollbar !== 'boolean' && scrollbarRef?.current) {
+            if (swiper.destroyed || !swiper.params) return;
+
+            if (
+              typeof swiper.params.scrollbar !== 'boolean' &&
+              swiper.params.scrollbar &&
+              scrollbarRef?.current &&
+              swiper.scrollbar
+            ) {
               swiper.params.scrollbar = {
                 ...swiper.params.scrollbar,
                 el: scrollbarRef.current,
@@ -119,13 +126,17 @@ export default function Slider({
                 dragClass: 'slider__scrollbar-drag',
               };
 
-              swiper.scrollbar.destroy();
               swiper.scrollbar.init();
               swiper.scrollbar.updateSize();
               swiper.scrollbar.setTranslate();
             }
 
-            if (typeof swiper.params.pagination !== 'boolean' && paginationRef?.current) {
+            if (
+              typeof swiper.params.pagination !== 'boolean' &&
+              swiper.params.pagination &&
+              paginationRef?.current &&
+              swiper.pagination
+            ) {
               swiper.params.pagination = {
                 ...swiper.params.pagination,
                 el: paginationRef.current,
@@ -141,8 +152,10 @@ export default function Slider({
 
             if (
               typeof swiper.params.navigation !== 'boolean' &&
+              swiper.params.navigation &&
               prevRef.current &&
-              nextRef.current
+              nextRef.current &&
+              swiper.navigation
             ) {
               swiper.params.navigation = {
                 ...swiper.params.navigation,
