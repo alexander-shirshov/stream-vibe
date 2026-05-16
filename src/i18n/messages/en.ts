@@ -202,6 +202,44 @@ const en: Messages = {
       },
     },
   },
+
+  plans: {
+    title: `Choose the plan that's right for you`,
+    descr:
+      'Join StreamVibe and select from our flexible subscription options tailored to suit your viewing preferences. Get ready for non-stop entertainment!',
+    mainAction: 'Choose Plan',
+    secondaryAction: 'Start Free Trial',
+    periods: {
+      day: 'Day',
+      week: 'Week',
+      month: 'Month',
+      year: 'Year',
+    },
+    tabs: {
+      monthly: 'monthly',
+      yearly: 'yearly',
+    },
+
+    items: {
+      basic: {
+        title: 'Basic Plan',
+        descr:
+          'Enjoy a vast library of movies and shows, including popular titles and recently released content.',
+      },
+
+      standard: {
+        title: 'Standard Plan',
+        descr:
+          'Get access to a wider selection of movies and shows, including most new releases and exclusive content.',
+      },
+
+      premium: {
+        title: 'Premium Plan',
+        descr:
+          'Unlock the largest selection of movies and shows, including all new releases and offline viewing.',
+      },
+    },
+  },
 };
 
 export default en;

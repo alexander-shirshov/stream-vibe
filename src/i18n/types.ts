@@ -175,4 +175,35 @@ export interface Messages {
       };
     };
   };
+
+  plans: {
+    title: string;
+    descr: string;
+    mainAction: string;
+    secondaryAction: string;
+    periods: {
+      day: string;
+      week: string;
+      month: string;
+      year: string;
+    };
+    tabs: {
+      monthly: string;
+      yearly: string;
+    };
+    items: {
+      basic: {
+        title: string;
+        descr: string;
+      };
+      standard: {
+        title: string;
+        descr: string;
+      };
+      premium: {
+        title: string;
+        descr: string;
+      };
+    };
+  };
 }
