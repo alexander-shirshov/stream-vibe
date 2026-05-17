@@ -17,7 +17,7 @@ export default function Plans() {
     >
       <Grid columns={3}>
         {activePlanGroup.items.map(item => (
-          <PlanCard {...item} key={item.itemKey}></PlanCard>
+          <PlanCard {...item} key={item.itemKey} showApproxPrice={true}></PlanCard>
         ))}
       </Grid>
     </Section>

@@ -21,6 +21,12 @@
     row-gap: fluid(16, 10);
   }
 
+  &__pricing {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+  }
+
   &__conditions {
     display: flex;
     align-items: end;

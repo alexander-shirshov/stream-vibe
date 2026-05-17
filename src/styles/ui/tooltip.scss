@@ -1,0 +1,237 @@
+@use '@/styles/helpers' as *;
+
+@keyframes shake {
+  0%,
+  100% {
+    translate: 0;
+  }
+  25% {
+    translate: 10px 0;
+  }
+  50% {
+    translate: -10px 0;
+  }
+}
+
+.tooltip {
+  position: relative;
+  --tooltip-bg: #333;
+  --tooltip-border-radius: 4px;
+  --tooltip-pointer-border-color: transparent;
+
+  &--error {
+    --tooltip-bg: #f44336;
+    animation: shake 0.2s 2;
+
+    input,
+    select {
+      border-color: red !important;
+    }
+  }
+
+  &--info {
+    --tooltip-bg: var(--color-black-30);
+    --tooltip-border-radius: var(--border-radius-m);
+
+    &::before {
+      // border: var(--border);
+    }
+  }
+
+  // Общие стили для тултипа
+  &::before {
+    opacity: 0;
+    visibility: hidden;
+    content: attr(data-tooltip);
+    position: absolute;
+    background-color: var(--tooltip-bg);
+    color: #fff;
+    padding: 0.5rem 0.625rem;
+    font-size: 0.75rem;
+    // white-space: nowrap;
+    border-radius: var(--tooltip-border-radius);
+    z-index: 1000;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.28);
+    line-height: 1.35;
+
+    //переносы
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-word;
+    max-width: 300px; // Максимальная ширина
+    width: max-content;
+    min-width: 120px; // Минимальная ширина
+  }
+
+  // Общие стили для указателя (стрелки)
+  &::after {
+    opacity: 0;
+    visibility: hidden;
+    content: '';
+    position: absolute;
+    border: 6px solid var(--tooltip-pointer-border-color);
+    z-index: 1001;
+  }
+
+  @include hover {
+    &::before,
+    &::after {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &:focus-visible {
+    &::before,
+    &::after {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after,
+.tooltip:focus::before,
+.tooltip:focus::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+// Позиционирование СНИЗУ (по умолчанию)
+.tooltip--bottom {
+  &::before {
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    margin-top: 8px;
+  }
+
+  &::after {
+    border-bottom-color: var(--tooltip-bg);
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    margin-top: -4px;
+  }
+}
+
+// Позиционирование СВЕРХУ
+.tooltip--top {
+  &::before {
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+  }
+
+  &::after {
+    border-top-color: var(--tooltip-bg);
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    margin-bottom: -4px;
+  }
+}
+
+// Позиционирование СЛЕВА
+.tooltip--left {
+  &::before {
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 8px;
+  }
+
+  &::after {
+    border-left-color: var(--tooltip-bg);
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: -4px;
+  }
+}
+
+// Позиционирование СПРАВА
+.tooltip--right {
+  &::before {
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 8px;
+  }
+
+  &::after {
+    border-right-color: var(--tooltip-bg);
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: -4px;
+  }
+}
+
+// Угловые позиции - СВЕРХУ-СЛЕВА
+.tooltip--top-left {
+  &::before {
+    left: 0;
+    bottom: 100%;
+    margin-bottom: 8px;
+  }
+
+  &::after {
+    border-top-color: var(--tooltip-bg);
+    left: 12px;
+    bottom: 100%;
+    margin-bottom: -4px;
+  }
+}
+
+// СВЕРХУ-СПРАВА
+.tooltip--top-right {
+  &::before {
+    right: 0;
+    bottom: 100%;
+    margin-bottom: 8px;
+  }
+
+  &::after {
+    border-top-color: var(--tooltip-bg);
+    right: 12px;
+    bottom: 100%;
+    margin-bottom: -4px;
+  }
+}
+
+// СНИЗУ-СЛЕВА
+.tooltip--bottom-left {
+  &::before {
+    left: 0;
+    top: 100%;
+    margin-top: 8px;
+  }
+
+  &::after {
+    border-bottom-color: var(--tooltip-bg);
+    left: 12px;
+    top: 100%;
+    margin-top: -4px;
+  }
+}
+
+// СНИЗУ-СПРАВА
+.tooltip--bottom-right {
+  &::before {
+    right: 0;
+    top: 100%;
+    margin-top: 8px;
+  }
+
+  &::after {
+    border-bottom-color: var(--tooltip-bg);
+    right: 12px;
+    top: 100%;
+    margin-top: -4px;
+  }
+}

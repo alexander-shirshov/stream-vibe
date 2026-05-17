@@ -2,24 +2,45 @@ import './PlanCard.scss';
 import LinkButton from '@/components/Button';
 import { useLanguage } from '@/i18n/LanguageProvider';
 import type { ButtonNavLink } from '@/constants/navConfig';
-import type { Messages } from '@/i18n/types';
-import type { Currencies } from '@/constants/currencies';
+import { type Messages, getLocale, getApproxCurrency } from '@/i18n/types';
+import type { Currency } from '@/constants/currencies';
+import { formatMoney, convertPrice } from '@/utils/money';
+import { useExchangeRates } from '@/hooks/useExchangeRates';
+import ApproxConvertedPrice from '@/components/ApproxConvertedPrice';
 
 type PriceItem = {
   value: number;
-  currency: Currencies;
+  currency: Currency;
   period: keyof Messages['plans']['periods'];
 };
 
-export type PlanCardProps = {
+export type PlanCardData = {
   itemKey: keyof Messages['plans']['items'];
   price: PriceItem;
 };
 
+type PlanCardProps = PlanCardData & {
+  showApproxPrice?: boolean;
+};
+
 const planLink: ButtonNavLink = { route: 'subscriptions' };
 
-export default function PlanCard({ itemKey, price }: PlanCardProps) {
-  const { t } = useLanguage();
+export default function PlanCard({ itemKey, price, showApproxPrice }: PlanCardProps) {
+  const { t, language } = useLanguage();
+  const { rates, isLoading, error } = useExchangeRates();
+
+  const locale = getLocale(language);
+  const formattedSum = formatMoney(price.value, price.currency, locale);
+  const approxCurrency = getApproxCurrency(language);
+  const rate = approxCurrency ? rates?.[approxCurrency] : null;
+
+  const shouldShowApproxPrice =
+    Boolean(showApproxPrice) && !isLoading && !error && approxCurrency && rate != null;
+
+  const approxPrice =
+    shouldShowApproxPrice && approxCurrency && rate != null
+      ? formatMoney(convertPrice(price.value, rate), approxCurrency, locale)
+      : null;
 
   return (
     <div className="plan-card">
@@ -29,10 +50,20 @@ export default function PlanCard({ itemKey, price }: PlanCardProps) {
           <p>{t(`plans.items.${itemKey}.descr`)}</p>
         </div>
       </div>
-      <div className="plan-card__conditions">
-        <span className="plan-card__price">{price.currency + price.value.toFixed(2)}</span>
-        <span className="plan-card__period">/{t(`plans.periods.${price.period}`)}</span>
+      <div className="plan-card__pricing">
+        <div className="plan-card__conditions">
+          <span className="plan-card__price">{formattedSum}</span>
+          <span className="plan-card__period">/{t(`plans.periods.${price.period}`)}</span>
+        </div>
+        {approxPrice && (
+          <ApproxConvertedPrice
+            formattedPrice={approxPrice}
+            disclaimer={t('plans.approxPriceDisclaimer')}
+            showDivider
+          />
+        )}
       </div>
+
       <div className="plan-card__actions">
         <LinkButton mode="link" link={planLink} customClass="button button--black-08">
           {t('plans.secondaryAction')}

@@ -220,6 +220,8 @@ const en: Messages = {
       yearly: 'yearly',
     },
 
+    approxPriceDisclaimer:
+      'Approximate price based on the current exchange rate. The final billing amount may vary.',
     items: {
       basic: {
         title: 'Basic Plan',

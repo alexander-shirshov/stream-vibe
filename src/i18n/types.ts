@@ -1,9 +1,34 @@
-export const SUPPORTED_LANGUAGES = ['ru', 'en'] as const;
+import type { Currency } from '@/constants/currencies';
 
-export type Language = (typeof SUPPORTED_LANGUAGES)[number];
+type LanguageConfig = {
+  code: string;
+  locale: string;
+  approxCurrency: Currency | null;
+};
+
+export const LANGUAGES = [
+  { code: 'ru', locale: 'ru-RU', approxCurrency: 'RUB' },
+  { code: 'en', locale: 'en-US', approxCurrency: null },
+] as const satisfies readonly LanguageConfig[];
+
+export type Language = (typeof LANGUAGES)[number]['code'];
+
+export type Locale = (typeof LANGUAGES)[number]['locale'];
 
 export function isLanguage(value: string): value is Language {
-  return SUPPORTED_LANGUAGES.includes(value as Language);
+  return LANGUAGES.some(language => language.code === value);
+}
+
+export function getLanguageConfig(language: Language) {
+  return LANGUAGES.find(item => item.code === language);
+}
+
+export function getApproxCurrency(language: Language) {
+  return getLanguageConfig(language)!.approxCurrency;
+}
+
+export function getLocale(language: Language): Locale {
+  return getLanguageConfig(language)!.locale;
 }
 
 export interface Messages {
@@ -181,6 +206,7 @@ export interface Messages {
     descr: string;
     mainAction: string;
     secondaryAction: string;
+    approxPriceDisclaimer: string;
     periods: {
       day: string;
       week: string;

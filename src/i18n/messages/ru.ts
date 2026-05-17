@@ -214,7 +214,8 @@ const ru: Messages = {
       monthly: 'на месяц',
       yearly: 'на год',
     },
-
+    approxPriceDisclaimer:
+      'Примерная стоимость по текущему курсу. Итоговая сумма при оплате может отличаться.',
     items: {
       basic: {
         title: 'Базовый тариф',

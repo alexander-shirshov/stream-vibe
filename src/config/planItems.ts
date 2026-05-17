@@ -1,10 +1,10 @@
-import type { PlanCardProps } from '@/components/PlanCard/PlanCard';
+import type { PlanCardData } from '@/components/PlanCard/PlanCard';
 import type { Messages } from '@/i18n/types';
 
 type planGroup = {
   title: keyof Messages['plans']['tabs'];
   isActive?: boolean;
-  items: PlanCardProps[];
+  items: PlanCardData[];
 };
 
 export const planGroups: planGroup[] = [
@@ -16,7 +16,7 @@ export const planGroups: planGroup[] = [
         itemKey: 'basic',
         price: {
           value: 9.99,
-          currency: '$',
+          currency: 'USD',
           period: 'month',
         },
       },
@@ -24,7 +24,7 @@ export const planGroups: planGroup[] = [
         itemKey: 'standard',
         price: {
           value: 12.99,
-          currency: '$',
+          currency: 'USD',
           period: 'month',
         },
       },
@@ -32,7 +32,7 @@ export const planGroups: planGroup[] = [
         itemKey: 'premium',
         price: {
           value: 14.99,
-          currency: '$',
+          currency: 'USD',
           period: 'month',
         },
       },
@@ -45,7 +45,7 @@ export const planGroups: planGroup[] = [
         itemKey: 'basic',
         price: {
           value: 99.99,
-          currency: '$',
+          currency: 'USD',
           period: 'year',
         },
       },
@@ -53,7 +53,7 @@ export const planGroups: planGroup[] = [
         itemKey: 'standard',
         price: {
           value: 129.99,
-          currency: '$',
+          currency: 'USD',
           period: 'year',
         },
       },
@@ -61,7 +61,7 @@ export const planGroups: planGroup[] = [
         itemKey: 'premium',
         price: {
           value: 149.99,
-          currency: '$',
+          currency: 'USD',
           period: 'year',
         },
       },
