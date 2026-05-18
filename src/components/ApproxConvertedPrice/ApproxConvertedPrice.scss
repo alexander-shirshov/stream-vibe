@@ -33,7 +33,11 @@
     color: var(--color-gray-60);
     font-size: fluid(16, 14);
     line-height: 1.2;
-    cursor: help;
+    cursor: default;
+
+    &.tooltip {
+      cursor: help;
+    }
 
     &:focus-visible {
       outline: none;

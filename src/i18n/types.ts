@@ -20,15 +20,15 @@ export function isLanguage(value: string): value is Language {
 }
 
 export function getLanguageConfig(language: Language) {
-  return LANGUAGES.find(item => item.code === language);
+  return LANGUAGES.find(item => item.code === language) ?? LANGUAGES[0];
 }
 
 export function getApproxCurrency(language: Language) {
-  return getLanguageConfig(language)!.approxCurrency;
+  return getLanguageConfig(language).approxCurrency;
 }
 
 export function getLocale(language: Language): Locale {
-  return getLanguageConfig(language)!.locale;
+  return getLanguageConfig(language).locale;
 }
 
 export interface Messages {

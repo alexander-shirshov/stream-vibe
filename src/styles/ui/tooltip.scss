@@ -32,10 +32,6 @@
   &--info {
     --tooltip-bg: var(--color-black-30);
     --tooltip-border-radius: var(--border-radius-m);
-
-    &::before {
-      // border: var(--border);
-    }
   }
 
   // Общие стили для тултипа

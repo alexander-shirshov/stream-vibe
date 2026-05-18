@@ -19,6 +19,10 @@ function isApiRateItem(value: unknown): value is ApiRateItem {
 }
 
 export async function fetchExchangeRates() {
+  if (!QUOTE_CURRENCIES_PARAM) {
+    return {};
+  }
+
   const res = await fetch(`${API_URL}?base=${BASE_CURRENCY}&quotes=${QUOTE_CURRENCIES_PARAM}`);
   if (!res.ok) {
     throw new Error(`Failed to fetch rates data! HTTP status: ${res.status}`);
