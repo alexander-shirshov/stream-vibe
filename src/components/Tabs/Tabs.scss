@@ -1,0 +1,9 @@
+@use '@/styles/helpers' as *;
+
+.tabs {
+  &__content {
+    &:not(.is-active) {
+      display: none;
+    }
+  }
+}

@@ -9,6 +9,15 @@ $mobile-s: 480px;
   }
 }
 
+@mixin reset-button {
+  padding: 0;
+  border-color: transparent;
+  background-color: transparent;
+  cursor: default;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 @mixin laptop {
   @media (width <= $laptop) {
     @content;
