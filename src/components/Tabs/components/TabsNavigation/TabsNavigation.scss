@@ -2,7 +2,15 @@
 
 .tabs-navigation {
   --tabsNavigationPadding: #{fluid-to-laptop(10, 8)};
+  overflow: hidden;
 
+  &.is-resizing {
+    .tabs-navigation__indicator {
+      transition: none;
+    }
+  }
+
+  position: relative;
   display: flex;
   column-gap: 4px;
   inline-size: fit-content;
@@ -12,6 +20,23 @@
   border-radius: var(--border-radius-m);
   background-color: var(--color-black-06);
 
+  &__indicator {
+    position: absolute;
+    top: var(--tabsNavigationPadding);
+    left: var(--tabsNavigationPadding);
+    z-index: 0;
+    block-size: calc(100% - var(--tabsNavigationPadding) * 2);
+    border-radius: var(--border-radius-s);
+    background-color: var(--color-black-12);
+    pointer-events: none;
+    transition:
+      left var(--transition-duration),
+      width var(--transition-duration);
+
+    @include laptop {
+      border-radius: var(--border-radius-xs);
+    }
+  }
   @include laptop {
     border-radius: var(--border-radius-s);
   }
@@ -23,6 +48,9 @@
   &__button {
     @include reset-button;
     @include fluid-text(18, 14);
+
+    position: relative;
+    z-index: 1;
 
     display: flex;
     justify-content: center;
@@ -53,9 +81,7 @@
     }
 
     &.is-active {
-      color: var(--color-white);
-      background-color: var(--color-black-12);
-      pointer-events: none;
+      background-color: transparent;
     }
 
     &:focus-visible {

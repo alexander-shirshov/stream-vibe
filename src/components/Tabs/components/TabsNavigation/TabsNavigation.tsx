@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { getIdFromTitle, getTabsElementsIdsFromTitle } from '@/utils/tabs';
 
 import type { TabItem } from '@/components/Tabs/Tabs';
-import { useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 type TabsNavigationProps = {
   className?: string;
@@ -24,6 +24,52 @@ export default function TabsNavigation({
   const titleId = `${titleFormatted}-title`;
 
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const navigationRef = useRef<HTMLDivElement>(null);
+  const [isResizing, setIsResizing] = useState(false);
+  const resizeTimeoutRef = useRef<number | null>(null);
+
+  const [indicatorPos, setIndicatorPos] = useState({
+    width: 0,
+    left: 0,
+  });
+
+  function updateIndicatorPos() {
+    const activeButton = buttonRefs.current[activeTabIndex];
+
+    if (!activeButton) return;
+
+    setIndicatorPos({
+      width: activeButton.offsetWidth,
+      left: activeButton.offsetLeft,
+    });
+  }
+
+  useLayoutEffect(() => {
+    updateIndicatorPos();
+
+    function handleResize() {
+      setIsResizing(true);
+      updateIndicatorPos();
+
+      if (resizeTimeoutRef.current) {
+        window.clearTimeout(resizeTimeoutRef.current);
+      }
+
+      resizeTimeoutRef.current = window.setTimeout(() => {
+        setIsResizing(false);
+      }, 150);
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+
+      if (resizeTimeoutRef.current) {
+        window.clearTimeout(resizeTimeoutRef.current);
+      }
+    };
+  }, [activeTabIndex, items]);
 
   function activateTab(index: number) {
     onChange(index);
@@ -92,14 +138,24 @@ export default function TabsNavigation({
 
   return (
     <div
-      className={clsx(className, 'tabs-navigation')}
+      className={clsx(className, 'tabs-navigation', {
+        'is-resizing': isResizing,
+      })}
       role="tablist"
+      ref={navigationRef}
       aria-labelledby={titleId}
       onKeyDown={handleKeyDown}
     >
       <h3 className="visually-hidden" id={titleId}>
         {title}
       </h3>
+      <div
+        className="tabs-navigation__indicator"
+        style={{
+          width: indicatorPos.width,
+          left: indicatorPos.left,
+        }}
+      />
       {items.map((item, index) => {
         const { buttonId, contentId } = getTabsElementsIdsFromTitle(item.title);
         const isActive = index === activeTabIndex;

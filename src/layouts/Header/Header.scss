@@ -87,6 +87,7 @@
       padding: fluid-to-laptop(14, 12) fluid-to-laptop(24, 20);
       color: var(--color-gray-75);
       border-radius: var(--border-radius-s);
+      -webkit-tap-highlight-color: transparent;
 
       @include tablet {
         font-size: 20px;

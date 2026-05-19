@@ -20,6 +20,7 @@
     list-style: none;
     cursor: pointer;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
 
     &::-webkit-details-marker {
       display: none;
