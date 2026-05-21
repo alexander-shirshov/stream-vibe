@@ -3,12 +3,12 @@ type TabsElementIds = {
   contentId: string;
 };
 
-export const getIdFromTitle = (title: string): string => {
+export const getId = (title: string): string => {
   return title.toLocaleLowerCase().replaceAll(' ', '-');
 };
 
-export const getTabsElementsIdsFromTitle = (title: string): TabsElementIds => {
-  const titleFormatted = getIdFromTitle(title);
+export const getTabsElementIds = (id: string): TabsElementIds => {
+  const titleFormatted = getId(id);
 
   return {
     buttonId: `${titleFormatted}-tab`,

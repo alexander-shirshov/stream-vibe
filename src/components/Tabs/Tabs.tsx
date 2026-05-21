@@ -1,8 +1,9 @@
 import './Tabs.scss';
 import clsx from 'clsx';
-import { getTabsElementsIdsFromTitle } from '@/utils/tabs';
+import { getTabsElementIds } from '@/utils/tabs';
 
 export type TabItem = {
+  id: string;
   title: string;
   isActive?: boolean;
   children: React.ReactNode;
@@ -19,10 +20,10 @@ export default function Tabs({ className, activeTabIndex, items }: TabsProps) {
     <div className={clsx(className, 'tabs')}>
       <div className="tabs__body">
         {items.map((item, index) => {
-          const { title, children } = item;
+          const { children, id } = item;
           const isActive = index === activeTabIndex;
 
-          const { buttonId, contentId } = getTabsElementsIdsFromTitle(title);
+          const { buttonId, contentId } = getTabsElementIds(id);
 
           return (
             <div
@@ -34,7 +35,7 @@ export default function Tabs({ className, activeTabIndex, items }: TabsProps) {
               id={contentId}
               aria-labelledby={buttonId}
               tabIndex={0}
-              key={title}
+              key={id}
             >
               {children}
             </div>

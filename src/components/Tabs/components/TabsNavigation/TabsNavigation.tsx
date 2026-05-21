@@ -1,6 +1,6 @@
 import './TabsNavigation.scss';
 import clsx from 'clsx';
-import { getIdFromTitle, getTabsElementsIdsFromTitle } from '@/utils/tabs';
+import { getId, getTabsElementIds } from '@/utils/tabs';
 
 import type { TabItem } from '@/components/Tabs/Tabs';
 import { useLayoutEffect, useRef, useState } from 'react';
@@ -20,7 +20,7 @@ export default function TabsNavigation({
   activeTabIndex,
   onChange,
 }: TabsNavigationProps) {
-  const titleFormatted = getIdFromTitle(title);
+  const titleFormatted = getId(title);
   const titleId = `${titleFormatted}-title`;
 
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -69,7 +69,7 @@ export default function TabsNavigation({
         window.clearTimeout(resizeTimeoutRef.current);
       }
     };
-  }, [activeTabIndex, items]);
+  }, [activeTabIndex, items.length]);
 
   function activateTab(index: number) {
     onChange(index);
@@ -157,7 +157,7 @@ export default function TabsNavigation({
         }}
       />
       {items.map((item, index) => {
-        const { buttonId, contentId } = getTabsElementsIdsFromTitle(item.title);
+        const { buttonId, contentId } = getTabsElementIds(item.id);
         const isActive = index === activeTabIndex;
 
         return (
@@ -174,7 +174,7 @@ export default function TabsNavigation({
             role="tab"
             aria-selected={isActive}
             tabIndex={isActive ? 0 : -1}
-            key={item.title}
+            key={item.id}
             onClick={() => activateTab(index)}
           >
             {item.title}

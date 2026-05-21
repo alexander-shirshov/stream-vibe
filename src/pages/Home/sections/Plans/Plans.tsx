@@ -15,6 +15,7 @@ export default function Plans() {
   const tabsItems = useMemo<TabItem[]>(() => {
     return planGroups.map(group => {
       return {
+        id: group.title,
         title: t(`plans.tabs.${group.title}`),
         isActive: group.isActive,
         children: (
@@ -37,7 +38,7 @@ export default function Plans() {
   return (
     <Section
       title={t('plans.title')}
-      titleId="plans-id"
+      titleId="plans-title"
       id="pricing"
       description={t('plans.descr')}
       actions={
