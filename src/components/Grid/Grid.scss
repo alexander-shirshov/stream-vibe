@@ -3,9 +3,19 @@
 .grid {
   --gridColumns: 1;
 
+  min-width: 0;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
   display: grid;
-  grid-template-columns: repeat(var(--gridColumns), 1fr);
+  grid-template-columns: repeat(var(--gridColumns), minmax(0, 1fr));
   gap: fluid-to-laptop(30, 20);
+
+  &__item {
+    min-width: 0;
+  }
 
   &--2 {
     --gridColumns: 2;

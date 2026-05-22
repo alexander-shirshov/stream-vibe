@@ -92,6 +92,12 @@ export interface Messages {
     linkedin: string;
   };
 
+  banner: {
+    cta: string;
+    title: string;
+    description: string;
+  };
+
   main: {
     pageTitle: string;
   };

@@ -66,6 +66,13 @@ const en: Messages = {
     linkedin: 'LinkedIn',
   },
 
+  banner: {
+    cta: 'Start a Free Trial',
+    title: 'Start your free trial today!',
+    description:
+      'Discover unlimited entertainment with StreamVibe. Enjoy your favorite movies and shows for free during your trial period.',
+  },
+
   main: {
     pageTitle: 'Home',
   },
