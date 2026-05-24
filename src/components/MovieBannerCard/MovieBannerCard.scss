@@ -1,0 +1,79 @@
+@use '@/styles/helpers' as *;
+
+.movie-banner-card {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  border: var(--border);
+  border-radius: var(--border-radius-l);
+
+  &__image {
+    width: 100%;
+    height: var(--movie-banner-min-height);
+    object-fit: cover;
+    user-select: none;
+  }
+
+  &__inner {
+    @include abs-cover;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    row-gap: fluid(30, 20);
+    padding: fluid-to-laptop(126, 104) fluid(50, 24);
+    background-image: linear-gradient(0deg, var(--color-black-08) 0%, rgba(20, 20, 20, 0) 100%);
+
+    @include mobile {
+      padding-block: 16px;
+    }
+  }
+
+  &__body {
+    display: grid;
+    row-gap: fluid-to-laptop(4, 2);
+  }
+
+  &__description {
+    max-width: fluid-to-laptop(1194, 960);
+  }
+
+  &__cta {
+    display: flex;
+    align-items: center;
+    column-gap: 9px;
+
+    & svg {
+      color: var(--color-white);
+      @include square(19px);
+    }
+  }
+
+  &__play {
+    @include mobile-s {
+      width: 100%;
+    }
+  }
+
+  &__icon {
+    color: var(--color-white);
+    @include square(20px);
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    @include mobile {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    column-gap: fluid-to-laptop(10, 8);
+  }
+}

@@ -3,6 +3,7 @@ import { useLanguage } from '@/i18n/LanguageProvider';
 import Grid from '@/components/Grid';
 import { deviceItems } from '@/config/deviceItems';
 import DeviceCard from '@/components/DeviceCard';
+import { sectionIds } from '@/constants/navConfig';
 
 export default function Devices() {
   const { t } = useLanguage();
@@ -11,7 +12,7 @@ export default function Devices() {
     <Section
       title={t('devices.title')}
       titleId="devices-title"
-      id="devices"
+      id={sectionIds.devices}
       description={t('devices.descr')}
       isActionsHiddenOnMobile
     >

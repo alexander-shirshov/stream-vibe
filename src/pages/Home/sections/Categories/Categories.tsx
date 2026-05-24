@@ -1,29 +1,40 @@
 import Section from '@/layouts/Section';
 import './Categories.scss';
 import { useLanguage } from '@/i18n/LanguageProvider';
-import { categoryItems } from '@/config/categoryItems';
 import CategoryCard from '@/components/CategoryCard';
 import Slider from '@/components/Slider';
 import SliderNavigation from '@/components/Slider/components/SliderNavigation';
+import { sectionIds } from '@/constants/navConfig';
+import { useCatalogSection } from '@/hooks/useCatalogSection';
+import CatalogSectionSkeleton from '@/components/CatalogSectionSkeleton';
 
 import { useRef, useState } from 'react';
 
 export function Categories() {
   const [isLocked, setIsLocked] = useState(true);
-  const { t } = useLanguage();
+  const { language } = useLanguage();
+  const { section, error, isLoading } = useCatalogSection(language, 'homeCategories');
 
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const paginationRef = useRef<HTMLDivElement>(null);
   const scrollbarRef = useRef<HTMLDivElement>(null);
 
+  if (isLoading) {
+    return <CatalogSectionSkeleton />;
+  }
+
+  if (error || !section) {
+    return null;
+  }
+
   return (
     <Section
-      title={t('categories.title')}
-      titleId="categories-title"
-      description={t('categories.descr')}
+      title={section.title}
+      titleId={section.id}
+      description={section.description}
       isActionsHiddenOnMobile
-      id="categories"
+      id={sectionIds.categories}
       actions={
         <SliderNavigation
           prevRef={prevRef}
@@ -42,8 +53,8 @@ export function Categories() {
         scrollbarRef={scrollbarRef}
         onLockChange={setIsLocked}
       >
-        {categoryItems.map(cat => {
-          return <CategoryCard key={cat.genre} {...cat}></CategoryCard>;
+        {section.items.map(item => {
+          return <CategoryCard key={item.id} {...item}></CategoryCard>;
         })}
       </Slider>
     </Section>

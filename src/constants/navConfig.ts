@@ -7,6 +7,13 @@ type HeaderNavItem = {
   labelKey: keyof Messages['link'];
 };
 
+export const sectionIds = {
+  categories: 'categories',
+  devices: 'devices',
+  pricing: 'pricing',
+  faq: 'faq',
+} as const;
+
 export const headerNav = [
   { route: 'home', labelKey: 'home' },
   { route: 'catalog', labelKey: 'catalog' },

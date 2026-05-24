@@ -1,13 +1,13 @@
 import type { PlanCardData } from '@/components/PlanCard/PlanCard';
 import type { Messages } from '@/i18n/types';
 
-export type planGroup = {
+export type PlanGroup = {
   title: keyof Messages['plans']['tabs'];
   isActive?: boolean;
   items: PlanCardData[];
 };
 
-export const planGroups: planGroup[] = [
+export const planGroups: PlanGroup[] = [
   {
     title: 'monthly',
     isActive: true,

@@ -249,6 +249,20 @@ const en: Messages = {
       },
     },
   },
+
+  catalogPage: {
+    heading: 'Movies & Shows',
+    cta: 'Play Now',
+    actions: {
+      add: 'Add to playlist',
+      like: 'Like',
+      sound: 'Mute',
+    },
+  },
+
+  moviesPage: {
+    pageTitle: 'Movies',
+  },
 };
 
 export default en;

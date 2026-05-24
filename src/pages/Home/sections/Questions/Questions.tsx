@@ -5,6 +5,7 @@ import type { ButtonNavLink } from '@/constants/navConfig';
 import { questionItems } from '@/config/questionItems';
 import AccordionGroup from '@/components/AccordionGroup';
 import Accordion from '@/components/Accordion';
+import { sectionIds } from '@/constants/navConfig';
 
 export default function Questions() {
   const { t } = useLanguage();
@@ -15,7 +16,7 @@ export default function Questions() {
     <Section
       title={t('questions.title')}
       titleId="questions-title"
-      id="faq"
+      id={sectionIds.faq}
       description={t('questions.descr')}
       actions={
         <LinkButton mode="link" link={supportLink} customClass="button">

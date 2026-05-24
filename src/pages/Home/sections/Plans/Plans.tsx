@@ -8,6 +8,7 @@ import PlanCard from '@/components/PlanCard';
 import Tabs from '@/components/Tabs';
 import TabsNavigation from '@/components/Tabs/components/TabsNavigation';
 import type { TabItem } from '@/components/Tabs/Tabs';
+import { sectionIds } from '@/constants/navConfig';
 
 export default function Plans() {
   const { t } = useLanguage();
@@ -39,7 +40,7 @@ export default function Plans() {
     <Section
       title={t('plans.title')}
       titleId="plans-title"
-      id="pricing"
+      id={sectionIds.pricing}
       description={t('plans.descr')}
       actions={
         <TabsNavigation

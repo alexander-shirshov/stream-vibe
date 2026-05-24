@@ -4,79 +4,96 @@ import 'swiper/css/pagination';
 import './Slider.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
+import type { SwiperOptions } from 'swiper/types';
 import 'swiper/css/scrollbar';
 
 import React, { Children } from 'react';
 
 type SliderProps = {
   children: React.ReactNode;
+  controls?: React.ReactNode;
   prevRef: React.RefObject<HTMLButtonElement | null>;
   nextRef: React.RefObject<HTMLButtonElement | null>;
   paginationRef?: React.RefObject<HTMLDivElement | null>;
+  hasScrollbar?: boolean;
   scrollbarRef?: React.RefObject<HTMLDivElement | null>;
   onLockChange?: (locked: boolean) => void;
+  options?: SwiperOptions;
+};
+
+const defaultSliderOptions: SwiperOptions = {
+  slidesPerView: 5,
+  slidesPerGroup: 5,
+  spaceBetween: 30,
+  allowTouchMove: false,
+  watchOverflow: true,
+  freeMode: false,
+  breakpoints: {
+    0: {
+      slidesPerView: 2,
+      slidesPerGroup: 1,
+      spaceBetween: 20,
+      allowTouchMove: true,
+    },
+    481: {
+      slidesPerView: 3,
+      slidesPerGroup: 1,
+      spaceBetween: 20,
+      allowTouchMove: true,
+    },
+    768: {
+      slidesPerView: 4,
+      slidesPerGroup: 4,
+      spaceBetween: 20,
+      allowTouchMove: true,
+    },
+    1024: {
+      slidesPerView: 5,
+      slidesPerGroup: 5,
+      spaceBetween: 20,
+      allowTouchMove: false,
+    },
+    1441: {
+      slidesPerView: 5,
+      slidesPerGroup: 5,
+      spaceBetween: 30,
+      allowTouchMove: false,
+    },
+  },
 };
 
 export default function Slider({
   children,
+  controls,
   prevRef,
   nextRef,
   paginationRef,
   scrollbarRef,
+  hasScrollbar,
   onLockChange,
+  options,
 }: SliderProps) {
   const handleLockChange = (swiper: { isLocked: boolean }) => {
     onLockChange?.(swiper.isLocked);
+  };
+
+  const sliderOptions: SwiperOptions = {
+    ...defaultSliderOptions,
+    ...options,
+    breakpoints: options?.breakpoints ?? defaultSliderOptions.breakpoints,
   };
 
   return (
     <div className="slider">
       <Swiper
         modules={[Navigation, Pagination, Scrollbar]}
+        {...sliderOptions}
         navigation
         pagination
         scrollbar={{
           el: scrollbarRef?.current,
           draggable: true,
           dragClass: 'slider__scrollbar-drag',
-        }}
-        slidesPerView={5}
-        slidesPerGroup={5}
-        spaceBetween={30}
-        allowTouchMove={false}
-        watchOverflow
-        freeMode={false}
-        breakpoints={{
-          0: {
-            slidesPerView: 2,
-            slidesPerGroup: 1,
-            spaceBetween: 20,
-            allowTouchMove: true,
-          },
-          481: {
-            slidesPerView: 3,
-            slidesPerGroup: 1,
-            spaceBetween: 20,
-            allowTouchMove: true,
-          },
-          768: {
-            slidesPerView: 4,
-            slidesPerGroup: 1,
-            spaceBetween: 20,
-            allowTouchMove: true,
-          },
-          1024: {
-            slidesPerView: 5,
-            slidesPerGroup: 5,
-            spaceBetween: 20,
-            allowTouchMove: false,
-          },
-          1441: {
-            slidesPerView: 5,
-            slidesPerGroup: 5,
-            spaceBetween: 30,
-            allowTouchMove: false,
-          },
         }}
         onInit={handleLockChange}
         onBreakpoint={handleLockChange}
@@ -173,7 +190,10 @@ export default function Slider({
           <SwiperSlide key={index}>{slide}</SwiperSlide>
         ))}
       </Swiper>
-      <div ref={scrollbarRef} className="slider__scrollbar visible-mobile" />
+      {controls}
+      {hasScrollbar && scrollbarRef && (
+        <div ref={scrollbarRef} className="slider__scrollbar visible-mobile" />
+      )}
     </div>
   );
 }

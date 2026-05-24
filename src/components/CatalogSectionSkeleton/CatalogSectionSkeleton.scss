@@ -1,0 +1,103 @@
+@use '@/styles/helpers' as *;
+
+.banner-skeleton {
+  width: 100%;
+  min-height: var(--movie-banner-min-height);
+  display: block;
+  object-fit: cover;
+  border-radius: var(--border-radius-l);
+  background-color: var(--color-black-15);
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+.catalog-section-skeleton {
+  display: grid;
+  // row-gap: fluid(50, 30);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  &__title,
+  &__description,
+  &__navigation,
+  &__card,
+  &__image,
+  &__card-title,
+  &__icon {
+    background-color: var(--color-black-15);
+    animation: skeleton-pulse 1.4s ease-in-out infinite;
+  }
+
+  &__info {
+    width: 100%;
+  }
+
+  &__title {
+    width: min(420px, 70%);
+    height: fluid(40, 25);
+    border-radius: var(--border-radius-xs);
+  }
+
+  &__description {
+    width: min(640px, 90%);
+    height: 1em;
+    border-radius: var(--border-radius-xs);
+  }
+
+  &__navigation {
+    width: fluid(280, 120);
+    height: 52px;
+    border-radius: var(--border-radius-m);
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(var(--skeleton-columns), 1fr);
+    gap: fluid(30, 16);
+  }
+
+  &__card {
+    display: grid;
+    gap: 16px;
+    padding: fluid(30, 20);
+    border: var(--border);
+    border-radius: var(--border-radius-l);
+  }
+
+  &__image {
+    height: fluid(160, 100);
+    border-radius: var(--border-radius-m);
+  }
+
+  &__card-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__card-title {
+    width: 55%;
+    height: 1em;
+    border-radius: var(--border-radius-xs);
+  }
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

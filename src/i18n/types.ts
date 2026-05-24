@@ -31,6 +31,16 @@ export function getLocale(language: Language): Locale {
   return getLanguageConfig(language).locale;
 }
 
+type LocalizedText = Partial<Record<Language, string>>;
+
+export function getLocalizedText(
+  value: LocalizedText,
+  lang: Language,
+  fallbackLang: Language = 'en'
+) {
+  return value[lang] ?? value[fallbackLang] ?? '';
+}
+
 export interface Messages {
   lang: {
     ariaLabel: string;
@@ -237,5 +247,19 @@ export interface Messages {
         descr: string;
       };
     };
+  };
+
+  catalogPage: {
+    heading: string;
+    cta: string;
+    actions: {
+      add: string;
+      like: string;
+      sound: string;
+    };
+  };
+
+  moviesPage: {
+    pageTitle: string;
   };
 }

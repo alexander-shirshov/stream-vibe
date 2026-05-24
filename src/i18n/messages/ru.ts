@@ -243,6 +243,20 @@ const ru: Messages = {
       },
     },
   },
+
+  catalogPage: {
+    heading: 'Фильмы и сериалы',
+    cta: 'Смотреть',
+    actions: {
+      add: 'В плейлист',
+      like: 'Нравится',
+      sound: 'Без звука',
+    },
+  },
+
+  moviesPage: {
+    pageTitle: 'Фильмы',
+  },
 };
 
 export default ru;

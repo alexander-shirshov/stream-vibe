@@ -1,0 +1,36 @@
+@use '@/styles/helpers' as *;
+
+.movies-banner {
+  padding-bottom: fluid(125, 40);
+
+  &__navigation {
+    @include mobile {
+      display: none !important;
+    }
+    position: absolute;
+    inset-inline: 0;
+    bottom: fluid-to-laptop(20, 16);
+    padding: 0 fluid-to-laptop(50, 40);
+    z-index: 5;
+
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+
+    background: transparent;
+    border: none;
+  }
+
+  &__navigation .slider-navigation__pagination {
+    justify-self: stretch;
+    justify-content: center;
+  }
+
+  &__navigation .slider-navigation__arrow-button--prev {
+    justify-self: start;
+  }
+
+  &__navigation .slider-navigation__arrow-button--next {
+    justify-self: end;
+  }
+}

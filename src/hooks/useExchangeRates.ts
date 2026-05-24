@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { ExchangeRates } from '@/constants/currencies';
-import { fetchExchangeRates } from '@/api/exchangeRates';
+import { fetchExchangeRates } from '@/api/money/exchangeRates';
 
 export function useExchangeRates() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
