@@ -13,7 +13,7 @@ export function mapCatalogItemDto(dto: CatalogItemDto, language: Language): Cata
     description: dto.description ? getLocalizedText(dto.description, language) : null,
     images: dto.images ?? null,
 
-    badge: dto.badge ?? null,
+    badge: dto.badge ? getLocalizedText(dto.badge, language) : null,
 
     href: dto.href ?? null,
 

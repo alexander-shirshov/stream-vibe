@@ -252,6 +252,10 @@ const ru: Messages = {
       like: 'Нравится',
       sound: 'Без звука',
     },
+    catalogSections: {
+      movies: 'Фильмы',
+      shows: 'Сериалы',
+    },
   },
 
   moviesPage: {

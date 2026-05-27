@@ -1,11 +1,43 @@
 import { useEffect, useState } from 'react';
 
-import type { CatalogSection, CatalogSectionKey } from '@/api/catalog/catalog.types';
-import type { Language } from '@/i18n/types';
-import { fetchSection } from '@/api/catalog/catalog.api';
+import type {
+  CatalogSection,
+  CatalogSectionKey,
+  CatalogSectionWithKey,
+} from '@/api/catalog/catalog.types';
 
-export function useCatalogSection(language: Language, sectionKey: CatalogSectionKey) {
-  const [section, setSection] = useState<CatalogSection | null>(null);
+import type { Language } from '@/i18n/types';
+
+import { fetchSection, fetchSectionWithKey } from '@/api/catalog/catalog.api';
+
+export type UseCatalogSectionBase = {
+  isLoading: boolean;
+  error: string | null;
+};
+
+export function useCatalogSection(
+  language: Language,
+  sectionKey: CatalogSectionKey,
+  options?: { withKey?: false }
+): UseCatalogSectionBase & {
+  section: CatalogSection | null;
+};
+
+export function useCatalogSection(
+  language: Language,
+  sectionKey: CatalogSectionKey,
+  options: { withKey: true }
+): UseCatalogSectionBase & {
+  section: CatalogSectionWithKey | null;
+};
+
+export function useCatalogSection(
+  language: Language,
+  sectionKey: CatalogSectionKey,
+  options: { withKey?: boolean } = {}
+) {
+  const [section, setSection] = useState<CatalogSection | CatalogSectionWithKey | null>(null);
+
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -16,7 +48,10 @@ export function useCatalogSection(language: Language, sectionKey: CatalogSection
       try {
         setIsLoading(true);
         setError(null);
-        const data = await fetchSection(sectionKey, language, false);
+
+        const data = options.withKey
+          ? await fetchSectionWithKey(sectionKey, language)
+          : await fetchSection(sectionKey, language, false);
 
         if (!ignore) {
           setSection(data);
@@ -37,7 +72,7 @@ export function useCatalogSection(language: Language, sectionKey: CatalogSection
     return () => {
       ignore = true;
     };
-  }, [language, sectionKey]);
+  }, [language, sectionKey, options.withKey]);
 
   return {
     section,

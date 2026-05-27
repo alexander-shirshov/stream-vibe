@@ -4,10 +4,17 @@ export type CatalogCategory = 'genres' | 'top' | 'trending' | 'new' | 'must-watc
 
 export const catalogSectionKeys = {
   homeCategories: 'homeCategories',
-  moviesGenres: 'moviesGenres',
-  moviesTrending: 'moviesTrending',
-  moviesNewReleases: 'moviesNewReleases',
-  moviesPopular: 'moviesPopular',
+
+  catalogMoviesGenres: 'catalogMoviesGenres',
+  catalogMoviesTrending: 'calatogMoviesTrending',
+  catalogMoviesNewReleases: 'catalogMoviesNewReleases',
+  catalogMoviesPopular: 'catalogMoviesPopular',
+
+  catalogShowsGenres: 'catalogShowsGenres',
+  catalogShowsTrending: 'catalogShowsTrending',
+  catalogShowsNewReleases: 'catalogShowsNewReleases',
+  catalogShowsPopular: 'catalogShowsPopular',
+
   catalogBanner: 'catalogBanner',
 } as const;
 
@@ -29,13 +36,17 @@ export type CatalogSection = {
   items: CatalogItem[];
 };
 
+export type CatalogSectionWithKey = CatalogSection & {
+  key: CatalogSectionKey;
+};
+
 export type CatalogItemDto = {
   id: string;
   title: Partial<Record<Language, string>>;
   description?: Partial<Record<Language, string>>;
   images?: string[];
 
-  badge?: string;
+  badge?: Partial<Record<Language, string>>;
 
   href?: string;
 

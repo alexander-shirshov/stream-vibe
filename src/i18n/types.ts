@@ -257,6 +257,10 @@ export interface Messages {
       like: string;
       sound: string;
     };
+    catalogSections: {
+      movies: string;
+      shows: string;
+    };
   };
 
   moviesPage: {

@@ -258,6 +258,10 @@ const en: Messages = {
       like: 'Like',
       sound: 'Mute',
     },
+    catalogSections: {
+      movies: 'Movies',
+      shows: 'Shows',
+    },
   },
 
   moviesPage: {
