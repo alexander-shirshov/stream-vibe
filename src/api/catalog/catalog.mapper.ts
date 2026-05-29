@@ -9,6 +9,8 @@ import { getLocalizedText, type Language } from '@/i18n/types';
 export function mapCatalogItemDto(dto: CatalogItemDto, language: Language): CatalogItem {
   return {
     id: dto.id,
+    entityId: dto.entityId ?? dto.id,
+
     title: getLocalizedText(dto.title, language),
     description: dto.description ? getLocalizedText(dto.description, language) : null,
     images: dto.images ?? null,

@@ -42,6 +42,7 @@ export type CatalogSectionWithKey = CatalogSection & {
 
 export type CatalogItemDto = {
   id: string;
+  entityId?: string;
   title: Partial<Record<Language, string>>;
   description?: Partial<Record<Language, string>>;
   images?: string[];
@@ -58,6 +59,8 @@ export type CatalogItemDto = {
 
 export type CatalogItem = {
   id: string;
+  entityId: string;
+
   title: string;
   description?: string | null;
   images?: string[] | null;
