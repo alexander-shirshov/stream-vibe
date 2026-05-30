@@ -15,3 +15,18 @@ type ArrayKeys<T> = {
 }[keyof T];
 
 export type UserCatalogArrayKeys = ArrayKeys<UserCatalog>;
+
+export type UserPreferencesDto = {
+  userId: string;
+  isMuted: boolean;
+};
+
+export type UserPreferences = {
+  userId: string;
+  isMuted: boolean;
+};
+
+export type PersistedUserState = {
+  catalog: UserCatalog;
+  preferences: UserPreferences;
+};
