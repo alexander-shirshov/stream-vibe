@@ -1,6 +1,8 @@
 @use '@/styles/helpers' as *;
 
 .button {
+  --buttonPressAnimation: button-press 0.28s cubic-bezier(0.2, 0, 0.2, 1);
+
   @include flex-center(true);
 
   padding: fluid-to-laptop(18, 14) fluid-to-laptop(24, 20);
@@ -21,10 +23,6 @@
   @include hover {
     color: var(--color-white);
     background-color: var(--color-red-60);
-  }
-
-  &:active {
-    scale: 1.05;
   }
 
   &:disabled {
@@ -59,6 +57,9 @@
 
   &--black-06 {
     background-color: var(--color-black-06);
+    @include hover {
+      background-color: var(--color-black-12);
+    }
   }
 
   &--black-08 {
@@ -72,5 +73,24 @@
   &--movies-actions {
     @include square(fluid-to-laptop(56, 48));
     padding: fluid-to-laptop(14, 12);
+  }
+}
+
+.button.is-pressed,
+.link.is-pressed {
+  animation: var(--buttonPressAnimation);
+}
+
+@keyframes button-press {
+  0% {
+    scale: 1;
+  }
+
+  45% {
+    scale: 0.965;
+  }
+
+  100% {
+    scale: 1;
   }
 }

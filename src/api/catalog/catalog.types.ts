@@ -6,7 +6,7 @@ export const catalogSectionKeys = {
   homeCategories: 'homeCategories',
 
   catalogMoviesGenres: 'catalogMoviesGenres',
-  catalogMoviesTrending: 'calatogMoviesTrending',
+  catalogMoviesTrending: 'catalogMoviesTrending',
   catalogMoviesNewReleases: 'catalogMoviesNewReleases',
   catalogMoviesPopular: 'catalogMoviesPopular',
 

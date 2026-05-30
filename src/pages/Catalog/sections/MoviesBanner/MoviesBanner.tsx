@@ -4,9 +4,14 @@ import { useLanguage } from '@/i18n/LanguageProvider';
 import { useRef } from 'react';
 import Slider from '@/components/Slider';
 import SliderNavigation from '@/components/Slider/components/SliderNavigation';
-import { useCatalogSection } from '@/hooks/useCatalogSection';
+
 import CatalogSectionSkeleton from '@/components/CatalogSectionSkeleton';
 import MovieBannerCard from '@/components/MovieBannerCard/MovieBannerCard';
+
+import { CURRENT_USER_ID } from '@/constants/user';
+
+import { useCatalogSection } from '@/hooks/useCatalogSection';
+import { useUserState } from '@/hooks/useUserState';
 
 export default function MoviesBanner() {
   const { t, language } = useLanguage();
@@ -18,9 +23,23 @@ export default function MoviesBanner() {
 
   const { error, isLoading, section } = useCatalogSection(language, 'catalogBanner');
 
-  if (isLoading) return <CatalogSectionSkeleton variant="banner" />;
+  const {
+    isLoading: isUserStateLoading,
+    error: userStateError,
+    handleToggleLike,
+    handleTogglePlaylist,
+    isInPlaylist,
+    handleToggleMuted,
+    isMuted,
+    userState,
+    isLiked,
+  } = useUserState(CURRENT_USER_ID);
 
-  if (error || !section || !section.items) return null;
+  const isPageLoading = isLoading || isUserStateLoading;
+
+  if (isPageLoading) return <CatalogSectionSkeleton variant="banner" />;
+
+  if (error || userStateError || !section?.items || !userState) return null;
 
   return (
     <section className="movies-banner container" aria-labelledby={titleId}>
@@ -49,7 +68,16 @@ export default function MoviesBanner() {
         }
       >
         {section.items.map(item => (
-          <MovieBannerCard key={item.id} {...item} />
+          <MovieBannerCard
+            key={item.entityId}
+            {...item}
+            liked={isLiked(item.entityId)}
+            added={isInPlaylist(item.entityId)}
+            isMuted={isMuted}
+            onLikeToggle={() => handleToggleLike(item.entityId)}
+            onPlaylistToggle={() => handleTogglePlaylist(item.entityId)}
+            onMuteToggle={handleToggleMuted}
+          />
         ))}
       </Slider>
     </section>

@@ -15,7 +15,10 @@
   },
   "dependencies": {
     "@a1rth/css-normalize": "^1.2.4",
+    "@lottiefiles/react-lottie-player": "^3.6.0",
     "clsx": "^2.1.1",
+    "lottie-react": "^2.4.1",
+    "lottie-web": "^5.13.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-helmet-async": "^3.0.0",

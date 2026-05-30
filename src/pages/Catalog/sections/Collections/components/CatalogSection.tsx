@@ -1,7 +1,6 @@
 import './CatalogSection.scss';
 import { useRef, useState } from 'react';
 
-import { catalogSectionSliderConfig } from '@/config/catalogSectionSliderConfig';
 import type { CatalogSection } from '@/api/catalog/catalog.types';
 import type { SwiperOptions } from 'swiper/types';
 import Section from '@/layouts/Section';
@@ -14,14 +13,7 @@ type CatalogSectionProps = CatalogSection & {
   sliderParams?: SwiperOptions;
 };
 
-export default function CatalogSection({
-  id,
-  title,
-  description,
-  category,
-  items,
-  sliderParams,
-}: CatalogSectionProps) {
+export default function CatalogSection({ id, title, items, sliderParams }: CatalogSectionProps) {
   const [isLocked, setIsLocked] = useState(true);
 
   const prevRef = useRef<HTMLButtonElement>(null);

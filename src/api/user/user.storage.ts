@@ -1,4 +1,4 @@
-import type { UserPreferences, PersistedUserState } from './user.types';
+import type { PersistedUserState } from './user.types';
 
 const USER_STATE_STORAGE_KEY = 'streamvibe-user-state';
 

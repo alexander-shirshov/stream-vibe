@@ -56,9 +56,53 @@
     }
   }
 
+  &__like {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+
+    &-animation {
+      position: absolute;
+      inset: -12px;
+      opacity: 0;
+      pointer-events: none;
+
+      &--visible {
+        opacity: 1;
+      }
+    }
+  }
+
   &__icon {
     color: var(--color-white);
     @include square(20px);
+  }
+
+  &__playlist-icon {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+
+    svg {
+      grid-area: 1 / 1;
+      transition:
+        opacity 0.22s ease,
+        transform 0.28s cubic-bezier(0.2, 0, 0.2, 1);
+    }
+  }
+
+  &__playlist-icon-plus {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  &__playlist-icon-check {
+    opacity: 0;
+    transform: scale(0.6) rotate(-18deg);
   }
 
   &__footer {
@@ -75,5 +119,17 @@
   &__actions {
     display: flex;
     column-gap: fluid-to-laptop(10, 8);
+  }
+}
+
+.movie-banner-card__playlist-icon.is-added {
+  .movie-banner-card__playlist-icon-plus {
+    opacity: 0;
+    transform: scale(0.55) rotate(90deg);
+  }
+
+  .movie-banner-card__playlist-icon-check {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
   }
 }

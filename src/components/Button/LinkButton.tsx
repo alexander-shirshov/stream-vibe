@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { getPath } from '@/router/routes';
 import clsx from 'clsx';
 import type { ButtonNavLink } from '@/constants/navConfig';
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 
 type ButtonTypes = 'button' | 'submit' | 'reset';
 type ButtonVariants = 'primary' | 'secondary' | 'danger' | 'transparent';
@@ -34,6 +34,24 @@ type LinkButtonProps =
 
 const LinkButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, LinkButtonProps>(
   (props, ref) => {
+    const [isPressed, setIsPressed] = useState(false);
+
+    const handlePress = () => {
+      setIsPressed(false);
+
+      requestAnimationFrame(() => {
+        setIsPressed(true);
+      });
+    };
+
+    const handleAnimationEnd = (
+      event: React.AnimationEvent<HTMLButtonElement | HTMLAnchorElement>
+    ) => {
+      if (event.animationName !== 'button-press') return;
+
+      setIsPressed(false);
+    };
+
     if (props.mode === 'link') {
       const { link, children, target, customClass, ariaLabel } = props;
       let path: string;
@@ -52,7 +70,9 @@ const LinkButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, LinkButtonP
           rel="noopener noreferrer"
           aria-label={ariaLabel}
           target={target}
-          className={clsx('link', customClass)}
+          className={clsx('link', customClass, isPressed && 'is-pressed')}
+          onClick={handlePress}
+          onAnimationEnd={handleAnimationEnd}
         >
           {children}
         </a>
@@ -61,9 +81,13 @@ const LinkButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, LinkButtonP
           ref={ref as React.Ref<HTMLAnchorElement>}
           to={path}
           end={path === '/'}
-          className={({ isActive }) => clsx('link', customClass, isActive && 'is-active')}
+          className={({ isActive }) =>
+            clsx('link', customClass, isActive && 'is-active', isPressed && 'is-pressed')
+          }
           // target={target}
           aria-label={ariaLabel}
+          onClick={handlePress}
+          onAnimationEnd={handleAnimationEnd}
         >
           {children}
         </NavLink>
@@ -83,10 +107,21 @@ const LinkButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, LinkButtonP
       return (
         <button
           ref={ref as React.Ref<HTMLButtonElement>}
-          className={clsx('button', customClass, variant && `button--${variant}`)}
+          className={clsx(
+            'button',
+            customClass,
+            variant && `button--${variant}`,
+            isPressed && 'is-pressed'
+          )}
           type={type ?? 'button'}
-          onClick={onClick}
-          onAnimationEnd={onAnimationEnd}
+          onClick={() => {
+            handlePress();
+            onClick?.();
+          }}
+          onAnimationEnd={event => {
+            handleAnimationEnd(event);
+            onAnimationEnd?.(event);
+          }}
           aria-label={ariaLabel}
           aria-expanded={ariaExpanded}
           aria-haspopup={ariaHaspopup}

@@ -1,0 +1,49 @@
+@use '@/styles/helpers' as *;
+.movie-banner-card__sound-icon {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  color: var(--color-white);
+
+  svg {
+    width: 20px;
+    height: 20px;
+    overflow: visible;
+    transform: scale(1.1);
+  }
+}
+
+.movie-banner-card__sound-wave,
+.movie-banner-card__sound-mute-line {
+  transform-origin: center;
+  transition:
+    opacity 0.22s ease,
+    transform 0.28s cubic-bezier(0.2, 0, 0.2, 1),
+    stroke-dashoffset 0.28s ease;
+}
+
+.movie-banner-card__sound-wave {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.movie-banner-card__sound-mute-line {
+  opacity: 0;
+  stroke-dasharray: 8;
+  stroke-dashoffset: 8;
+  transform: scale(0.7);
+}
+
+.movie-banner-card__sound-icon.is-muted {
+  .movie-banner-card__sound-wave {
+    opacity: 0;
+    transform: translateX(-2px) scale(0.7);
+  }
+
+  .movie-banner-card__sound-mute-line {
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transform: scale(1);
+  }
+}
