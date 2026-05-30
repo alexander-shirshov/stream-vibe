@@ -65,12 +65,12 @@ function getMockUserPreferences(userId: string): UserPreferences | null {
 function initTempUser(userId: string): PersistedUserState {
   return {
     catalog: {
-      userId: userId,
+      userId,
       likedItemIds: [],
       playlistItemIds: [],
     },
     preferences: {
-      userId: userId,
+      userId,
       isMuted: false,
     },
   };
@@ -110,32 +110,32 @@ export async function fetchUserPrefs(userId: string): Promise<UserPreferences> {
   return state.preferences;
 }
 
-export async function toggleLike(userId: string, itemId: string): Promise<UserCatalog> {
+export async function toggleLike(userId: string, itemId: string): Promise<PersistedUserState> {
   const state = await fetchUserState(userId);
 
   toggleCatalogArrayItem(state.catalog, 'likedItemIds', itemId);
 
   setPersistedUserState(state);
 
-  return state.catalog;
+  return state;
 }
 
-export async function togglePlaylist(userId: string, itemId: string): Promise<UserCatalog> {
+export async function togglePlaylist(userId: string, itemId: string): Promise<PersistedUserState> {
   const state = await fetchUserState(userId);
 
   toggleCatalogArrayItem(state.catalog, 'playlistItemIds', itemId);
 
   setPersistedUserState(state);
 
-  return state.catalog;
+  return state;
 }
 
-export async function toggleMuted(userId: string): Promise<UserPreferences> {
+export async function toggleMuted(userId: string): Promise<PersistedUserState> {
   const state = await fetchUserState(userId);
 
   state.preferences.isMuted = !state.preferences.isMuted;
 
   setPersistedUserState(state);
 
-  return state.preferences;
+  return state;
 }
