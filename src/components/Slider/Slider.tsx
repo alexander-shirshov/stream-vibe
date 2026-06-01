@@ -8,6 +8,7 @@ import type { SwiperOptions } from 'swiper/types';
 import 'swiper/css/scrollbar';
 
 import React, { Children } from 'react';
+import clsx from 'clsx';
 
 type SliderProps = {
   children: React.ReactNode;
@@ -15,7 +16,8 @@ type SliderProps = {
   prevRef: React.RefObject<HTMLButtonElement | null>;
   nextRef: React.RefObject<HTMLButtonElement | null>;
   paginationRef?: React.RefObject<HTMLDivElement | null>;
-  hasScrollbar?: boolean;
+  hasScrollbarOnMobile?: boolean;
+  isMobileBleeding?: boolean;
   scrollbarRef?: React.RefObject<HTMLDivElement | null>;
   onLockChange?: (locked: boolean) => void;
   options?: SwiperOptions;
@@ -69,7 +71,8 @@ export default function Slider({
   nextRef,
   paginationRef,
   scrollbarRef,
-  hasScrollbar,
+  hasScrollbarOnMobile,
+  isMobileBleeding,
   onLockChange,
   options,
 }: SliderProps) {
@@ -84,7 +87,7 @@ export default function Slider({
   };
 
   return (
-    <div className="slider">
+    <div className={clsx('slider', isMobileBleeding && 'slider--bleed-mobile')}>
       <Swiper
         modules={[Navigation, Pagination, Scrollbar]}
         {...sliderOptions}
@@ -191,7 +194,7 @@ export default function Slider({
         ))}
       </Swiper>
       {controls}
-      {hasScrollbar && scrollbarRef && (
+      {hasScrollbarOnMobile && scrollbarRef && (
         <div ref={scrollbarRef} className="slider__scrollbar visible-mobile" />
       )}
     </div>

@@ -3,6 +3,18 @@
 .slider {
   position: relative;
 
+  &--bleed-mobile {
+    @include mobile {
+      margin-right: calc(var(--container-padding-x) * -1);
+      overflow: visible;
+
+      .swiper {
+        padding-right: var(--container-padding-x);
+        overflow: visible;
+      }
+    }
+  }
+
   &__scrollbar {
     @include abs-x;
 
