@@ -50,7 +50,7 @@ export default function MoviesBanner() {
         prevRef={prevRef}
         nextRef={nextRef}
         paginationRef={paginationRef}
-        hasScrollbar={false}
+        hasScrollbarOnMobile={false}
         options={{
           slidesPerView: 1,
           slidesPerGroup: 1,

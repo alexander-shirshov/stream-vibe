@@ -25,7 +25,7 @@ export default function CatalogGroup({ sectionKeys, titleKey }: CatalogGroupProp
           const cardsCount =
             typeof catalogSectionSliderConfig[key]?.slidesPerView === 'number' &&
             catalogSectionSliderConfig[key]?.slidesPerView > 0
-              ? catalogSectionSliderConfig[key]?.slidesPerView
+              ? Math.floor(catalogSectionSliderConfig[key]?.slidesPerView)
               : undefined;
           return <CatalogSectionSkeleton key={key} cardsCount={cardsCount} />;
         })}

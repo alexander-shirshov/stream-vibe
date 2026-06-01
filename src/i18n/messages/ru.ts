@@ -88,7 +88,7 @@ const ru: Messages = {
     descr: `Хотите посмеяться, задуматься или узнать что-то новое? У нас найдётся контент для любого настроения`,
   },
 
-  categoryCard: {
+  CatalogItemCard: {
     action: 'Экшн',
     adventure: 'Приключения',
     comedy: 'Комедии',

@@ -51,23 +51,23 @@ export default function Collections() {
 
   if (isMobileS) {
     return (
-      <>
+      <div className="collections container">
         <TabsNavigation
           title={''}
           items={tabsItems}
           activeTabIndex={activeTabIndex}
           onChange={setActiveTabIndex}
         />
-        <Tabs items={tabsItems} activeTabIndex={activeTabIndex} className="collections container" />
-      </>
+        <Tabs items={tabsItems} activeTabIndex={activeTabIndex} />
+      </div>
     );
   }
 
   return (
-    <>
+    <div className="collections container">
       {CATALOG_GROUPS.map(group => (
-        <CatalogGroup key={group.id} sectionKeys={group.sectionKeys} />
+        <CatalogGroup key={group.id} sectionKeys={group.sectionKeys} titleKey={group.id} />
       ))}
-    </>
+    </div>
   );
 }

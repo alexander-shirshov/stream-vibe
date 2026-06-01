@@ -93,7 +93,7 @@ const en: Messages = {
     descr: `Whether you're looking for a comedy to make you laugh, a drama to make you think, or a documentary to learn something new`,
   },
 
-  categoryCard: {
+  CatalogItemCard: {
     action: 'Action',
     adventure: 'Adventure',
     comedy: 'Comedy',

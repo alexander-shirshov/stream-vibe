@@ -11,13 +11,54 @@ export const catalogSectionSliderConfig: Partial<Record<CatalogSectionKey, Swipe
     freeMode: false,
     breakpoints: {
       0: {
-        slidesPerView: 1,
+        slidesPerView: 1.6,
         slidesPerGroup: 1,
         spaceBetween: 20,
         allowTouchMove: true,
       },
       481: {
-        slidesPerView: 2,
+        slidesPerView: 2.2,
+        slidesPerGroup: 2,
+        spaceBetween: 20,
+        allowTouchMove: true,
+      },
+      768: {
+        slidesPerView: 3,
+        slidesPerGroup: 3,
+        spaceBetween: 20,
+        allowTouchMove: true,
+      },
+      1024: {
+        slidesPerView: 4,
+        slidesPerGroup: 4,
+        spaceBetween: 20,
+        allowTouchMove: false,
+      },
+      1441: {
+        slidesPerView: 4,
+        slidesPerGroup: 4,
+        spaceBetween: 30,
+        allowTouchMove: false,
+      },
+    },
+  },
+
+  catalogShowsPopular: {
+    slidesPerView: 4,
+    slidesPerGroup: 4,
+    spaceBetween: 30,
+    allowTouchMove: false,
+    watchOverflow: true,
+    freeMode: false,
+    breakpoints: {
+      0: {
+        slidesPerView: 1.6,
+        slidesPerGroup: 1,
+        spaceBetween: 20,
+        allowTouchMove: true,
+      },
+      481: {
+        slidesPerView: 2.2,
         slidesPerGroup: 2,
         spaceBetween: 20,
         allowTouchMove: true,

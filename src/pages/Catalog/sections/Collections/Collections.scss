@@ -1,1 +1,11 @@
 @use '@/styles/helpers' as *;
+
+.collections {
+  &__group {
+    @include mobile-above {
+      padding: fluid-to-laptop(50, 40);
+      border: var(--border);
+      border-radius: var(--border-radius-l);
+    }
+  }
+}

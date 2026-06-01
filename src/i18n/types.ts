@@ -127,7 +127,7 @@ export interface Messages {
     descr: string;
   };
 
-  categoryCard: {
+  CatalogItemCard: {
     action: string;
     adventure: string;
     comedy: string;

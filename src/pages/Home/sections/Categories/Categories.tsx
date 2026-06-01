@@ -1,7 +1,7 @@
 import Section from '@/layouts/Section';
 import './Categories.scss';
 import { useLanguage } from '@/i18n/LanguageProvider';
-import CategoryCard from '@/components/CategoryCard';
+import CatalogItemCard from '@/components/CatalogItemCard';
 import Slider from '@/components/Slider';
 import SliderNavigation from '@/components/Slider/components/SliderNavigation';
 import { sectionIds } from '@/constants/navConfig';
@@ -52,9 +52,10 @@ export function Categories() {
         paginationRef={paginationRef}
         scrollbarRef={scrollbarRef}
         onLockChange={setIsLocked}
+        hasScrollbarOnMobile={true}
       >
         {section.items.map(item => {
-          return <CategoryCard key={item.id} {...item}></CategoryCard>;
+          return <CatalogItemCard key={item.id} {...item}></CatalogItemCard>;
         })}
       </Slider>
     </Section>
