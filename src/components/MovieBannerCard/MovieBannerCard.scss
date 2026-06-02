@@ -5,10 +5,35 @@
   overflow: hidden;
   text-align: center;
   border: 0;
-  border-radius: var(--border-radius-l) var(--border-radius-l) 0 0; // скругление только сверху
-  // background-color: var(--color-black-08); // страховка
+  border-radius: var(--border-radius-l) var(--border-radius-l) 0 0;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
 
-  transform: translateZ(0);
+    border: 1px solid var(--color-black-15);
+    border-bottom: 0;
+    border-radius: var(--border-radius-l) var(--border-radius-l) 0 0;
+
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 68%,
+      rgba(0, 0, 0, 0.45) 86%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 68%,
+      rgba(0, 0, 0, 0.45) 86%,
+      transparent 100%
+    );
+  }
+
+  // transform: translateZ(0);
 
   &__image {
     width: 100%;
@@ -16,7 +41,24 @@
     object-fit: cover;
     user-select: none;
     display: block;
-    transform: none;
+
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 62%,
+      rgba(0, 0, 0, 0.7) 78%,
+      rgba(0, 0, 0, 0.25) 90%,
+      transparent 100%
+    );
+
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 62%,
+      rgba(0, 0, 0, 0.7) 78%,
+      rgba(0, 0, 0, 0.25) 90%,
+      transparent 100%
+    );
   }
 
   &__inner {
@@ -34,11 +76,15 @@
       content: '';
       position: absolute;
       // растягиваем сильнее вниз и по бокам
-      inset: -2px -5px -20px -5px;
-      background: linear-gradient(0deg, var(--color-black-08) 0%, rgba(20, 20, 20, 0) 100%);
-      background-repeat: no-repeat;
-      background-size: 102% 102%; // чуть больше размер
-      background-position: center;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        var(--color-black-08) 0%,
+        rgba(20, 20, 20, 0.96) 12%,
+        rgba(20, 20, 20, 0.75) 28%,
+        rgba(20, 20, 20, 0.35) 52%,
+        transparent 78%
+      );
       pointer-events: none;
       z-index: 0;
     }
@@ -51,21 +97,6 @@
     @include mobile {
       padding-block: 16px;
     }
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--color-black-08);
-    pointer-events: none;
-    z-index: 3;
-    // Скрываем под скруглением, если оно есть
-    border-bottom-left-radius: var(--border-radius-l);
-    border-bottom-right-radius: var(--border-radius-l);
   }
 
   &__body {

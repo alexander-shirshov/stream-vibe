@@ -4,27 +4,50 @@
   padding-block: var(--section-padding-y);
 
   &__inner {
+    position: relative;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
     column-gap: 100px;
     padding: fluid(100, 50) fluid(80, 30);
     min-height: 390px;
-    background:
-      linear-gradient(
-        90deg,
-        var(--color-black-06) 2.42%,
-        rgba(20, 15, 15, 0.97) 25.46%,
-        rgba(34, 14, 14, 0.91) 46.72%,
-        rgba(229, 0, 0, 0) 168.98%
-      ),
-      url('../../assets/images/banner/bg.png');
+
+    background-image: url('../../assets/images/banner/bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
     border: var(--border);
     border-radius: var(--border-radius-l);
+
+    background-color: var(--color-black-08);
+
+    // Слой с градиентом (поверх картинки, под контентом)
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -2px; // растягиваем на 2px во все стороны
+      background: linear-gradient(
+        90deg,
+        var(--color-black-06) 2.42%,
+        rgba(20, 15, 15, 0.97) 25.46%,
+        rgba(34, 14, 14, 0.91) 46.72%,
+        rgba(229, 0, 0, 0) 168.98%
+      );
+      background-size: 102% 102%; // чуть больше размер
+      background-position: center;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      border-radius: inherit; // наследуем скругление
+      z-index: 0;
+    }
+
+    // Контент выше градиента
+    & > * {
+      position: relative;
+      z-index: 1;
+    }
 
     @include laptop {
       max-height: 300px;
@@ -40,8 +63,8 @@
       min-height: 350px;
       max-height: none;
 
-      background:
-        linear-gradient(
+      &::before {
+        background: linear-gradient(
           180deg,
           rgba(15, 6, 6, 0.92) 0%,
           rgba(20, 8, 8, 0.88) 22%,
@@ -49,12 +72,10 @@
           rgba(35, 10, 10, 0.72) 58%,
           rgba(55, 8, 8, 0.78) 78%,
           rgba(90, 0, 0, 0.62) 100%
-        ),
-        url('../../assets/images/banner/bg.png');
-
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+        );
+        background-size: 102% 102%;
+        background-position: center;
+      }
     }
   }
 
