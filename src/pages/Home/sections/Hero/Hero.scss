@@ -14,39 +14,57 @@
   &__pano {
     --heroGradientColorStart: var(--color-black-08);
     --heroGradientColorEnd: rgb(20 20 20 / 0);
-
     --heroGradientHeight: 67.5%;
 
+    // Решение: добавляем дополнительный градиент-заглушку
     --heroGradientTop: linear-gradient(
         to bottom,
         var(--heroGradientColorStart) 0%,
         var(--heroGradientColorEnd) 100%
       )
-      50% 0/100.5% var(--heroGradientHeight);
-    //направление
-    //цвет в начале
-    //цвет в конце
-    //положение по горизонтали положение по вертикали/ширина высота
+      50% 0 / 100% var(--heroGradientHeight);
 
     --heroGradientBottom: linear-gradient(
         to top,
         var(--heroGradientColorStart) 0%,
         var(--heroGradientColorEnd) 100%
       )
-      50% 100.5%/1100.5% var(--heroGradientHeight);
+      50% 100% / 100% var(--heroGradientHeight);
+
+    // КЛЮЧЕВОЕ: градиент-заглушка, который перекрывает возможные зазоры
+    --heroGradientCover: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--heroGradientColorEnd) 100%
+      )
+      50% 100% / 100% 2px; // 2px запаса
 
     @include flex-center;
-
     flex-grow: 1;
-
     padding-top: fluid(195, 150);
     padding-bottom: fluid(131, 50);
 
     background:
+      var(--heroGradientCover),
+      // Заглушка всегда снизу
       var(--heroGradientTop),
       var(--heroGradientBottom),
       url('../../../../assets/images/hero/bg.png') 50% / cover;
     background-repeat: no-repeat;
+
+    // ФИНАЛЬНОЕ РЕШЕНИЕ: добавляем псевдоэлемент как страховку
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; // Чуть ниже основного блока
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--color-black-08); // Цвет твоего градиента
+      pointer-events: none;
+    }
   }
 
   &__play-button {
@@ -71,8 +89,10 @@
   }
 
   &__title {
+    position: relative;
     margin-top: -0.5em;
     margin-bottom: fluid-to-laptop(14, 10);
+    z-index: 10;
   }
 
   &__description {

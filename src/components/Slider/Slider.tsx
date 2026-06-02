@@ -86,23 +86,29 @@ export default function Slider({
     breakpoints: options?.breakpoints ?? defaultSliderOptions.breakpoints,
   };
 
+  const hasScrollbar = Boolean(hasScrollbarOnMobile && scrollbarRef);
+
   return (
     <div className={clsx('slider', isMobileBleeding && 'slider--bleed-mobile')}>
       <Swiper
-        modules={[Navigation, Pagination, Scrollbar]}
+        modules={[Navigation, Pagination, ...(hasScrollbar ? [Scrollbar] : [])]}
         {...sliderOptions}
         navigation
         pagination
-        scrollbar={{
-          el: scrollbarRef?.current,
-          draggable: true,
-          dragClass: 'slider__scrollbar-drag',
-        }}
+        scrollbar={
+          hasScrollbar
+            ? {
+                el: scrollbarRef?.current,
+                draggable: true,
+                dragClass: 'slider__scrollbar-drag',
+              }
+            : false
+        }
         onInit={handleLockChange}
         onBreakpoint={handleLockChange}
         onResize={handleLockChange}
         onBeforeInit={swiper => {
-          if (typeof swiper.params.scrollbar !== 'boolean') {
+          if (hasScrollbar && typeof swiper.params.scrollbar !== 'boolean') {
             swiper.params.scrollbar = {
               ...swiper.params.scrollbar,
               el: scrollbarRef?.current,
@@ -134,6 +140,7 @@ export default function Slider({
             if (swiper.destroyed || !swiper.params) return;
 
             if (
+              hasScrollbar &&
               typeof swiper.params.scrollbar !== 'boolean' &&
               swiper.params.scrollbar &&
               scrollbarRef?.current &&
@@ -194,9 +201,7 @@ export default function Slider({
         ))}
       </Swiper>
       {controls}
-      {hasScrollbarOnMobile && scrollbarRef && (
-        <div ref={scrollbarRef} className="slider__scrollbar visible-mobile" />
-      )}
+      {hasScrollbar && <div ref={scrollbarRef} className="slider__scrollbar visible-mobile" />}
     </div>
   );
 }

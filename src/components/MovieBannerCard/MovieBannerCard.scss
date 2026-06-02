@@ -4,14 +4,19 @@
   position: relative;
   overflow: hidden;
   text-align: center;
-  border: var(--border);
-  border-radius: var(--border-radius-l);
+  border: 0;
+  border-radius: var(--border-radius-l) var(--border-radius-l) 0 0; // скругление только сверху
+  // background-color: var(--color-black-08); // страховка
+
+  transform: translateZ(0);
 
   &__image {
     width: 100%;
     height: var(--movie-banner-min-height);
     object-fit: cover;
     user-select: none;
+    display: block;
+    transform: none;
   }
 
   &__inner {
@@ -23,11 +28,44 @@
     align-items: center;
     row-gap: fluid(30, 20);
     padding: fluid-to-laptop(126, 104) fluid(50, 24);
-    background-image: linear-gradient(0deg, var(--color-black-08) 0%, rgba(20, 20, 20, 0) 100%);
+    // background-image: linear-gradient(0deg, var(--color-black-08) 0%, rgba(20, 20, 20, 0) 100%);
+
+    &::before {
+      content: '';
+      position: absolute;
+      // растягиваем сильнее вниз и по бокам
+      inset: -2px -5px -20px -5px;
+      background: linear-gradient(0deg, var(--color-black-08) 0%, rgba(20, 20, 20, 0) 100%);
+      background-repeat: no-repeat;
+      background-size: 102% 102%; // чуть больше размер
+      background-position: center;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    & > * {
+      position: relative;
+      z-index: 1;
+    }
 
     @include mobile {
       padding-block: 16px;
     }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-black-08);
+    pointer-events: none;
+    z-index: 3;
+    // Скрываем под скруглением, если оно есть
+    border-bottom-left-radius: var(--border-radius-l);
+    border-bottom-right-radius: var(--border-radius-l);
   }
 
   &__body {

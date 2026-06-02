@@ -2,6 +2,7 @@
 
 .category-item {
   --gradientOpacity: 1;
+  --gradientColor: var(--color-black-10);
 
   display: flex;
   flex-direction: column;
@@ -45,25 +46,56 @@
     gap: 5px;
     transition: transform var(--transition-duration) cubic-bezier(0.2, 0.9, 0.4, 1.1);
     user-select: none;
+    border-radius: var(--border-radius-m);
+    overflow: hidden;
+    transform: translateZ(0);
 
+    // ФИКС: убираем весь предыдущий оверкилл и делаем просто
+    background-color: var(--color-black-10);
+
+    // САМЫЙ ВАЖНЫЙ ФИКС: создаем новый stacking context
+    isolation: isolate;
+
+    box-shadow: inset 0 0 0 2px var(--color-black-10);
+
+    // Единый градиент на всю группу
     &::after {
       position: absolute;
       inset: 0;
-
       content: '';
-      background-image: linear-gradient(
-        180deg,
-        rgba(26, 26, 26, 0) 0%,
-        var(--color-black-10) 101.79%
-      );
+      background: linear-gradient(180deg, transparent 0%, var(--color-black-10) 100%);
       opacity: var(--gradientOpacity);
       transition-duration: var(--transition-duration);
+      pointer-events: none;
+      z-index: 2;
+      // КЛЮЧ: растягиваем градиент за пределы
+      margin: -2px;
+      padding: 2px;
+      // Маскируем края
+      border-radius: calc(var(--border-radius-m) + 2px);
     }
   }
 
   &__image-wrapper {
+    position: relative;
     overflow: hidden;
     border-radius: var(--border-radius-m);
+    background-color: var(--color-black-10);
+    line-height: 0;
+    font-size: 0;
+
+    // ФИКС: убираем все отрицательные маргины - они только мешают
+    // Вместо этого делаем картинки чуть больше
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+      pointer-events: none;
+      border-radius: inherit;
+      z-index: 1;
+    }
 
     @include laptop {
       border-radius: var(--border-radius-xs);
@@ -72,10 +104,17 @@
 
   &__image {
     width: 100%;
-    height: fluid(124, 68);
+    height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
-    transform: scale(1.02);
+    transform: scale(1.05);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    // ФИКС для белых рамок на самих картинках
+    // Обрезаем 1px с каждой стороны самой картинки
+    clip-path: inset(1px);
 
     @include laptop {
       border-radius: var(--border-radius-xs);
@@ -87,6 +126,8 @@
     justify-content: space-between;
     align-items: center;
     column-gap: 10px;
+    position: relative;
+    z-index: 3;
   }
 
   &__title {
@@ -94,16 +135,12 @@
     flex-direction: column;
     align-items: start;
     row-gap: fluid-to-laptop(4, 2);
-
     font-size: inherit;
     font-weight: 600;
   }
 
   &__icon {
-    // color: var(--color-white);
-
     @include square(fluid(18, 12));
-
     transition: transform var(--transition-duration) ease;
   }
 }
