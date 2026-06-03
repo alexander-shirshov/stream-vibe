@@ -12,6 +12,8 @@ function App() {
           return <Route key={key} path={path} element={<Component />} />;
         })}
       </Route>
+      {/* <Route path="/catalog/movies/:slug" element={<MovieDetails />} />
+      <Route path="/catalog/shows/:slug" element={<ShowDetails />} /> */}
     </Routes>
   );
 }

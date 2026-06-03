@@ -1,3 +1,5 @@
+import { getPath } from '@/router/routes';
+
 import type {
   CatalogItemDto,
   CatalogSection,
@@ -7,6 +9,12 @@ import type {
 import { getLocalizedText, type Language } from '@/i18n/types';
 
 export function mapCatalogItemDto(dto: CatalogItemDto, language: Language): CatalogItem {
+  const href = dto.slug
+    ? dto.entityType === 'movie'
+      ? getPath('catalogMovieDetails', { slug: dto.slug })
+      : getPath('catalogShowDetails', { slug: dto.slug })
+    : null;
+
   return {
     id: dto.id,
     entityId: dto.entityId ?? dto.id,
@@ -17,7 +25,7 @@ export function mapCatalogItemDto(dto: CatalogItemDto, language: Language): Cata
 
     badge: dto.badge ? getLocalizedText(dto.badge, language) : null,
 
-    href: dto.href ?? null,
+    href,
 
     views: dto.views ?? null,
     rating: dto.rating ?? null,

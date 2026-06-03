@@ -1,6 +1,5 @@
 import type { Messages } from '@/i18n/types';
-import { type GenreRouteParams } from '@/router/routes';
-import type { PageRouteKey, DynamicRouteKey } from '@/router/routes';
+import type { PageRouteKey, DynamicRouteKey, DynamicRouteParams } from '@/router/routes';
 
 type HeaderNavItem = {
   route: PageRouteKey;
@@ -28,7 +27,7 @@ export type FooterNavLink =
     }
   | {
       route: DynamicRouteKey;
-      params: GenreRouteParams;
+      params: DynamicRouteParams;
       labelKey: keyof Messages['footerLink'];
     }
   | {
@@ -44,7 +43,7 @@ export type FooterSocialLink = {
 
 export type ButtonNavLink =
   | { route: PageRouteKey }
-  | { route: DynamicRouteKey; params: GenreRouteParams }
+  | { route: DynamicRouteKey; params: DynamicRouteParams }
   | { href: string };
 
 export type FooterSection = {

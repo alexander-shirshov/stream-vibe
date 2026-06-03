@@ -1,6 +1,7 @@
 import type { Language } from '@/i18n/types';
 
 export type CatalogCategory = 'genres' | 'top' | 'trending' | 'new' | 'must-watch' | 'poster';
+export type CatalogEntityType = 'movie' | 'show';
 
 export const catalogSectionKeys = {
   homeCategories: 'homeCategories',
@@ -43,13 +44,15 @@ export type CatalogSectionWithKey = CatalogSection & {
 export type CatalogItemDto = {
   id: string;
   entityId?: string;
+  entityType: CatalogEntityType;
+
   title: Partial<Record<Language, string>>;
+  slug?: string | null;
+
   description?: Partial<Record<Language, string>>;
   images?: string[];
 
   badge?: Partial<Record<Language, string>>;
-
-  href?: string;
 
   views?: number;
   rating?: number;
