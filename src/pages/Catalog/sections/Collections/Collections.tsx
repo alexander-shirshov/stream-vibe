@@ -32,7 +32,7 @@ const CATALOG_GROUPS: CatalogSectionGroup[] = [
 
 export default function Collections() {
   const { t } = useLanguage();
-  const isMobileS = useMediaQuery(`(max-width: ${BREAKPOINTS.mobile_s}px)`, {
+  const isMobile = useMediaQuery(`(max-width: ${BREAKPOINTS.mobile}px)`, {
     defaultValue: false,
     initializeWithValue: true,
   });
@@ -49,7 +49,7 @@ export default function Collections() {
     });
   }, [t]);
 
-  if (isMobileS) {
+  if (isMobile) {
     return (
       <div className="collections container">
         <TabsNavigation

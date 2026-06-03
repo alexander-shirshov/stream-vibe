@@ -1,11 +1,48 @@
 @use '@/styles/helpers' as *;
 
 .collections {
+  display: flex;
+  flex-direction: column;
+  gap: fluid-to-laptop(150, 120);
+
+  @include mobile {
+    gap: 50px;
+  }
+
+  --collectionsGroupPadding: #{fluid(100, 75)};
+
   &__group {
+    display: grid;
+    row-gap: var(--collectionsGroupPadding);
+
     @include mobile-above {
+      position: relative;
       padding: fluid-to-laptop(50, 40);
       border: var(--border);
       border-radius: var(--border-radius-l);
+    }
+  }
+
+  &__title {
+    position: absolute;
+    left: var(--collectionsGroupPadding);
+    top: 0;
+    translate: 0 -50%;
+    padding: fluid-to-laptop(10, 8) fluid-to-laptop(24, 20);
+    color: var(--color-white);
+    font-size: fluid-to-laptop(20, 16);
+    font-weight: 600;
+    background-color: var(--color-red-45);
+    border-radius: var(--border-radius-s);
+
+    @include laptop {
+      border-radius: var(--border-radius-xs);
+    }
+  }
+
+  &__section {
+    &.section {
+      padding: 0;
     }
   }
 }

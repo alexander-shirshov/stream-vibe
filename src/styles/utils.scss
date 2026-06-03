@@ -40,6 +40,12 @@
   }
 }
 
+.hidden-mobile-s {
+  @include mobile-s {
+    display: none !important;
+  }
+}
+
 .no-scroll {
   overflow: hidden;
 }
