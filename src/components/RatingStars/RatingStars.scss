@@ -1,0 +1,33 @@
+@use '@/styles/helpers' as *;
+
+.rating-stars {
+  --ratingStarsValue: 5;
+
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+
+  &__indicator {
+    position: relative;
+    width: 98px;
+    height: 18px;
+    flex-shrink: 0;
+
+    img {
+      display: block;
+    }
+
+    &-filled-wrapper {
+      position: absolute;
+      inset: 0;
+      width: calc(100% / 5 * var(--ratingStarsValue));
+      overflow: hidden;
+    }
+
+    &-filled {
+      width: 98px;
+      height: 18px;
+      max-width: none;
+    }
+  }
+}
