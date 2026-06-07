@@ -128,11 +128,15 @@ export interface Messages {
   };
 
   CatalogItemCard: {
-    action: string;
-    adventure: string;
-    comedy: string;
-    drama: string;
-    horror: string;
+    durationHours: string;
+    durationMinutes: string;
+    releasedAt: string;
+    ariaLabels: {
+      duration: string;
+      views: string;
+      rating: string;
+      season: string;
+    };
   };
 
   slider: {

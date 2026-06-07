@@ -20,6 +20,10 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   color: var(--color-white);
+
+  @include laptop {
+    font-size: fluid(9, 8);
+  }
 }
 
 .lang__trigger {

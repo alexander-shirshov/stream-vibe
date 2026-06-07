@@ -8,12 +8,29 @@ import type {
 } from '@/api/catalog/catalog.types';
 import { getLocalizedText, type Language } from '@/i18n/types';
 
+function normalizeRating(value?: number): number | null {
+  if (typeof value !== 'number') return null;
+  if (!Number.isFinite(value)) return null;
+  if (value < 0 || value > 5) return null;
+
+  return value;
+}
+
+function normalizeRatingCount(value?: number): number | null {
+  if (typeof value !== 'number') return null;
+  if (!Number.isFinite(value)) return null;
+  if (value < 0) return null;
+
+  return value;
+}
+
 export function mapCatalogItemDto(dto: CatalogItemDto, language: Language): CatalogItem {
-  const href = dto.slug
-    ? dto.entityType === 'movie'
-      ? getPath('catalogMovieDetails', { slug: dto.slug })
-      : getPath('catalogShowDetails', { slug: dto.slug })
-    : null;
+  const href =
+    dto.slug && dto.entityType
+      ? dto.entityType === 'movie'
+        ? getPath('catalogMovieDetails', { slug: dto.slug })
+        : getPath('catalogShowDetails', { slug: dto.slug })
+      : null;
 
   return {
     id: dto.id,
@@ -28,9 +45,11 @@ export function mapCatalogItemDto(dto: CatalogItemDto, language: Language): Cata
     href,
 
     views: dto.views ?? null,
-    rating: dto.rating ?? null,
-    duration: dto.duration ?? null,
+    rating: normalizeRating(dto.rating),
+    ratingCount: normalizeRatingCount(dto.ratingCount),
+    durationMinutes: dto.durationMinutes ?? null,
     releaseDate: dto.releaseDate ?? null,
+    season: dto.season ?? null,
   };
 }
 

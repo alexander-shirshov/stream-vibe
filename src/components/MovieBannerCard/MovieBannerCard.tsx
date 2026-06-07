@@ -130,7 +130,7 @@ export default function MovieBannerCard({
       <div className="movie-banner-card__inner">
         <div className="movie-banner-card__body">
           <h2 className="movie-banner-card__title h3">{title}</h2>
-          <div className="movie-banner-card__description">
+          <div className="movie-banner-card__description hidden-mobile">
             <p>{description}</p>
           </div>
         </div>

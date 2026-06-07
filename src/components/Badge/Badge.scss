@@ -1,9 +1,15 @@
 @use '@/styles/helpers' as *;
 
 .badge {
+  --badgeIconSize: #{fluid-to-laptop(24, 20)};
+
+  @include flex-center;
+
+  width: fit-content;
+  column-gap: 4px;
   padding: 6px 10px;
-  font-size: fluid-to-laptop(24, 12);
-  font-weight: 500px;
+  font-size: fluid-to-laptop(16, 12);
+  font-weight: 500;
   line-height: 1;
   color: var(--color-gray-60);
   white-space: nowrap;
@@ -13,6 +19,12 @@
 
   @include mobile {
     padding-inline: 8px;
+  }
+
+  &__icon {
+    width: var(--badgeIconSize);
+    height: var(--badgeIconSize);
+    color: var(--color-gray-60);
   }
 
   &--accent {

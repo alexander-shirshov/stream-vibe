@@ -553,3 +553,546 @@ export const catalogShowsSectionTopMock: CatalogSectionDto = {
     },
   ],
 };
+
+export const catalogShowsSectionTrendingMock: CatalogSectionDto = {
+  id: 'catalog-page-shows-trending',
+  title: {
+    en: 'Trending Shows Now',
+    ru: 'Сейчас в тренде',
+  },
+  category: 'trending',
+  items: [
+    {
+      id: 'stranger-things',
+      title: {
+        ru: 'Stranger Things',
+        en: 'Stranger Things',
+      },
+      durationMinutes: 500,
+      season: 4,
+
+      entityType: 'show',
+      slug: 'stranger-things',
+      images: ['/images/catalog/catalogpage/shows/trending/1.jpg'],
+    },
+    {
+      id: 'money-heist',
+      title: {
+        ru: 'Money Heist',
+        en: 'Money Heist',
+      },
+      durationMinutes: 743,
+      season: 5,
+      images: ['/images/catalog/catalogpage/shows/trending/2.jpg'],
+    },
+    {
+      id: 'lucifer',
+      title: {
+        ru: 'Lucifer',
+        en: 'Lucifer',
+      },
+      durationMinutes: 870,
+      season: 3,
+      images: ['/images/catalog/catalogpage/shows/trending/3.jpg'],
+    },
+    {
+      id: 'gray-man',
+      title: {
+        ru: 'The Gray Man',
+        en: 'The Gray Man',
+      },
+      durationMinutes: 460,
+      season: 2,
+      images: ['/images/catalog/catalogpage/shows/trending/4.jpg'],
+    },
+    {
+      id: 'stranger-things',
+      title: {
+        ru: 'Stranger Things',
+        en: 'Stranger Things',
+      },
+      durationMinutes: 500,
+      season: 4,
+
+      entityType: 'show',
+      slug: 'stranger-things',
+      images: ['/images/catalog/catalogpage/shows/trending/1.jpg'],
+    },
+    {
+      id: 'money-heist',
+      title: {
+        ru: 'Money Heist',
+        en: 'Money Heist',
+      },
+      durationMinutes: 743,
+      season: 5,
+      images: ['/images/catalog/catalogpage/shows/trending/2.jpg'],
+    },
+    {
+      id: 'lucifer',
+      title: {
+        ru: 'Lucifer',
+        en: 'Lucifer',
+      },
+      durationMinutes: 870,
+      season: 3,
+      images: ['/images/catalog/catalogpage/shows/trending/3.jpg'],
+    },
+    {
+      id: 'gray-man',
+      title: {
+        ru: 'The Gray Man',
+        en: 'The Gray Man',
+      },
+      durationMinutes: 460,
+      season: 2,
+      images: ['/images/catalog/catalogpage/shows/trending/4.jpg'],
+    },
+    {
+      id: 'stranger-things',
+      title: {
+        ru: 'Stranger Things',
+        en: 'Stranger Things',
+      },
+      durationMinutes: 500,
+      season: 4,
+
+      entityType: 'show',
+      slug: 'stranger-things',
+      images: ['/images/catalog/catalogpage/shows/trending/1.jpg'],
+    },
+    {
+      id: 'money-heist',
+      title: {
+        ru: 'Money Heist',
+        en: 'Money Heist',
+      },
+      durationMinutes: 743,
+      season: 5,
+      images: ['/images/catalog/catalogpage/shows/trending/2.jpg'],
+    },
+    {
+      id: 'lucifer',
+      title: {
+        ru: 'Lucifer',
+        en: 'Lucifer',
+      },
+      durationMinutes: 870,
+      season: 3,
+      images: ['/images/catalog/catalogpage/shows/trending/3.jpg'],
+    },
+    {
+      id: 'gray-man',
+      title: {
+        ru: 'The Gray Man',
+        en: 'The Gray Man',
+      },
+      durationMinutes: 460,
+      season: 2,
+      images: ['/images/catalog/catalogpage/shows/trending/4.jpg'],
+    },
+    {
+      id: 'stranger-things',
+      title: {
+        ru: 'Stranger Things',
+        en: 'Stranger Things',
+      },
+      durationMinutes: 500,
+      season: 4,
+
+      entityType: 'show',
+      slug: 'stranger-things',
+      images: ['/images/catalog/catalogpage/shows/trending/1.jpg'],
+    },
+    {
+      id: 'money-heist',
+      title: {
+        ru: 'Money Heist',
+        en: 'Money Heist',
+      },
+      durationMinutes: 743,
+      season: 5,
+      images: ['/images/catalog/catalogpage/shows/trending/2.jpg'],
+    },
+    {
+      id: 'lucifer',
+      title: {
+        ru: 'Lucifer',
+        en: 'Lucifer',
+      },
+      durationMinutes: 870,
+      season: 3,
+      images: ['/images/catalog/catalogpage/shows/trending/3.jpg'],
+    },
+    {
+      id: 'gray-man',
+      title: {
+        ru: 'The Gray Man',
+        en: 'The Gray Man',
+      },
+      durationMinutes: 460,
+      season: 2,
+      images: ['/images/catalog/catalogpage/shows/trending/4.jpg'],
+    },
+  ],
+};
+
+export const catalogShowsSectionNewMock: CatalogSectionDto = {
+  id: 'catalog-page-shows-new',
+  title: {
+    en: 'New Releases',
+    ru: 'Новинки',
+  },
+  category: 'new',
+  items: [
+    {
+      id: 'high-town',
+      title: {
+        ru: 'High Town',
+        en: 'High Town',
+      },
+      durationMinutes: 743,
+      season: 5,
+      images: ['/images/catalog/catalogpage/shows/new/1.jpg'],
+    },
+    {
+      id: 'mirzapur',
+      title: {
+        ru: 'Mirzapur',
+        en: 'Mirzapur',
+      },
+      durationMinutes: 460,
+      season: 2,
+      images: ['/images/catalog/catalogpage/shows/new/2.jpg'],
+    },
+    {
+      id: 'breathe',
+      title: {
+        ru: 'Breathe: into the shadows',
+        en: 'Breathe: into the shadows',
+      },
+      durationMinutes: 500,
+      season: 4,
+      images: ['/images/catalog/catalogpage/shows/new/3.jpg'],
+    },
+    {
+      id: 'peaky-blinders',
+      title: {
+        ru: 'Peaky blinders',
+        en: 'Peaky blinders',
+      },
+      durationMinutes: 630,
+      season: 3,
+      images: ['/images/catalog/catalogpage/shows/new/4.jpg'],
+    },
+
+    {
+      id: 'high-town',
+      title: {
+        ru: 'High Town',
+        en: 'High Town',
+      },
+      durationMinutes: 743,
+      season: 5,
+      images: ['/images/catalog/catalogpage/shows/new/1.jpg'],
+    },
+    {
+      id: 'mirzapur',
+      title: {
+        ru: 'Mirzapur',
+        en: 'Mirzapur',
+      },
+      durationMinutes: 460,
+      season: 2,
+      images: ['/images/catalog/catalogpage/shows/new/2.jpg'],
+    },
+    {
+      id: 'breathe',
+      title: {
+        ru: 'Breathe: into the shadows',
+        en: 'Breathe: into the shadows',
+      },
+      durationMinutes: 500,
+      season: 4,
+      images: ['/images/catalog/catalogpage/shows/new/3.jpg'],
+    },
+    {
+      id: 'peaky-blinders',
+      title: {
+        ru: 'Peaky blinders',
+        en: 'Peaky blinders',
+      },
+      durationMinutes: 630,
+      season: 3,
+      images: ['/images/catalog/catalogpage/shows/new/4.jpg'],
+    },
+
+    {
+      id: 'high-town',
+      title: {
+        ru: 'High Town',
+        en: 'High Town',
+      },
+      durationMinutes: 743,
+      season: 5,
+      images: ['/images/catalog/catalogpage/shows/new/1.jpg'],
+    },
+    {
+      id: 'mirzapur',
+      title: {
+        ru: 'Mirzapur',
+        en: 'Mirzapur',
+      },
+      durationMinutes: 460,
+      season: 2,
+      images: ['/images/catalog/catalogpage/shows/new/2.jpg'],
+    },
+    {
+      id: 'breathe',
+      title: {
+        ru: 'Breathe: into the shadows',
+        en: 'Breathe: into the shadows',
+      },
+      durationMinutes: 500,
+      season: 4,
+      images: ['/images/catalog/catalogpage/shows/new/3.jpg'],
+    },
+    {
+      id: 'peaky-blinders',
+      title: {
+        ru: 'Peaky blinders',
+        en: 'Peaky blinders',
+      },
+      durationMinutes: 630,
+      season: 3,
+      images: ['/images/catalog/catalogpage/shows/new/4.jpg'],
+    },
+    {
+      id: 'high-town',
+      title: {
+        ru: 'High Town',
+        en: 'High Town',
+      },
+      durationMinutes: 743,
+      season: 5,
+      images: ['/images/catalog/catalogpage/shows/new/1.jpg'],
+    },
+    {
+      id: 'mirzapur',
+      title: {
+        ru: 'Mirzapur',
+        en: 'Mirzapur',
+      },
+      durationMinutes: 460,
+      season: 2,
+      images: ['/images/catalog/catalogpage/shows/new/2.jpg'],
+    },
+    {
+      id: 'breathe',
+      title: {
+        ru: 'Breathe: into the shadows',
+        en: 'Breathe: into the shadows',
+      },
+      durationMinutes: 500,
+      season: 4,
+      images: ['/images/catalog/catalogpage/shows/new/3.jpg'],
+    },
+    {
+      id: 'peaky-blinders',
+      title: {
+        ru: 'Peaky blinders',
+        en: 'Peaky blinders',
+      },
+      durationMinutes: 630,
+      season: 3,
+      images: ['/images/catalog/catalogpage/shows/new/4.jpg'],
+    },
+  ],
+};
+
+export const catalogShowsSectionMustWatchMock: CatalogSectionDto = {
+  id: 'catalog-page-shows-must-watch',
+  title: {
+    en: 'Must - Watch Shows',
+    ru: 'Сериалы, которые нельзя пропустить',
+  },
+  category: 'must-watch',
+  items: [
+    {
+      id: 'duranga',
+      title: {
+        ru: 'Duranga',
+        en: 'Duranga',
+      },
+      durationMinutes: 460,
+      ratingCount: 12000,
+      rating: 4.6,
+      images: ['/images/catalog/catalogpage/shows/must-watch/1.jpg'],
+    },
+    {
+      id: 'money-heist',
+      title: {
+        ru: 'Money Heist',
+        en: 'Money Heist',
+      },
+      durationMinutes: 743,
+      ratingCount: 28300,
+      rating: 5,
+      images: ['/images/catalog/catalogpage/shows/must-watch/2.jpg'],
+    },
+    {
+      id: 'mai',
+      title: {
+        ru: 'MAI',
+        en: 'MAI',
+      },
+      durationMinutes: 630,
+      ratingCount: 2100,
+      rating: 4,
+      images: ['/images/catalog/catalogpage/shows/must-watch/3.jpg'],
+    },
+    {
+      id: 'stranger-things',
+      title: {
+        ru: 'Stranger Things',
+        en: 'Stranger Things',
+      },
+      durationMinutes: 500,
+      ratingCount: 32200,
+      rating: 4.5,
+      images: ['/images/catalog/catalogpage/shows/must-watch/4.jpg'],
+    },
+    {
+      id: 'duranga',
+      title: {
+        ru: 'Duranga',
+        en: 'Duranga',
+      },
+      durationMinutes: 460,
+      ratingCount: 12000,
+      rating: 4.6,
+      images: ['/images/catalog/catalogpage/shows/must-watch/1.jpg'],
+    },
+    {
+      id: 'money-heist',
+      title: {
+        ru: 'Money Heist',
+        en: 'Money Heist',
+      },
+      durationMinutes: 743,
+      ratingCount: 28300,
+      rating: 5,
+      images: ['/images/catalog/catalogpage/shows/must-watch/2.jpg'],
+    },
+    {
+      id: 'mai',
+      title: {
+        ru: 'MAI',
+        en: 'MAI',
+      },
+      durationMinutes: 630,
+      ratingCount: 2100,
+      rating: 4,
+      images: ['/images/catalog/catalogpage/shows/must-watch/3.jpg'],
+    },
+    {
+      id: 'stranger-things',
+      title: {
+        ru: 'Stranger Things',
+        en: 'Stranger Things',
+      },
+      durationMinutes: 500,
+      ratingCount: 32200,
+      rating: 4.5,
+      images: ['/images/catalog/catalogpage/shows/must-watch/4.jpg'],
+    },
+    {
+      id: 'duranga',
+      title: {
+        ru: 'Duranga',
+        en: 'Duranga',
+      },
+      durationMinutes: 460,
+      ratingCount: 12000,
+      rating: 4.6,
+      images: ['/images/catalog/catalogpage/shows/must-watch/1.jpg'],
+    },
+    {
+      id: 'money-heist',
+      title: {
+        ru: 'Money Heist',
+        en: 'Money Heist',
+      },
+      durationMinutes: 743,
+      ratingCount: 28300,
+      rating: 5,
+      images: ['/images/catalog/catalogpage/shows/must-watch/2.jpg'],
+    },
+    {
+      id: 'mai',
+      title: {
+        ru: 'MAI',
+        en: 'MAI',
+      },
+      durationMinutes: 630,
+      ratingCount: 2100,
+      rating: 4,
+      images: ['/images/catalog/catalogpage/shows/must-watch/3.jpg'],
+    },
+    {
+      id: 'stranger-things',
+      title: {
+        ru: 'Stranger Things',
+        en: 'Stranger Things',
+      },
+      durationMinutes: 500,
+      ratingCount: 32200,
+      rating: 4.5,
+      images: ['/images/catalog/catalogpage/shows/must-watch/4.jpg'],
+    },
+    {
+      id: 'duranga',
+      title: {
+        ru: 'Duranga',
+        en: 'Duranga',
+      },
+      durationMinutes: 460,
+      ratingCount: 12000,
+      rating: 4.6,
+      images: ['/images/catalog/catalogpage/shows/must-watch/1.jpg'],
+    },
+    {
+      id: 'money-heist',
+      title: {
+        ru: 'Money Heist',
+        en: 'Money Heist',
+      },
+      durationMinutes: 743,
+      ratingCount: 28300,
+      rating: 5,
+      images: ['/images/catalog/catalogpage/shows/must-watch/2.jpg'],
+    },
+    {
+      id: 'mai',
+      title: {
+        ru: 'MAI',
+        en: 'MAI',
+      },
+      durationMinutes: 630,
+      ratingCount: 2100,
+      rating: 4,
+      images: ['/images/catalog/catalogpage/shows/must-watch/3.jpg'],
+    },
+    {
+      id: 'stranger-things',
+      title: {
+        ru: 'Stranger Things',
+        en: 'Stranger Things',
+      },
+      durationMinutes: 500,
+      ratingCount: 32200,
+      rating: 4.5,
+      images: ['/images/catalog/catalogpage/shows/must-watch/4.jpg'],
+    },
+  ],
+};

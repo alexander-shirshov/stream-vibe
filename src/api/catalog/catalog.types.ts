@@ -10,11 +10,13 @@ export const catalogSectionKeys = {
   catalogMoviesTrending: 'catalogMoviesTrending',
   catalogMoviesNewReleases: 'catalogMoviesNewReleases',
   catalogMoviesPopular: 'catalogMoviesPopular',
+  catalogMoviesMustWatch: 'catalogMoviesMustWatch',
 
   catalogShowsGenres: 'catalogShowsGenres',
   catalogShowsTrending: 'catalogShowsTrending',
   catalogShowsNewReleases: 'catalogShowsNewReleases',
   catalogShowsPopular: 'catalogShowsPopular',
+  catalogShowsMustWatch: 'catalogShowsMustWatch',
 
   catalogBanner: 'catalogBanner',
 } as const;
@@ -44,7 +46,7 @@ export type CatalogSectionWithKey = CatalogSection & {
 export type CatalogItemDto = {
   id: string;
   entityId?: string;
-  entityType: CatalogEntityType;
+  entityType?: CatalogEntityType;
 
   title: Partial<Record<Language, string>>;
   slug?: string | null;
@@ -56,8 +58,10 @@ export type CatalogItemDto = {
 
   views?: number;
   rating?: number;
-  duration?: string;
-  releaseDate?: string;
+  ratingCount?: number;
+  durationMinutes?: number;
+  releaseDate?: string; // ISO: '2023-04-14'
+  season?: number;
 };
 
 export type CatalogItem = {
@@ -70,10 +74,12 @@ export type CatalogItem = {
 
   badge?: string | null;
 
-  href?: string | null;
+  href: string | null;
 
   views?: number | null;
-  rating?: number | null;
-  duration?: string | null;
+  rating: number | null;
+  ratingCount: number | null;
+  durationMinutes: number | null;
   releaseDate?: string | null;
+  season: number | null;
 };

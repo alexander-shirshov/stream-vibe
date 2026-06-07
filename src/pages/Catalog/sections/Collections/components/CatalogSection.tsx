@@ -5,6 +5,7 @@ import type { CatalogSection } from '@/api/catalog/catalog.types';
 import type { SwiperOptions } from 'swiper/types';
 import Section from '@/layouts/Section';
 import CatalogItemCard from '@/components/CatalogItemCard';
+import type { CatalogItemCardVariant } from '@/components/CatalogItemCard/CatalogItemCard';
 
 import Slider from '@/components/Slider';
 import SliderNavigation from '@/components/Slider/components/SliderNavigation';
@@ -28,7 +29,9 @@ export default function CatalogSection({
   const paginationRef = useRef<HTMLDivElement>(null);
   const scrollbarRef = useRef<HTMLDivElement>(null);
 
-  const BadgeVariant: BadgeVariant = category === 'top' ? 'accent' : 'default';
+  const badgeVariant: BadgeVariant = category === 'top' ? 'accent' : 'default';
+  const cardVariant: CatalogItemCardVariant =
+    category === 'genres' || category === 'top' ? 'genre' : 'poster';
 
   return (
     <Section
@@ -58,7 +61,12 @@ export default function CatalogSection({
       >
         {items.map(item => {
           return (
-            <CatalogItemCard key={item.id} {...item} badgeVariant={BadgeVariant}></CatalogItemCard>
+            <CatalogItemCard
+              key={item.id}
+              {...item}
+              badgeVariant={badgeVariant}
+              variant={cardVariant}
+            ></CatalogItemCard>
           );
         })}
       </Slider>

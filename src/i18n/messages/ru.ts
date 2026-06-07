@@ -89,11 +89,15 @@ const ru: Messages = {
   },
 
   CatalogItemCard: {
-    action: 'Экшн',
-    adventure: 'Приключения',
-    comedy: 'Комедии',
-    drama: 'Драмы',
-    horror: 'Ужасы',
+    durationHours: 'ч',
+    durationMinutes: 'мин',
+    releasedAt: 'Релиз',
+    ariaLabels: {
+      duration: 'длительность',
+      views: 'просмотры',
+      rating: 'рейтинг',
+      season: 'Сезон',
+    },
   },
 
   slider: {

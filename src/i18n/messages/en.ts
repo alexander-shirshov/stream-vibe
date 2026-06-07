@@ -94,11 +94,15 @@ const en: Messages = {
   },
 
   CatalogItemCard: {
-    action: 'Action',
-    adventure: 'Adventure',
-    comedy: 'Comedy',
-    drama: 'Drama',
-    horror: 'Horror',
+    durationHours: 'h',
+    durationMinutes: 'min',
+    releasedAt: 'Released at',
+    ariaLabels: {
+      duration: 'duration',
+      views: 'views',
+      rating: 'rating',
+      season: 'Season',
+    },
   },
 
   slider: {
