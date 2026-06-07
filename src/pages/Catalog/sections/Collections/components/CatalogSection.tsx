@@ -35,9 +35,10 @@ export default function CatalogSection({
 
   return (
     <Section
+      id={id}
       className="collections__section"
       title={title}
-      titleId={id}
+      titleId={`${id}-title`}
       isActionsHiddenOnMobile={true}
       actions={
         <SliderNavigation

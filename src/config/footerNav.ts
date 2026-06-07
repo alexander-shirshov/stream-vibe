@@ -1,5 +1,7 @@
 import type { FooterSection, FooterSocialSection, FooterNavLink } from '@/constants/navConfig';
 
+import { sectionIds } from '@/constants/navConfig';
+
 import Facebook from '@/assets/icons/facebook.svg?react';
 import X from '@/assets/icons/x.svg?react';
 import Linkedin from '@/assets/icons/linkedin.svg?react';
@@ -15,21 +17,21 @@ export const footerNavSections: FooterSection[] = [
     ],
   },
   {
-    main: { route: 'catalogMovies', labelKey: 'movies' },
+    main: { route: 'catalog', hash: sectionIds.movies, labelKey: 'movies' },
     links: [
-      { href: '#genres', labelKey: 'moviesGenres' },
-      { href: '#trending', labelKey: 'moviesTrending' },
-      { href: '#newRelease', labelKey: 'moviesNew' },
-      { href: '#popular', labelKey: 'moviesPopular' },
+      { route: 'catalog', hash: sectionIds.moviesGenres, labelKey: 'moviesGenres' },
+      { route: 'catalog', hash: sectionIds.moviesTrending, labelKey: 'moviesTrending' },
+      { route: 'catalog', hash: sectionIds.moviesNew, labelKey: 'moviesNew' },
+      { route: 'catalog', hash: sectionIds.moviesPopular, labelKey: 'moviesPopular' },
     ],
   },
   {
-    main: { route: 'catalogShows', labelKey: 'shows' },
+    main: { route: 'catalog', hash: sectionIds.shows, labelKey: 'shows' },
     links: [
-      { href: '#genres', labelKey: 'showsGenres' },
-      { href: '#trending', labelKey: 'showsTrending' },
-      { href: '#newRelease', labelKey: 'showsNew' },
-      { href: '#popular', labelKey: 'showsPopular' },
+      { route: 'catalog', hash: sectionIds.showsGenres, labelKey: 'showsGenres' },
+      { route: 'catalog', hash: sectionIds.showsTrending, labelKey: 'showsTrending' },
+      { route: 'catalog', hash: sectionIds.showsNew, labelKey: 'showsNew' },
+      { route: 'catalog', hash: sectionIds.showsPopular, labelKey: 'showsPopular' },
     ],
   },
   {

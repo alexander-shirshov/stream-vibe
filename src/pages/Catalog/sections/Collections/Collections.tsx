@@ -2,7 +2,8 @@ import './Collections.scss';
 
 import { useMediaQuery } from 'usehooks-ts';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Tabs from '@/components/Tabs';
 import TabsNavigation from '@/components/Tabs/components/TabsNavigation';
 import CatalogGroup from '@/pages/Catalog/sections/Collections/components/CatalogGroup';
@@ -11,6 +12,7 @@ import type { CatalogSectionKey } from '@/api/catalog/catalog.types';
 import { type Messages } from '@/i18n/types';
 import type { TabItem } from '@/components/Tabs/Tabs';
 import { BREAKPOINTS } from '@/config/windowBreakpoints';
+import { sectionIds } from '@/constants/navConfig';
 
 import { useLanguage } from '@/i18n/LanguageProvider';
 
@@ -32,10 +34,32 @@ const CATALOG_GROUPS: CatalogSectionGroup[] = [
 
 export default function Collections() {
   const { t } = useLanguage();
+  const location = useLocation();
   const isMobile = useMediaQuery(`(max-width: ${BREAKPOINTS.mobile}px)`, {
     defaultValue: false,
     initializeWithValue: true,
   });
+
+  useEffect(() => {
+    if (!location.hash) return;
+
+    const id = location.hash.slice(1);
+
+    let frameId = 0;
+
+    frameId = window.requestAnimationFrame(() => {
+      frameId = window.requestAnimationFrame(() => {
+        const element = document.getElementById(id);
+
+        element?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [location.hash, isMobile]);
 
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
 
@@ -44,7 +68,7 @@ export default function Collections() {
       return {
         id: group.id,
         title: t(`catalogPage.catalogSections.${group.id}`),
-        children: <CatalogGroup sectionKeys={group.sectionKeys} />,
+        children: <CatalogGroup id={sectionIds[group.id]} sectionKeys={group.sectionKeys} />,
       };
     });
   }, [t]);
@@ -66,7 +90,12 @@ export default function Collections() {
   return (
     <div className="collections container">
       {CATALOG_GROUPS.map(group => (
-        <CatalogGroup key={group.id} sectionKeys={group.sectionKeys} titleKey={group.id} />
+        <CatalogGroup
+          id={sectionIds[group.id]}
+          key={group.id}
+          sectionKeys={group.sectionKeys}
+          titleKey={group.id}
+        />
       ))}
     </div>
   );

@@ -3,16 +3,18 @@ import CatalogSection from './CatalogSection';
 import { useLanguage } from '@/i18n/LanguageProvider';
 import { catalogSectionSliderConfig } from '@/config/catalogSectionSliderConfig';
 import CatalogSectionSkeleton from '@/components/CatalogSectionSkeleton';
+import { catalogSectionIds } from '@/constants/navConfig';
 
 import type { CatalogSectionKey } from '@/api/catalog/catalog.types';
 import { type Messages } from '@/i18n/types';
 
 type CatalogGroupProps = {
+  id: string;
   sectionKeys: CatalogSectionKey[];
   titleKey?: keyof Messages['catalogPage']['catalogSections'];
 };
 
-export default function CatalogGroup({ sectionKeys, titleKey }: CatalogGroupProps) {
+export default function CatalogGroup({ sectionKeys, titleKey, id }: CatalogGroupProps) {
   const { language, t } = useLanguage();
   const { sections, error, isInitialLoading } = useCatalogMultipleSections(language, sectionKeys, {
     withKeys: true,
@@ -38,7 +40,7 @@ export default function CatalogGroup({ sectionKeys, titleKey }: CatalogGroupProp
   }
 
   return (
-    <div className="collections__group">
+    <div id={id} className="collections__group">
       {titleKey && (
         <p className="collections__title hidden-mobile">
           {t(`catalogPage.catalogSections.${titleKey}`)}
@@ -48,6 +50,7 @@ export default function CatalogGroup({ sectionKeys, titleKey }: CatalogGroupProp
         return (
           <CatalogSection
             {...section}
+            id={catalogSectionIds[section.key] ?? section.id}
             sliderParams={catalogSectionSliderConfig[section.key]}
             key={section.id}
           ></CatalogSection>
