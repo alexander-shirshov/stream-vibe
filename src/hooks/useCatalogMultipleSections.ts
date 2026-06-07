@@ -74,9 +74,12 @@ export function useCatalogMultipleSections(
     };
   }, [language, keys, options.withKeys]);
 
+  const hasData = sections.length > 0;
+
   return {
     sections,
     isLoading,
+    isInitialLoading: isLoading && !hasData,
     error,
   };
 }

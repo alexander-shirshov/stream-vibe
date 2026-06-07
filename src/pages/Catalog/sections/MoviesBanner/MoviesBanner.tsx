@@ -21,7 +21,7 @@ export default function MoviesBanner() {
   const nextRef = useRef<HTMLButtonElement>(null);
   const paginationRef = useRef<HTMLDivElement>(null);
 
-  const { error, isLoading, section } = useCatalogSection(language, 'catalogBanner');
+  const { error, isInitialLoading, section } = useCatalogSection(language, 'catalogBanner');
 
   const {
     isLoading: isUserStateLoading,
@@ -35,11 +35,18 @@ export default function MoviesBanner() {
     isLiked,
   } = useUserState(CURRENT_USER_ID);
 
-  const isPageLoading = isLoading || isUserStateLoading;
+  const isInitialPageLoading = isInitialLoading || (isUserStateLoading && !userState);
 
-  if (isPageLoading) return <CatalogSectionSkeleton variant="banner" />;
+  if (isInitialPageLoading) return <CatalogSectionSkeleton variant="banner" />;
 
-  if (error || userStateError || !section?.items || !userState) return null;
+  if (
+    (error && !section?.items?.length) ||
+    (userStateError && !userState) ||
+    !section?.items ||
+    !userState
+  ) {
+    return null;
+  }
 
   return (
     <section className="movies-banner container" aria-labelledby={titleId}>

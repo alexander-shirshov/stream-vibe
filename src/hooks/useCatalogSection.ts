@@ -12,6 +12,7 @@ import { fetchSection, fetchSectionWithKey } from '@/api/catalog/catalog.api';
 
 export type UseCatalogSectionBase = {
   isLoading: boolean;
+  isInitialLoading: boolean;
   error: string | null;
 };
 
@@ -74,9 +75,12 @@ export function useCatalogSection(
     };
   }, [language, sectionKey, options.withKey]);
 
+  const hasData = section !== null;
+
   return {
     section,
     isLoading,
+    isInitialLoading: isLoading && !hasData,
     error,
   };
 }

@@ -4,7 +4,6 @@ import type { Language } from './types';
 import type { ReactNode } from 'react';
 import { getNestedValue, getInitialLocale } from './utils/langUtils';
 import { DEFAULT_LANGUAGE, LANG_CONSTANTS } from './constants/langConstants';
-import { type Locale } from '@/i18n/types';
 
 type LanguageProviderProps = {
   children: ReactNode;

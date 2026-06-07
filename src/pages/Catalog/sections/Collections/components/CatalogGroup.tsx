@@ -14,11 +14,11 @@ type CatalogGroupProps = {
 
 export default function CatalogGroup({ sectionKeys, titleKey }: CatalogGroupProps) {
   const { language, t } = useLanguage();
-  const { sections, error, isLoading } = useCatalogMultipleSections(language, sectionKeys, {
+  const { sections, error, isInitialLoading } = useCatalogMultipleSections(language, sectionKeys, {
     withKeys: true,
   });
 
-  if (isLoading) {
+  if (isInitialLoading) {
     return (
       <>
         {sectionKeys.map(key => {
@@ -33,7 +33,7 @@ export default function CatalogGroup({ sectionKeys, titleKey }: CatalogGroupProp
     );
   }
 
-  if (error || !sections) {
+  if (error && sections.length === 0) {
     return null;
   }
 
