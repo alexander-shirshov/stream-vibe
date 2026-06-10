@@ -6,10 +6,7 @@ import type {
 } from '@/api/catalog/catalog.types';
 import { mapCatalogSectionDto, warnCatalogDuplicates } from '@/api/catalog/catalog.mapper';
 import { catalogSectionsMock } from '@/api/catalog/mocks';
-
-function sleep(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+import { sleep } from '@/api/utils/sleep';
 
 function isCatalogSection(section: CatalogSection | null): section is CatalogSection {
   return section !== null;

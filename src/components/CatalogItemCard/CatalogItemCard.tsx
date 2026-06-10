@@ -163,7 +163,7 @@ export default function CatalogItemCard({
 
   if (href) {
     return (
-      <Link className={mainClassName} to={href} aria-label={title} title={title}>
+      <Link className={mainClassName} to={href} aria-label={title}>
         {content}
       </Link>
     );

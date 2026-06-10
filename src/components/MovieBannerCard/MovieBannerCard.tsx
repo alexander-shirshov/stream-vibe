@@ -8,7 +8,6 @@ import LinkButton from '@/components/Button';
 import SoundToggleIcon from '@/components/MovieBannerCard/SoundToggleIcon';
 import lottie from 'lottie-web';
 import type { AnimationItem } from 'lottie-web';
-import type { CatalogItem } from '@/api/catalog/catalog.types';
 
 import clsx from 'clsx';
 
@@ -16,7 +15,11 @@ import animationData from '@/assets/animations/animated_like_icon_dark_v5.json';
 
 import { useLanguage } from '@/i18n/LanguageProvider';
 
-type MovieBannerCardProps = Pick<CatalogItem, 'title' | 'description' | 'images'> & {
+type MovieBannerCardProps = {
+  title: string;
+  description?: string | null;
+  images: string[] | null;
+
   liked: boolean;
   added: boolean;
   isMuted: boolean;

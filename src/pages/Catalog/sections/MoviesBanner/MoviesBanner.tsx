@@ -77,7 +77,9 @@ export default function MoviesBanner() {
         {section.items.map(item => (
           <MovieBannerCard
             key={item.entityId}
-            {...item}
+            title={item.title}
+            images={item.images || null}
+            description={item.description}
             liked={isLiked(item.entityId)}
             added={isInPlaylist(item.entityId)}
             isMuted={isMuted}

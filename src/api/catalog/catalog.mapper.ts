@@ -8,21 +8,7 @@ import type {
 } from '@/api/catalog/catalog.types';
 import { getLocalizedText, type Language } from '@/i18n/types';
 
-function normalizeRating(value?: number): number | null {
-  if (typeof value !== 'number') return null;
-  if (!Number.isFinite(value)) return null;
-  if (value < 0 || value > 5) return null;
-
-  return value;
-}
-
-function normalizeRatingCount(value?: number): number | null {
-  if (typeof value !== 'number') return null;
-  if (!Number.isFinite(value)) return null;
-  if (value < 0) return null;
-
-  return value;
-}
+import { normalizeRating, normalizeRatingCount } from '@/api/utils/rating';
 
 export function mapCatalogItemDto(dto: CatalogItemDto, language: Language): CatalogItem {
   const href =

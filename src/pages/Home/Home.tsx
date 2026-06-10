@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <Helmet>
         <title>{getTitle(t('main.pageTitle'))}</title>
-        <meta name="description" content="Главная страница Stream Vibe" />
+        <meta name="description" content={t('main.meta')} />
       </Helmet>
 
       <Hero />

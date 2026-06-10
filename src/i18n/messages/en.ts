@@ -75,6 +75,7 @@ const en: Messages = {
 
   main: {
     pageTitle: 'Home',
+    meta: 'Stream Vibe home page',
   },
 
   playButton: {
@@ -255,6 +256,8 @@ const en: Messages = {
   },
 
   catalogPage: {
+    pageTitle: 'Movies & Shows',
+    meta: 'Movies & Shows catalog',
     heading: 'Movies & Shows',
     cta: 'Play Now',
     actions: {
@@ -268,8 +271,15 @@ const en: Messages = {
     },
   },
 
-  moviesPage: {
-    pageTitle: 'Movies',
+  catalogEntity: {
+    movie: {
+      title: 'Movie',
+      meta: 'About movie',
+    },
+    show: {
+      title: 'Show',
+      meta: 'About show',
+    },
   },
 };
 

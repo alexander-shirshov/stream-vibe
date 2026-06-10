@@ -70,6 +70,7 @@ const ru: Messages = {
 
   main: {
     pageTitle: 'Главная',
+    meta: 'Главная страница Stream Vibe',
   },
 
   playButton: {
@@ -249,6 +250,8 @@ const ru: Messages = {
   },
 
   catalogPage: {
+    pageTitle: 'Фильмы и сериалы',
+    meta: 'Каталог фильмов и сериалов',
     heading: 'Фильмы и сериалы',
     cta: 'Смотреть',
     actions: {
@@ -261,9 +264,15 @@ const ru: Messages = {
       shows: 'Сериалы',
     },
   },
-
-  moviesPage: {
-    pageTitle: 'Фильмы',
+  catalogEntity: {
+    movie: {
+      title: 'Фильм',
+      meta: 'О фильме',
+    },
+    show: {
+      title: 'Сериал',
+      meta: 'О сериале',
+    },
   },
 };
 

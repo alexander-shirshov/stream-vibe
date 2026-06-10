@@ -110,6 +110,7 @@ export interface Messages {
 
   main: {
     pageTitle: string;
+    meta: string;
   };
 
   playButton: {
@@ -254,6 +255,8 @@ export interface Messages {
   };
 
   catalogPage: {
+    pageTitle: string;
+    meta: string;
     heading: string;
     cta: string;
     actions: {
@@ -267,7 +270,21 @@ export interface Messages {
     };
   };
 
-  moviesPage: {
-    pageTitle: string;
+  catalogEntity: {
+    movie: {
+      title: string;
+      meta: string;
+    };
+    show: {
+      title: string;
+      meta: string;
+    };
   };
+
+  // moviePage: {
+  //   pageTitle: string;
+  // };
+  // showPage: {
+  //   pageTitle: string;
+  // };
 }

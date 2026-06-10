@@ -10,8 +10,8 @@ export default function Catalog() {
   return (
     <>
       <Helmet>
-        <title>{getTitle(t('main.pageTitle'))}</title>
-        <meta name="description" content="Главная страница Stream Vibe" />
+        <title>{getTitle(t('catalogPage.pageTitle'))}</title>
+        <meta name="description" content={t('catalogPage.meta')} />
       </Helmet>
 
       <MoviesBanner />
