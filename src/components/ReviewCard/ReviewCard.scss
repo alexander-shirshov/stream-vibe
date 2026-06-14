@@ -1,0 +1,25 @@
+@use '@/styles/helpers' as *;
+
+.review-card {
+  display: grid;
+  height: 100%;
+  row-gap: fluid-to-laptop(20, 16);
+
+  padding: fluid(40, 24);
+
+  background-color: var(--color-black-06);
+  border: var(--border);
+  border-radius: var(--border-radius-l);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+  }
+
+  &__name,
+  &__country {
+    font-weight: 500;
+  }
+}

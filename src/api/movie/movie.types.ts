@@ -11,6 +11,7 @@ export type PersonDto = {
 export type Person = {
   id: string;
   fullName: string;
+  fullNameShort: string | null;
   country: string | null;
   avatar: string;
 };

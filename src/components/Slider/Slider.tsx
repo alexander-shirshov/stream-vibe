@@ -21,6 +21,7 @@ type SliderProps = {
   scrollbarRef?: React.RefObject<HTMLDivElement | null>;
   onLockChange?: (locked: boolean) => void;
   options?: SwiperOptions;
+  className?: string;
 };
 
 const defaultSliderOptions: SwiperOptions = {
@@ -75,6 +76,7 @@ export default function Slider({
   isMobileBleeding,
   onLockChange,
   options,
+  className,
 }: SliderProps) {
   const handleLockChange = (swiper: { isLocked: boolean }) => {
     onLockChange?.(swiper.isLocked);
@@ -87,14 +89,27 @@ export default function Slider({
   };
 
   const hasScrollbar = Boolean(hasScrollbarOnMobile && scrollbarRef);
+  const hasPagination = Boolean(paginationRef);
 
   return (
-    <div className={clsx('slider', isMobileBleeding && 'slider--bleed-mobile')}>
+    <div className={clsx('slider', isMobileBleeding && 'slider--bleed-mobile', className)}>
       <Swiper
         modules={[Navigation, Pagination, ...(hasScrollbar ? [Scrollbar] : [])]}
         {...sliderOptions}
-        navigation
-        pagination
+        navigation={{
+          prevEl: prevRef.current,
+          nextEl: nextRef.current,
+        }}
+        pagination={
+          hasPagination
+            ? {
+                el: paginationRef?.current,
+                clickable: true,
+                bulletClass: 'slider-navigation__pagination-bullet',
+                bulletActiveClass: 'is-active',
+              }
+            : false
+        }
         scrollbar={
           hasScrollbar
             ? {
@@ -125,7 +140,7 @@ export default function Slider({
             };
           }
 
-          if (typeof swiper.params.pagination !== 'boolean') {
+          if (hasPagination && typeof swiper.params.pagination !== 'boolean') {
             swiper.params.pagination = {
               ...swiper.params.pagination,
               el: paginationRef?.current,
@@ -159,6 +174,7 @@ export default function Slider({
             }
 
             if (
+              hasPagination &&
               typeof swiper.params.pagination !== 'boolean' &&
               swiper.params.pagination &&
               paginationRef?.current &&
@@ -172,6 +188,7 @@ export default function Slider({
                 bulletActiveClass: 'is-active',
               };
 
+              swiper.pagination.destroy();
               swiper.pagination.init();
               swiper.pagination.render();
               swiper.pagination.update();

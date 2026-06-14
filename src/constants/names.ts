@@ -1,0 +1,1 @@
+export const MAX_PERSON_NAME_PART_LENGTH = 12;

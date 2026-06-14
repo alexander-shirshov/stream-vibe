@@ -26,7 +26,23 @@ export type UserPreferences = {
   isMuted: boolean;
 };
 
+export type UserReview = {
+  id: string;
+  entityId: string;
+  entityType: 'movie' | 'show';
+  authorName: string;
+  country: string | null;
+  rating: number;
+  text: string;
+  createdAt: string;
+};
+
+export type UserReviews = {
+  userId: string;
+  items: UserReview[];
+};
 export type PersistedUserState = {
   catalog: UserCatalog;
   preferences: UserPreferences;
+  reviews: UserReviews;
 };

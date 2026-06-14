@@ -74,6 +74,10 @@
     @include square(fluid-to-laptop(56, 48));
     padding: fluid-to-laptop(14, 12);
   }
+
+  &--review {
+    padding: 12px;
+  }
 }
 
 .button.is-pressed,

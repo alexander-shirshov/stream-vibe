@@ -274,10 +274,36 @@ export interface Messages {
     movie: {
       title: string;
       meta: string;
+      details: string;
+      description: string;
+      cast: string;
+      reviews: string;
+      addReview: string;
+      editReview: string;
+      rating: string;
+      release: string;
+      languages: string;
+      ratings: string;
+      genres: string;
+      director: string;
+      music: string;
     };
     show: {
       title: string;
       meta: string;
+      details: string;
+      description: string;
+      cast: string;
+      reviews: string;
+      addReview: string;
+      editReview: string;
+      rating: string;
+      release: string;
+      languages: string;
+      ratings: string;
+      genres: string;
+      director: string;
+      music: string;
     };
   };
 

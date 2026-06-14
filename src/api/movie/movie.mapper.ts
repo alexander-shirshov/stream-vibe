@@ -9,14 +9,20 @@ import type {
   Movie,
 } from './movie.types';
 import { getLocalizedText, type Language } from '@/i18n/types';
+import { MAX_PERSON_NAME_PART_LENGTH } from '@/constants/names';
 import { normalizeRating, normalizeRatingCount } from '@/api/utils/rating';
 
 const FALLBACK_AVATAR = '/images/persons/default-avatar.jpg';
 
 export function mapPersonDto(dto: PersonDto, language: Language): Person {
+  const maxNameLength = MAX_PERSON_NAME_PART_LENGTH;
+
+  const firstName = dto.firstName.length <= maxNameLength ? dto.firstName : dto.firstName[0] + '.';
+  const lastName = dto.lastName.length <= maxNameLength ? dto.lastName : dto.lastName[0] + '.';
   return {
     id: dto.id,
     fullName: `${dto.firstName} ${dto.lastName}`,
+    fullNameShort: `${firstName} ${lastName}`,
     country: dto.country ? getLocalizedText(dto.country, language) : null,
     avatar: dto.avatar ?? FALLBACK_AVATAR,
   };

@@ -46,7 +46,6 @@ export default function CatalogSection({
           nextRef={nextRef}
           paginationRef={paginationRef}
           hasPagination={!isLocked}
-          variant="round"
           className={isLocked ? 'visually-hidden' : undefined}
         />
       }

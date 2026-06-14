@@ -1,0 +1,25 @@
+@use '@/styles/helpers' as *;
+
+.info-panel {
+  display: flex;
+  flex-direction: column;
+  row-gap: fluid(30, 16);
+
+  padding: fluid(50, 24);
+
+  background-color: var(--color-black-10);
+  border-radius: var(--border-radius-m);
+  border: var(--border);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 10px;
+  }
+
+  &__title {
+    font-size: fluid(18, 14);
+    color: var(--color-gray-60);
+  }
+}

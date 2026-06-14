@@ -3,7 +3,10 @@ import type {
   UserCatalogDto,
   UserPreferences,
   UserPreferencesDto,
+  UserReview,
 } from './user.types';
+
+import type { ReviewItem } from '@/api/movie/movie.types';
 
 export function mapUserCatalogDto(dto: UserCatalogDto): UserCatalog {
   return {
@@ -17,5 +20,15 @@ export function mapUserPrefsDto(dto: UserPreferencesDto): UserPreferences {
   return {
     userId: dto.userId,
     isMuted: dto.isMuted,
+  };
+}
+
+export function mapUserReviewToReviewItem(review: UserReview): ReviewItem {
+  return {
+    id: review.id,
+    authorName: review.authorName,
+    country: review.country,
+    rating: review.rating,
+    text: review.text,
   };
 }

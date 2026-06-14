@@ -1,6 +1,14 @@
 import { useState, useEffect, useMemo } from 'react';
-import type { PersistedUserState } from '@/api/user/user.types';
-import { toggleLike, togglePlaylist, fetchUserState, toggleMuted } from '@/api/user/user.api';
+import type { PersistedUserState, UserReview } from '@/api/user/user.types';
+import {
+  toggleLike,
+  togglePlaylist,
+  fetchUserState,
+  toggleMuted,
+  addReview,
+  deleteReview,
+  updateReview,
+} from '@/api/user/user.api';
 
 export function useUserState(userId: string) {
   const [userState, setUserState] = useState<PersistedUserState | null>(null);
@@ -50,6 +58,8 @@ export function useUserState(userId: string) {
 
   const isMuted = userState?.preferences.isMuted ?? false;
 
+  const userReviews = userState?.reviews.items ?? [];
+
   const userCatalog = userState?.catalog ?? null;
   const userPreferences = userState?.preferences ?? null;
 
@@ -92,17 +102,64 @@ export function useUserState(userId: string) {
     }
   };
 
+  const getReviewForEntity = (entityId: string, entityType: UserReview['entityType']) => {
+    return userReviews.find(
+      review => review.entityId === entityId && review.entityType === entityType
+    );
+  };
+
+  const handleAddReview = async (review: UserReview) => {
+    try {
+      setError(null);
+
+      const updatedState = await addReview(review, userId);
+
+      setUserState(updatedState);
+    } catch {
+      setError(`Failed to add review - entityId: "${review.entityId}", userId "${userId}"`);
+    }
+  };
+
+  const handleUpdateReview = async (review: UserReview) => {
+    try {
+      setError(null);
+
+      const updatedState = await updateReview(review, userId);
+
+      setUserState(updatedState);
+    } catch {
+      setError(`Failed to update review - entityId: "${review.entityId}", userId "${userId}"`);
+    }
+  };
+
+  const handleDeleteReview = async (reviewId: string) => {
+    try {
+      setError(null);
+
+      const updatedState = await deleteReview(reviewId, userId);
+
+      setUserState(updatedState);
+    } catch {
+      setError(`Failed to delete review - reviewId: "${reviewId}", userId "${userId}"`);
+    }
+  };
+
   return {
     isLoading,
     error,
     userState,
     userCatalog,
     userPreferences,
+    userReviews,
     isLiked,
     isInPlaylist,
     isMuted,
     handleToggleLike,
     handleTogglePlaylist,
     handleToggleMuted,
+    getReviewForEntity,
+    handleAddReview,
+    handleUpdateReview,
+    handleDeleteReview,
   };
 }

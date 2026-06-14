@@ -41,7 +41,6 @@ export function Categories() {
           nextRef={nextRef}
           paginationRef={paginationRef}
           hasPagination={!isLocked}
-          variant="round"
           className={isLocked ? 'visually-hidden' : undefined}
         />
       }

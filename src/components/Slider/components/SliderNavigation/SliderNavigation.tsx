@@ -51,8 +51,9 @@ export default function SliderNavigation({
         mode="button"
         ref={prevRef}
         customClass={clsx(
-          'button--black-10 slider-navigation__arrow-button slider-navigation__arrow-button--prev',
-          clickedButton === 'prev' && 'is-clicked'
+          'slider-navigation__arrow-button slider-navigation__arrow-button--prev',
+          clickedButton === 'prev' && 'is-clicked',
+          variant === 'round' ? 'button--black-08' : 'button--black-10'
         )}
         ariaLabel={t('slider.prevButton')}
         onClick={() => handleClick('prev')}
@@ -65,8 +66,9 @@ export default function SliderNavigation({
         ref={nextRef}
         mode="button"
         customClass={clsx(
-          'button--black-10 slider-navigation__arrow-button slider-navigation__arrow-button--next',
-          clickedButton === 'next' && 'is-clicked'
+          'slider-navigation__arrow-button slider-navigation__arrow-button--next',
+          clickedButton === 'next' && 'is-clicked',
+          variant === 'round' ? 'button--black-08' : 'button--black-10'
         )}
         ariaLabel={t('slider.nextButton')}
         onClick={() => handleClick('next')}
