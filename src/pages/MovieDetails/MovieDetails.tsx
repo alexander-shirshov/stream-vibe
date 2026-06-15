@@ -4,6 +4,8 @@ import React from 'react';
 import { useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import clsx from 'clsx';
+
 import { CURRENT_USER_ID } from '@/constants/user';
 
 import { Helmet } from 'react-helmet-async';
@@ -76,7 +78,7 @@ export default function MovieDetails() {
           <meta name="description" content={t('catalogEntity.movie.meta')} />
         </Helmet>
         <CatalogSectionSkeleton variant="banner" />
-        {/* <DetailsBlockSkeleton /> */}
+        <DetailsBlockSkeleton />
       </>
     );
 
@@ -175,7 +177,10 @@ export default function MovieDetails() {
                 nextRef={reviewsNextRef}
                 paginationRef={reviewsPaginationRef}
                 hasPagination={true}
-                className={isReviewsLocked ? 'visually-hidden' : undefined}
+                className={clsx(
+                  'movie-details__reviews-navigation',
+                  isReviewsLocked && 'is-hidden'
+                )}
                 variant="round"
               />
             </div>

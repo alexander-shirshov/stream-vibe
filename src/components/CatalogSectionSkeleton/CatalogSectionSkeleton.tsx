@@ -46,6 +46,8 @@ export default function CatalogSectionSkeleton({
       </section>
     </Section>
   ) : (
-    <div className="banner-skeleton container"></div>
+    <div className="banner-skeleton container">
+      <div className="banner-skeleton__body"></div>
+    </div>
   );
 }

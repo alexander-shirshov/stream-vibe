@@ -99,6 +99,43 @@
     border: var(--border);
     border-radius: var(--border-radius-m);
     min-width: 0;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+
+      &-track {
+        background: var(--color-black-25);
+        border-radius: 999px;
+
+        margin-top: 5px; /* отступ сверху */
+        margin-bottom: 5px; /* отступ снизу */
+      }
+
+      &-thumb {
+        background: var(--color-black-06);
+        border-radius: 999px;
+
+        box-shadow:
+          0 0 10px rgba(4, 239, 249, 0.18),
+          0 0 18px rgba(4, 239, 249, 0.1);
+
+        transition:
+          background 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      // @include hover {
+      //   background: linear-gradient(
+      //     to bottom,
+      //     rgba(4, 239, 249, 0.2),
+      //     var(--color-scrollbar-thumb-hover),
+      //     rgba(4, 239, 249, 0.14)
+      //   );
+      //   box-shadow:
+      //     0 0 12px rgba(4, 239, 249, 0.24),
+      //     0 0 22px rgba(4, 239, 249, 0.14);
+      // }
+    }
   }
 
   @include tablet {

@@ -1,1 +1,65 @@
 @use '@/styles/helpers' as *;
+@use '@/styles/animations/skeleton_pulse' as *;
+
+.details-block-skeleton {
+  padding-top: fluid-to-laptop(100, 60);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32.5%;
+  grid-template-rows: repeat(3, auto);
+
+  row-gap: fluid(30, 20);
+  column-gap: 20px;
+  align-items: start;
+
+  &__item {
+    &--main,
+    &--aside {
+      background-color: var(--color-black-15);
+      animation: skeleton-pulse 1.4s ease-in-out infinite;
+      border-radius: var(--border-radius-m);
+    }
+
+    &--main {
+      &:first-child {
+        height: 180px;
+      }
+
+      &:nth-child(3) {
+        height: 220px;
+      }
+
+      &:nth-child(4) {
+        height: 320px;
+      }
+
+      grid-column: 1;
+      min-width: 0;
+      width: 100%;
+    }
+
+    &--aside {
+      grid-column: 2;
+      grid-row: 1 / -1;
+      align-self: stretch;
+      height: 600px;
+      min-width: 0;
+    }
+  }
+
+  @include tablet {
+    display: flex;
+    flex-direction: column;
+
+    &__item {
+      &--main,
+      &--aside {
+        width: 100%;
+        min-width: 0;
+      }
+
+      &--aside {
+        height: 420px;
+      }
+    }
+  }
+}

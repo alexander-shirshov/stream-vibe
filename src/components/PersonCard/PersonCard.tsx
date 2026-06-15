@@ -35,6 +35,7 @@ export default function PersonCard({
         }}
         src={imgSrc}
         alt={displayedName ?? ''}
+        loading="lazy"
       />
       <div className={`person-card__meta person-card__meta--${variant}`}>
         <span className="person-card__name">{displayedName}</span>

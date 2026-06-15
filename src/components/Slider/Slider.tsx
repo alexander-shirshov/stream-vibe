@@ -91,6 +91,32 @@ export default function Slider({
   const hasScrollbar = Boolean(hasScrollbarOnMobile && scrollbarRef);
   const hasPagination = Boolean(paginationRef);
 
+  function updatePagination(swiper: any) {
+    if (
+      !hasPagination ||
+      swiper.destroyed ||
+      typeof swiper.params.pagination === 'boolean' ||
+      !swiper.params.pagination ||
+      !paginationRef?.current ||
+      !swiper.pagination
+    ) {
+      return;
+    }
+
+    swiper.params.pagination = {
+      ...swiper.params.pagination,
+      el: paginationRef.current,
+      clickable: true,
+      bulletClass: 'slider-navigation__pagination-bullet',
+      bulletActiveClass: 'is-active',
+    };
+
+    swiper.pagination.destroy();
+    swiper.pagination.init();
+    swiper.pagination.render();
+    swiper.pagination.update();
+  }
+
   return (
     <div className={clsx('slider', isMobileBleeding && 'slider--bleed-mobile', className)}>
       <Swiper
@@ -120,8 +146,22 @@ export default function Slider({
             : false
         }
         onInit={handleLockChange}
-        onBreakpoint={handleLockChange}
-        onResize={handleLockChange}
+        onBreakpoint={swiper => {
+          handleLockChange(swiper);
+
+          requestAnimationFrame(() => {
+            swiper.update();
+            updatePagination(swiper);
+          });
+        }}
+        onResize={swiper => {
+          handleLockChange(swiper);
+
+          requestAnimationFrame(() => {
+            swiper.update();
+            updatePagination(swiper);
+          });
+        }}
         onBeforeInit={swiper => {
           if (hasScrollbar && typeof swiper.params.scrollbar !== 'boolean') {
             swiper.params.scrollbar = {
@@ -153,6 +193,8 @@ export default function Slider({
         onSwiper={swiper => {
           setTimeout(() => {
             if (swiper.destroyed || !swiper.params) return;
+
+            updatePagination(swiper);
 
             if (
               hasScrollbar &&

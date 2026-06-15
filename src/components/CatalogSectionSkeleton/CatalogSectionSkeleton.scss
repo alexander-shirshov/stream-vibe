@@ -2,13 +2,15 @@
 @use '@/styles/animations/skeleton_pulse' as *;
 
 .banner-skeleton {
-  width: 100%;
-  min-height: var(--movie-banner-min-height);
-  display: block;
-  object-fit: cover;
-  border-radius: var(--border-radius-l);
-  background-color: var(--color-black-15);
-  animation: skeleton-pulse 1.4s ease-in-out infinite;
+  &__body {
+    width: 100%;
+    min-height: var(--movie-banner-min-height);
+    display: block;
+    object-fit: cover;
+    border-radius: var(--border-radius-l);
+    background-color: var(--color-black-15);
+    animation: skeleton-pulse 1.4s ease-in-out infinite;
+  }
 }
 
 .catalog-section-skeleton {

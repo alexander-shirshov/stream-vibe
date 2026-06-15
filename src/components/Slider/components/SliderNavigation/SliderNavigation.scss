@@ -80,6 +80,15 @@
   }
 }
 
+.movie-details__reviews-navigation {
+  justify-content: center;
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
 @keyframes arrow-click {
   0% {
     transform: translateX(4px) scale(1);
@@ -87,6 +96,20 @@
 
   50% {
     transform: translateX(8px) scale(0.92);
+  }
+
+  100% {
+    transform: translateX(4px) scale(1);
+  }
+}
+
+@keyframes arrow-click-lite {
+  0% {
+    transform: translateX(4px) scale(1);
+  }
+
+  50% {
+    transform: translateX(6px) scale(0.92);
   }
 
   100% {
