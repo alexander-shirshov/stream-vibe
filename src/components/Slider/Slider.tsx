@@ -150,6 +150,9 @@ export default function Slider({
           handleLockChange(swiper);
 
           requestAnimationFrame(() => {
+            if (swiper.destroyed) return;
+
+            swiper.slideTo(0, 0);
             swiper.update();
             updatePagination(swiper);
           });

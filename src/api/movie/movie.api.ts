@@ -5,7 +5,7 @@ import { mapMovie } from '@/api/movie/movie.mapper';
 import { moviesMock } from '@/api/movie/mocks/movies.mock';
 
 export async function fetchMovieBySlug(slug: string, language: Language): Promise<Movie | null> {
-  await sleep(30000);
+  await sleep(0);
 
   const dto = moviesMock.find(movie => movie.slug === slug);
 
