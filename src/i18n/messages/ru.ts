@@ -299,6 +299,25 @@ const ru: Messages = {
       director: 'Режиссёр',
       music: 'Композитор',
     },
+
+    reviewModal: {
+      titleAdd: 'Добавить отзыв',
+      titleEdit: 'Редактировать отзыв',
+      name: 'Ваше имя',
+      country: 'Ваша страна',
+      rating: 'Оценка',
+      review: 'Отзыв',
+      submit: 'Отправить отзыв',
+      save: 'Сохранить изменения',
+      deleteReview: 'Удалить отзыв',
+      deleteReviewConfirm: 'Удалить этот отзыв?',
+      cancel: 'Отмена',
+      delete: 'Удалить',
+    },
+  },
+
+  formLabel: {
+    required: 'Оязательное поле',
   },
 };
 

@@ -1,4 +1,7 @@
 import './ReviewCard.scss';
+
+import clsx from 'clsx';
+
 import { useLanguage } from '@/i18n/LanguageProvider';
 import Badge from '@/components/Badge';
 import RatingStars from '@/components/RatingStars';
@@ -8,14 +11,15 @@ type ReviewCardProps = {
   country: string | null;
   text: string;
   ratingValue: number | null;
+  isOwn?: boolean;
 };
 
-export default function ReviewCard({ name, country, text, ratingValue }: ReviewCardProps) {
+export default function ReviewCard({ name, country, text, ratingValue, isOwn }: ReviewCardProps) {
   const { t, language } = useLanguage();
   const displayedCountry = country ? (language === 'en' ? `From ${country}` : country) : 'null';
 
   return (
-    <div className="review-card">
+    <div className={clsx('review-card', isOwn && 'review-card--own')}>
       <header className="review-card__header">
         <div className="review-card__author">
           <h4 className="review-card__name h6">{name}</h4>

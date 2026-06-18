@@ -306,6 +306,25 @@ const en: Messages = {
       director: 'Director',
       music: 'Music',
     },
+
+    reviewModal: {
+      titleAdd: 'Add review',
+      titleEdit: 'Edit review',
+      name: 'Name',
+      country: 'Country',
+      rating: 'Rating',
+      review: 'Review',
+      submit: 'Submit Review',
+      save: 'Save Changes',
+      deleteReview: 'Delete Review',
+      deleteReviewConfirm: 'Delete this review?',
+      cancel: 'Cancel',
+      delete: 'Delete',
+    },
+  },
+
+  formLabel: {
+    required: 'Required field',
   },
 };
 

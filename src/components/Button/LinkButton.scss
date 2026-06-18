@@ -37,6 +37,25 @@
     padding: 0;
   }
 
+  &--danger {
+    color: var(--color-red-45);
+    background-color: var(--color-black-08);
+    border: 1px solid var(--color-red-45);
+
+    @include hover {
+      color: var(--color-white);
+      background-color: var(--color-red-45);
+      box-shadow: 0 0 18px rgb(229 0 0 / 22%);
+    }
+
+    &:disabled {
+      color: var(--color-gray-60);
+      background-color: var(--color-black-06);
+      border-color: var(--color-black-20);
+      box-shadow: none;
+    }
+  }
+
   &--transparent {
     background-color: transparent;
 

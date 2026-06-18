@@ -30,6 +30,7 @@ type LinkButtonProps =
       ariaLabel?: string;
       ariaExpanded?: boolean;
       ariaHaspopup?: React.AriaAttributes['aria-haspopup'];
+      disabled?: boolean;
     };
 
 const LinkButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, LinkButtonProps>(
@@ -103,10 +104,12 @@ const LinkButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, LinkButtonP
         ariaLabel,
         ariaExpanded,
         ariaHaspopup,
+        disabled,
       } = props;
       return (
         <button
           ref={ref as React.Ref<HTMLButtonElement>}
+          disabled={disabled}
           className={clsx(
             'button',
             customClass,

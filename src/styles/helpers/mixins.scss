@@ -1,4 +1,5 @@
 @use 'functions' as *;
+@use 'helpers' as *;
 
 @mixin fluid-text($max: 48, $min: 16) {
   font-size: fluid($max, $min);
@@ -76,4 +77,43 @@
 @mixin disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+@mixin scrollbar($thumb: var(--color-black-06), $track: var(--color-black-25), $width: 4px) {
+  @-moz-document url-prefix() {
+    scrollbar-width: thin;
+    scrollbar-color: $thumb $track;
+  }
+
+  &::-webkit-scrollbar {
+    width: $width;
+
+    &-track {
+      background: $track;
+      border-radius: 999px;
+      margin-block: 5px;
+    }
+
+    &-thumb {
+      background: $thumb;
+      border-radius: 999px;
+
+      transition: var(--transition-duration);
+
+      @include hover {
+        background: var(--color-black-08);
+      }
+    }
+  }
+}
+
+@mixin dark-autofill {
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--color-white);
+    caret-color: var(--color-white);
+    box-shadow: 0 0 0 1000px var(--color-black-08) inset;
+    transition: background-color 9999s ease-in-out 0s;
+  }
 }

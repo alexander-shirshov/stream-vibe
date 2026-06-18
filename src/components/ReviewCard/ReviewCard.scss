@@ -11,15 +11,24 @@
   border: var(--border);
   border-radius: var(--border-radius-l);
 
+  &--own {
+    border-color: var(--color-red-45);
+    box-shadow: 0 0 0 1px rgb(229 0 0 / 30%);
+  }
+
   &__header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     column-gap: 10px;
   }
 
   &__name,
   &__country {
     font-weight: 500;
+  }
+
+  &__country {
+    color: #888888b9;
   }
 }

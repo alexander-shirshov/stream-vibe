@@ -105,30 +105,7 @@
       scrollbar-color: var(--color-black-06) var(--color-black-25);
     }
 
-    &::-webkit-scrollbar {
-      width: 4px;
-
-      &-track {
-        background: var(--color-black-25);
-        border-radius: 999px;
-
-        margin-top: 5px; /* отступ сверху */
-        margin-bottom: 5px; /* отступ снизу */
-      }
-
-      &-thumb {
-        background: var(--color-black-06);
-        border-radius: 999px;
-
-        box-shadow:
-          0 0 10px rgb(4 239 249 / 18%),
-          0 0 18px rgb(4 239 249 / 10%);
-
-        transition:
-          background 0.2s ease,
-          box-shadow 0.2s ease;
-      }
-    }
+    @include scrollbar;
   }
 
   @include tablet {

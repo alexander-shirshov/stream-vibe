@@ -305,6 +305,21 @@ export interface Messages {
       director: string;
       music: string;
     };
+
+    reviewModal: {
+      titleAdd: string;
+      titleEdit: string;
+      name: string;
+      country: string;
+      rating: string;
+      review: string;
+      submit: string;
+      save: string;
+      deleteReview: string;
+      deleteReviewConfirm: string;
+      cancel: string;
+      delete: string;
+    };
   };
 
   // moviePage: {
@@ -313,4 +328,8 @@ export interface Messages {
   // showPage: {
   //   pageTitle: string;
   // };
+
+  formLabel: {
+    required: string;
+  };
 }

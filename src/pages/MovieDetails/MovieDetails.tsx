@@ -1,12 +1,14 @@
 import './MovieDetails.scss';
 
-import React from 'react';
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import clsx from 'clsx';
 
 import { CURRENT_USER_ID } from '@/constants/user';
+
+import type { UserReview } from '@/api/user/user.types';
+import type { ReviewFormValues } from '@/components/ReviewModal/ReviewModal';
 
 import { Helmet } from 'react-helmet-async';
 import { getTitle } from '@/utils/seo';
@@ -19,6 +21,7 @@ import Calendar from '@/assets/icons/calendar.svg?react';
 import Lang from '@/assets/icons/lang.svg?react';
 import Star from '@/assets/icons/star.svg?react';
 import Tiles from '@/assets/icons/tiles.svg?react';
+import Edit from '@/assets/icons/edit.svg?react';
 
 import LinkButton from '@/components/Button';
 import MovieBannerCard from '@/components/MovieBannerCard';
@@ -31,6 +34,9 @@ import PersonCard from '@/components/PersonCard';
 import ReviewCard from '@/components/ReviewCard';
 import Tags from '@/components/Tags';
 import Ratings from '@/components/Ratings';
+import ReviewModal from '@/components/ReviewModal';
+
+import { mapUserReviewToReviewItem } from '@/api/user/user.mapper';
 
 export default function MovieDetails() {
   const castPrevRef = useRef<HTMLButtonElement>(null);
@@ -56,7 +62,13 @@ export default function MovieDetails() {
     isMuted,
     userState,
     isLiked,
+    getReviewForEntity,
+    handleAddReview,
+    handleUpdateReview,
+    handleDeleteReview,
   } = useUserState(CURRENT_USER_ID);
+
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 
   const isInitialPageLoading = isInitialLoading || (isUserStateLoading && !userState);
 
@@ -88,6 +100,46 @@ export default function MovieDetails() {
 
   if (userStateError || !userState) {
     return null;
+  }
+
+  const userReview = getReviewForEntity(movie.id, 'movie');
+
+  const reviewModalMode = userReview ? 'edit' : 'create';
+
+  const currentUserReview = userReview ? mapUserReviewToReviewItem(userReview) : null;
+
+  const displayedReviews = currentUserReview
+    ? [currentUserReview, ...movie.reviews]
+    : movie.reviews;
+
+  async function handleReviewSubmit(values: ReviewFormValues) {
+    if (values.rating === null || !movie) return;
+
+    const nextReview: UserReview = {
+      id: userReview?.id ?? crypto.randomUUID(),
+      entityId: movie.id,
+      entityType: 'movie',
+      authorName: values.authorName,
+      country: values.country.trim() || null,
+      rating: values.rating,
+      text: values.text,
+      createdAt: userReview?.createdAt ?? new Date().toISOString(),
+    };
+
+    if (userReview) {
+      await handleUpdateReview(nextReview);
+    } else {
+      await handleAddReview(nextReview);
+    }
+
+    setIsReviewModalOpen(false);
+  }
+
+  async function handleReviewDelete() {
+    if (!userReview) return;
+
+    await handleDeleteReview(userReview.id);
+    setIsReviewModalOpen(false);
   }
 
   const detailsPanels = [
@@ -160,13 +212,25 @@ export default function MovieDetails() {
           className="details-block__main-item"
           title={t('catalogEntity.movie.reviews')}
           headerActions={
-            <LinkButton mode="button" customClass="button--black-08 button--review">
+            <LinkButton
+              mode="button"
+              customClass="button--black-08 button--review"
+              onClick={() => setIsReviewModalOpen(true)}
+            >
               <div className="movie-details__action">
                 <div className="movie-details__action-icon-wrapper">
-                  <Plus className="movie-details__action-icon" />
+                  {userReview ? (
+                    <Edit className="movie-details__action-icon" />
+                  ) : (
+                    <Plus className="movie-details__action-icon" />
+                  )}
                 </div>
 
-                <p className="movie-details__action-text">{t('catalogEntity.movie.addReview')}</p>
+                <p className="movie-details__action-text">
+                  {userReview
+                    ? t('catalogEntity.movie.editReview')
+                    : t('catalogEntity.movie.addReview')}
+                </p>
               </div>
             </LinkButton>
           }
@@ -208,13 +272,14 @@ export default function MovieDetails() {
               }}
               hasScrollbarOnMobile={false}
             >
-              {movie.reviews.map(review => (
+              {displayedReviews.map(review => (
                 <ReviewCard
                   name={review.authorName}
                   ratingValue={review.rating}
                   text={review.text}
                   country={review.country}
                   key={review.id}
+                  isOwn={review.id === userReview?.id}
                 ></ReviewCard>
               ))}
             </Slider>
@@ -335,6 +400,25 @@ export default function MovieDetails() {
           </React.Fragment>
         ))}
       </section>
+
+      {/* MODAL */}
+      <ReviewModal
+        mode={reviewModalMode}
+        isOpen={isReviewModalOpen}
+        initialValues={
+          userReview
+            ? {
+                authorName: userReview.authorName,
+                country: userReview.country ?? '',
+                rating: userReview.rating,
+                text: userReview.text,
+              }
+            : undefined
+        }
+        onClose={() => setIsReviewModalOpen(false)}
+        onSubmit={handleReviewSubmit}
+        onDelete={userReview ? handleReviewDelete : undefined}
+      />
     </>
   );
 }
