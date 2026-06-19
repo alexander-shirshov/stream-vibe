@@ -1,4 +1,5 @@
 @use '@/styles/helpers' as *;
+
 .rating-input {
   display: inline-flex;
   align-items: center;
@@ -23,7 +24,7 @@
   }
 
   &__value {
-    min-width: 36px;
+    width: 46px;
     padding: 4px 6px;
     color: var(--color-white);
     font-weight: 600;
@@ -37,7 +38,7 @@
   &__stepper {
     display: flex;
     flex-direction: column;
-    row-gap: 2px;
+    row-gap: 10px;
 
     max-width: 0;
     opacity: 0;
@@ -53,13 +54,15 @@
   &__value-wrapper.is-open {
     .rating-input__stepper {
       max-width: 24px;
+      height: 60px;
       opacity: 1;
       transform: translateX(0);
+      overflow: visible;
     }
   }
 
   &__stepper-button {
-    width: 20px;
+    width: 36px;
     height: 16px;
     padding: 0;
     color: var(--color-gray-60);
@@ -68,8 +71,31 @@
     border: 0;
     cursor: pointer;
 
+    & svg {
+      transition: var(--transition-duration);
+    }
+
     @include hover {
       color: var(--color-white);
     }
+
+    &.is-active {
+      color: var(--color-white);
+      filter: drop-shadow(0 0 8px rgb(229 0 0 / 35%));
+
+      & svg {
+        transform: translateX(2px);
+      }
+    }
+  }
+}
+
+.chevron {
+  &-up {
+    rotate: -90deg;
+  }
+
+  &-down {
+    rotate: 90deg;
   }
 }

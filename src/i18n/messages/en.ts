@@ -1,4 +1,5 @@
 import type { Messages } from '../types';
+import RatingInput from '../../components/RatingInput/RatingInput';
 
 const en: Messages = {
   lang: {
@@ -325,6 +326,12 @@ const en: Messages = {
 
   formLabel: {
     required: 'Required field',
+  },
+
+  RatingInput: {
+    editRating: 'Edit rating value',
+    increaseRating: 'Increase rating',
+    decreaseRating: 'Decrease rating',
   },
 };
 

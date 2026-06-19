@@ -319,6 +319,12 @@ const ru: Messages = {
   formLabel: {
     required: 'Оязательное поле',
   },
+
+  RatingInput: {
+    editRating: 'Изменить значение рейтинга',
+    increaseRating: 'Увеличить рейтинг',
+    decreaseRating: 'Уменьшить рейтинг',
+  },
 };
 
 export default ru;

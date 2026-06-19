@@ -332,4 +332,10 @@ export interface Messages {
   formLabel: {
     required: string;
   };
+
+  RatingInput: {
+    editRating: string;
+    increaseRating: string;
+    decreaseRating: string;
+  };
 }
