@@ -1,5 +1,5 @@
 import './ReviewModal.scss';
-import { useMemo, useState, useEffect, useCallback } from 'react';
+import { useMemo, useState, useEffect, useCallback, useRef } from 'react';
 import clsx from 'clsx';
 
 import RatingInput from '@/components/RatingInput';
@@ -45,6 +45,7 @@ export default function ReviewModal({
   const [rating, setRating] = useState<number | null>(initialValues?.rating ?? null);
   const [text, setText] = useState(initialValues?.text ?? '');
   const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
+  const [shouldRender, setShouldRender] = useState(isOpen);
 
   const trimmedName = authorName.trim();
   const trimmedText = text.trim();
@@ -55,6 +56,8 @@ export default function ReviewModal({
   const isRatingValid = rating !== null && rating > 0 && rating <= 5;
 
   const canSubmit = isNameValid && isTextValid && isRatingValid;
+
+  const authorInputRef = useRef<HTMLInputElement | null>(null);
 
   const { t } = useLanguage();
 
@@ -100,8 +103,14 @@ export default function ReviewModal({
     setIsDeleteConfirmVisible(false);
   }
 
+  function handleAnimationEnd() {
+    if (!isOpen) {
+      setShouldRender(false);
+    }
+  }
+
   useEffect(() => {
-    if (!isOpen) return;
+    if (!shouldRender) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         if (isDeleteConfirmVisible) {
@@ -114,10 +123,10 @@ export default function ReviewModal({
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [handleClose, isOpen, isDeleteConfirmVisible]);
+  }, [handleClose, shouldRender, isDeleteConfirmVisible]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!shouldRender) return;
 
     const { overflow } = document.body.style;
 
@@ -126,7 +135,7 @@ export default function ReviewModal({
     return () => {
       document.body.style.overflow = overflow;
     };
-  }, [isOpen]);
+  }, [shouldRender]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -134,14 +143,35 @@ export default function ReviewModal({
     resetForm();
   }, [isOpen, resetForm]);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (isOpen) {
+      setShouldRender(true);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const frameId = requestAnimationFrame(() => {
+      authorInputRef.current?.focus();
+    });
+
+    return () => cancelAnimationFrame(frameId);
+  }, [isOpen]);
+
+  if (!shouldRender) return null;
 
   return (
     <div
-      className={clsx('review-modal', isDeleteConfirmVisible && 'review-modal--confirm-open')}
+      className={clsx(
+        'review-modal',
+        isOpen ? 'review-modal--open' : 'review-modal--closing',
+        isDeleteConfirmVisible && 'review-modal--confirm-open'
+      )}
       role="dialog"
       aria-modal="true"
       aria-label={title}
+      onAnimationEnd={handleAnimationEnd}
     >
       <div className="review-modal__overlay" onClick={handleClose} />
 
@@ -173,6 +203,7 @@ export default function ReviewModal({
                 value={authorName}
                 disabled={isReadMode}
                 onChange={event => setAuthorName(event.target.value)}
+                ref={authorInputRef}
               />
             </FormLabel>
 

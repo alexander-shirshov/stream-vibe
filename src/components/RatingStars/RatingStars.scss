@@ -2,15 +2,24 @@
 
 .rating-stars {
   --ratingStarsValue: 5;
+  --starsGap: 4px;
+  --indicatorHeight: 18px;
+  --indicatorWidth: 98px;
 
   display: flex;
   align-items: center;
-  column-gap: 4px;
+  column-gap: var(--starsGap);
+
+  &--large {
+    --starsGap: 8px;
+    --indicatorHeight: 36px;
+    --indicatorWidth: 196px;
+  }
 
   &__indicator {
     position: relative;
-    width: 98px;
-    height: 18px;
+    width: var(--indicatorWidth);
+    height: var(--indicatorHeight);
     flex-shrink: 0;
 
     img {
@@ -25,8 +34,8 @@
     }
 
     &-filled {
-      width: 98px;
-      height: 18px;
+      width: var(--indicatorWidth);
+      height: var(--indicatorHeight);
       max-width: none;
     }
   }

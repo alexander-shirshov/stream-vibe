@@ -46,6 +46,8 @@ export default function MovieDetails() {
   const reviewsNextRef = useRef<HTMLButtonElement>(null);
   const reviewsPaginationRef = useRef<HTMLDivElement>(null);
 
+  const reviewButtonRef = useRef<HTMLButtonElement>(null);
+
   const [isCastLocked, setIsCastLocked] = useState(true);
   const [isReviewsLocked, setIsReviewsLocked] = useState(true);
 
@@ -130,6 +132,7 @@ export default function MovieDetails() {
       await handleUpdateReview(nextReview);
     } else {
       await handleAddReview(nextReview);
+      handleReviewModalClose();
     }
 
     setIsReviewModalOpen(false);
@@ -140,6 +143,14 @@ export default function MovieDetails() {
 
     await handleDeleteReview(userReview.id);
     setIsReviewModalOpen(false);
+  }
+
+  function handleReviewModalClose() {
+    setIsReviewModalOpen(false);
+
+    requestAnimationFrame(() => {
+      reviewButtonRef.current?.focus();
+    });
   }
 
   const detailsPanels = [
@@ -213,6 +224,7 @@ export default function MovieDetails() {
           title={t('catalogEntity.movie.reviews')}
           headerActions={
             <LinkButton
+              ref={reviewButtonRef}
               mode="button"
               customClass="button--black-08 button--review"
               onClick={() => setIsReviewModalOpen(true)}
@@ -415,7 +427,7 @@ export default function MovieDetails() {
               }
             : undefined
         }
-        onClose={() => setIsReviewModalOpen(false)}
+        onClose={handleReviewModalClose}
         onSubmit={handleReviewSubmit}
         onDelete={userReview ? handleReviewDelete : undefined}
       />

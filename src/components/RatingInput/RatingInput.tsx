@@ -10,14 +10,19 @@ type RatingInputProps = {
 };
 
 const MAX_RATING = 5;
-const STEP = 0.5;
+const DESKTOP_STEP = 0.1;
+const TOUCH_STEP = 1;
 
-function clampRating(value: number) {
-  return Math.min(MAX_RATING, Math.max(STEP, value));
+function clampRating(value: number, step: number) {
+  return Math.min(MAX_RATING, Math.max(step, value));
 }
 
-function roundToStep(value: number) {
-  return Math.round(value / STEP) * STEP;
+function roundToStep(value: number, step: number) {
+  return Math.round(value / step) * step;
+}
+
+function getStep(event: React.PointerEvent) {
+  return event.pointerType === 'mouse' ? DESKTOP_STEP : TOUCH_STEP;
 }
 
 export default function RatingInput({ value, onChange, ariaLabel, disabled }: RatingInputProps) {
@@ -25,12 +30,18 @@ export default function RatingInput({ value, onChange, ariaLabel, disabled }: Ra
 
   const displayedValue = previewValue ?? value ?? 0;
 
+  const [isLockedByStepper, setIsLockedByStepper] = useState(false);
+
   function getRatingFromPointer(event: React.PointerEvent<HTMLButtonElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
-    const x = event.clientX - rect.left;
+    const x = Math.min(Math.max(event.clientX - rect.left, 0), rect.width);
     const ratio = x / rect.width;
 
-    return clampRating(roundToStep(ratio * MAX_RATING));
+    if (event.pointerType !== 'mouse') {
+      return Math.min(MAX_RATING, Math.max(1, Math.ceil(ratio * MAX_RATING)));
+    }
+
+    return clampRating(roundToStep(ratio * MAX_RATING, DESKTOP_STEP), DESKTOP_STEP);
   }
 
   function handlePointerMove(event: React.PointerEvent<HTMLButtonElement>) {
@@ -63,11 +74,11 @@ export default function RatingInput({ value, onChange, ariaLabel, disabled }: Ra
         onPointerDown={handleClick}
         aria-label={ariaLabel}
       >
-        <RatingStars rating={displayedValue} ariaLabel={ariaLabel} />
+        <RatingStars rating={displayedValue} ariaLabel={ariaLabel} variant="large" />
       </button>
 
       <span className="rating-input__value" aria-live="polite">
-        {value === null ? '—' : value.toFixed(1)}
+        {displayedValue > 0 ? displayedValue.toFixed(1) : '—'}
       </span>
     </div>
   );
