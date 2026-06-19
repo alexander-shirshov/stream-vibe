@@ -1,5 +1,6 @@
 import './RatingInput.scss';
-import { useState } from 'react';
+import clsx from 'clsx';
+import { useEffect, useRef, useState } from 'react';
 import RatingStars from '@/components/RatingStars';
 
 type RatingInputProps = {
@@ -11,18 +12,19 @@ type RatingInputProps = {
 
 const MAX_RATING = 5;
 const DESKTOP_STEP = 0.1;
-const TOUCH_STEP = 1;
+const STEPPER_STEP = 0.1;
+const MIN_RATING = 0.1;
 
 function clampRating(value: number, step: number) {
   return Math.min(MAX_RATING, Math.max(step, value));
 }
 
-function roundToStep(value: number, step: number) {
-  return Math.round(value / step) * step;
+function normalizeRating(value: number) {
+  return Number(clampRating(roundToStep(value, STEPPER_STEP), STEPPER_STEP).toFixed(1));
 }
 
-function getStep(event: React.PointerEvent) {
-  return event.pointerType === 'mouse' ? DESKTOP_STEP : TOUCH_STEP;
+function roundToStep(value: number, step: number) {
+  return Math.round(value / step) * step;
 }
 
 export default function RatingInput({ value, onChange, ariaLabel, disabled }: RatingInputProps) {
@@ -31,6 +33,48 @@ export default function RatingInput({ value, onChange, ariaLabel, disabled }: Ra
   const displayedValue = previewValue ?? value ?? 0;
 
   const [isLockedByStepper, setIsLockedByStepper] = useState(false);
+  const [isStepperOpen, setIsStepperOpen] = useState(false);
+
+  const valueRef = useRef(value);
+  const holdRef = useRef<{ delayId: number | null; intervalId: number | null }>({
+    delayId: null,
+    intervalId: null,
+  });
+
+  function stopHold() {
+    if (holdRef.current.delayId) {
+      window.clearTimeout(holdRef.current.delayId);
+    }
+
+    if (holdRef.current.intervalId) {
+      window.clearInterval(holdRef.current.intervalId);
+    }
+
+    holdRef.current.delayId = null;
+    holdRef.current.intervalId = null;
+  }
+
+  function startHold(action: () => void) {
+    stopHold();
+    action();
+
+    holdRef.current.delayId = window.setTimeout(() => {
+      holdRef.current.intervalId = window.setInterval(action, 65);
+    }, 260);
+  }
+
+  function updateRating(nextValue: number) {
+    onChange(normalizeRating(nextValue));
+    setPreviewValue(null);
+  }
+
+  function bumpRating(delta: number) {
+    const currentValue = valueRef.current ?? MIN_RATING;
+    const nextValue = normalizeRating(currentValue + delta);
+
+    valueRef.current = nextValue;
+    updateRating(nextValue);
+  }
 
   function getRatingFromPointer(event: React.PointerEvent<HTMLButtonElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -59,9 +103,27 @@ export default function RatingInput({ value, onChange, ariaLabel, disabled }: Ra
 
     const nextRating = getRatingFromPointer(event);
 
-    onChange(nextRating);
-    setPreviewValue(null);
+    setIsStepperOpen(false);
+    updateRating(nextRating);
   }
+
+  useEffect(() => {
+    return stopHold;
+  }, []);
+
+  useEffect(() => {
+    valueRef.current = value;
+  }, [value]);
+
+  useEffect(() => {
+    window.addEventListener('pointerup', stopHold);
+    window.addEventListener('pointercancel', stopHold);
+
+    return () => {
+      window.removeEventListener('pointerup', stopHold);
+      window.removeEventListener('pointercancel', stopHold);
+    };
+  }, []);
 
   return (
     <div className="rating-input">
@@ -77,9 +139,64 @@ export default function RatingInput({ value, onChange, ariaLabel, disabled }: Ra
         <RatingStars rating={displayedValue} ariaLabel={ariaLabel} variant="large" />
       </button>
 
-      <span className="rating-input__value" aria-live="polite">
-        {displayedValue > 0 ? displayedValue.toFixed(1) : '—'}
-      </span>
+      <div className={clsx('rating-input__value-wrapper', isStepperOpen && 'is-open')}>
+        <button
+          className="rating-input__value"
+          type="button"
+          disabled={disabled}
+          onClick={() => setIsStepperOpen(prev => !prev)}
+          aria-expanded={isStepperOpen}
+          aria-label="Edit rating value"
+        >
+          {displayedValue > 0 ? displayedValue.toFixed(1) : '—'}
+        </button>
+
+        <div className="rating-input__stepper" aria-hidden={!isStepperOpen}>
+          <button
+            className="rating-input__stepper-button"
+            type="button"
+            disabled={disabled}
+            onPointerDown={event => {
+              event.preventDefault();
+              event.currentTarget.setPointerCapture(event.pointerId);
+              startHold(() => bumpRating(STEPPER_STEP));
+            }}
+            onPointerUp={event => {
+              event.currentTarget.releasePointerCapture(event.pointerId);
+              stopHold();
+            }}
+            onPointerCancel={event => {
+              event.currentTarget.releasePointerCapture(event.pointerId);
+              stopHold();
+            }}
+            aria-label="Increase rating"
+          >
+            ▲
+          </button>
+
+          <button
+            className="rating-input__stepper-button"
+            type="button"
+            disabled={disabled}
+            onPointerDown={event => {
+              event.preventDefault();
+              event.currentTarget.setPointerCapture(event.pointerId);
+              startHold(() => bumpRating(-STEPPER_STEP));
+            }}
+            onPointerUp={event => {
+              event.currentTarget.releasePointerCapture(event.pointerId);
+              stopHold();
+            }}
+            onPointerCancel={event => {
+              event.currentTarget.releasePointerCapture(event.pointerId);
+              stopHold();
+            }}
+            aria-label="Decrease rating"
+          >
+            ▼
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

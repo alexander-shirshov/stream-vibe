@@ -76,6 +76,10 @@ svg * {
   transition-duration: var(--transition-duration);
 }
 
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 a {
   color: inherit;
 
