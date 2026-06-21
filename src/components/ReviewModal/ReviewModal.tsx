@@ -103,7 +103,9 @@ export default function ReviewModal({
     setIsDeleteConfirmVisible(false);
   }
 
-  function handleAnimationEnd() {
+  function handleAnimationEnd(event: React.AnimationEvent<HTMLDivElement>) {
+    if (event.currentTarget !== event.target) return;
+
     if (!isOpen) {
       setShouldRender(false);
     }
@@ -164,8 +166,9 @@ export default function ReviewModal({
   return (
     <div
       className={clsx(
+        'modal',
         'review-modal',
-        isOpen ? 'review-modal--open' : 'review-modal--closing',
+        isOpen ? 'modal--open review-modal--open' : 'modal--closing review-modal--closing',
         isDeleteConfirmVisible && 'review-modal--confirm-open'
       )}
       role="dialog"
@@ -173,15 +176,15 @@ export default function ReviewModal({
       aria-label={title}
       onAnimationEnd={handleAnimationEnd}
     >
-      <div className="review-modal__overlay" onClick={handleClose} />
+      <div className="modal__overlay review-modal__overlay" onClick={handleClose} />
 
-      <div className="review-modal__window">
+      <div className="modal__window review-modal__window">
         <div className="review-modal__content">
-          <header className="review-modal__header">
-            <h2 className="review-modal__title h3">{title}</h2>
+          <header className="modal__header review-modal__header">
+            <h2 className="modal__title review-modal__title h3">{title}</h2>
 
             <LinkButton
-              customClass="review-modal__close button--black-08"
+              customClass="modal__close review-modal__close button--black-08"
               mode="button"
               type="button"
               onClick={handleClose}

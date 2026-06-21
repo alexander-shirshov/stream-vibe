@@ -1,0 +1,134 @@
+@use '@/styles/helpers' as *;
+
+.catalog-modal {
+  --gap-mobile: 48px;
+
+  display: flex;
+
+  z-index: var(--z-modal);
+
+  &__overlay {
+    z-index: 0;
+  }
+
+  &__window {
+    z-index: 1;
+
+    width: min(80vw, 1000px);
+    height: min(700px, 80vh);
+    overflow: hidden;
+  }
+
+  &__content {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: fluid(40, 24);
+  }
+
+  &__header,
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__body {
+    position: relative;
+
+    flex: 1;
+    min-height: 0;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+
+    padding-top: fluid-to-laptop(40, 20);
+
+    &::before {
+      content: '';
+      position: absolute;
+
+      top: 5%;
+      bottom: 5%;
+      left: 50%;
+
+      width: 2px;
+
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        rgb(255 255 255 / 0.16) 12%,
+        rgb(255 255 255 / 0.42) 50%,
+        rgb(255 255 255 / 0.16) 88%,
+        transparent
+      );
+
+      box-shadow:
+        0 0 12px rgb(255 255 255 / 0.12),
+        0 0 22px rgb(229 0 0 / 0.18);
+
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+  }
+
+  &__body > .category-item {
+    min-height: 0;
+    height: 100%;
+  }
+
+  &__body > .category-item--poster {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  &__body > .category-item--poster .category-item__images {
+    min-height: 0;
+    height: 100%;
+  }
+
+  &__body > .category-item--poster .category-item__image-wrapper {
+    min-height: 0;
+  }
+
+  @include mobile {
+    &__window {
+      width: min(95vw, 430px);
+      height: 80vh;
+    }
+
+    &__body {
+      grid-template-columns: 1fr;
+      gap: var(--gap-mobile);
+
+      &::before {
+        top: 52%;
+        left: 6%;
+        right: 6%;
+        bottom: auto;
+
+        width: auto;
+        height: 2px;
+
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgb(255 255 255 / 0.16) 12%,
+          rgb(255 255 255 / 0.42) 50%,
+          rgb(255 255 255 / 0.16) 88%,
+          transparent
+        );
+
+        transform: translateY(-50%);
+      }
+    }
+
+    &__body > .category-item {
+      width: min(100%, 340px);
+      justify-self: center;
+    }
+  }
+}

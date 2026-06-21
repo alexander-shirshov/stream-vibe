@@ -1,22 +1,6 @@
 @use '@/styles/helpers' as *;
 
-:root {
-  --z-dropdown: 100;
-  --z-sticky: 200;
-  --z-header: 300;
-
-  --z-backdrop: 900;
-  --z-modal: 910;
-  --z-modal-confirm: 920;
-
-  --z-toast: 1000;
-}
-
 .review-modal {
-  animation: review-modal-fade-in 0.22s ease both;
-
-  position: fixed;
-  inset: 0;
   z-index: var(--z-modal);
 
   display: flex;
@@ -34,34 +18,15 @@
     }
   }
 
-  &--closing {
-    animation: review-modal-fade-out 0.28s ease both;
-    pointer-events: none;
-
-    .review-modal__window {
-      animation: review-modal-window-out 0.28s ease both;
-    }
-  }
-
   &__overlay {
-    position: fixed;
-    inset: 0;
     z-index: 0;
-
-    background-color: rgb(0 0 0 / 70%);
   }
 
   &__window {
-    animation: review-modal-window-in 0.24s cubic-bezier(0.2, 0.85, 0.25, 1.1) both;
-
-    position: relative;
     z-index: 1;
 
     width: min(100%, 620px);
     max-height: calc(100vh - 80px);
-    background-color: var(--color-black-10);
-    border: var(--border);
-    border-radius: var(--border-radius-l);
 
     overflow: hidden;
   }
@@ -126,17 +91,6 @@
     }
   }
 
-  &__close {
-    @include square(42px);
-    color: var(--color-gray-75);
-    font-size: 32px;
-    padding: 10px;
-
-    @include hover {
-      color: var(--color-white);
-    }
-  }
-
   &__confirm {
     width: min(100%, 360px);
 
@@ -195,49 +149,5 @@
         width: 100%;
       }
     }
-  }
-}
-
-@keyframes review-modal-fade-in {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes review-modal-fade-out {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes review-modal-window-in {
-  from {
-    opacity: 0;
-    transform: translateY(18px) scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes review-modal-window-out {
-  from {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  to {
-    opacity: 0;
-    transform: translateY(24px) scale(0.96);
   }
 }

@@ -268,6 +268,9 @@ export interface Messages {
       movies: string;
       shows: string;
     };
+    promoModal: {
+      title: string;
+    };
   };
 
   catalogEntity: {

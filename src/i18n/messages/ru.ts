@@ -263,6 +263,9 @@ const ru: Messages = {
       movies: 'Фильмы',
       shows: 'Сериалы',
     },
+    promoModal: {
+      title: `Выбор редакции`,
+    },
   },
   catalogEntity: {
     movie: {

@@ -270,6 +270,9 @@ const en: Messages = {
       movies: 'Movies',
       shows: 'Shows',
     },
+    promoModal: {
+      title: `Editor's Picks`,
+    },
   },
 
   catalogEntity: {

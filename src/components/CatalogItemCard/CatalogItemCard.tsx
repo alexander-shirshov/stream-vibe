@@ -34,6 +34,8 @@ type CatalogItemCardProps = Pick<
 > & {
   variant?: CatalogItemCardVariant;
   badgeVariant?: BadgeVariant;
+  forceShowTitle?: boolean;
+  onClick?: () => void;
 };
 
 export default function CatalogItemCard({
@@ -49,6 +51,8 @@ export default function CatalogItemCard({
   views,
   releaseDate,
   season,
+  forceShowTitle,
+  onClick,
 }: CatalogItemCardProps) {
   const mainClassName: string = clsx('category-item', `category-item--${variant}`);
   const maxImages = variant === 'genre' ? 4 : 1;
@@ -77,6 +81,7 @@ export default function CatalogItemCard({
     : null;
   const viewsFormatted = hasViews ? formatViews(views) : null;
   const reviewsFormatted = hasRatingCount ? formatViews(ratingCount) : null;
+  const needShowTitle = variant === 'genre' || forceShowTitle;
 
   const content = (
     <>
@@ -91,7 +96,7 @@ export default function CatalogItemCard({
       )}
 
       <div className="category-item__body">
-        {variant === 'genre' ? (
+        {needShowTitle ? (
           <h3 className="category-item__title">
             {badge && (
               <Badge className="category-item__badge" variant={badgeVariant}>
@@ -163,7 +168,7 @@ export default function CatalogItemCard({
 
   if (href) {
     return (
-      <Link className={mainClassName} to={href} aria-label={title}>
+      <Link className={mainClassName} to={href} aria-label={title} onClick={onClick}>
         {content}
       </Link>
     );
