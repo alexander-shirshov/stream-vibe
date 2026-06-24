@@ -3,6 +3,7 @@ import { routeComponents, getPath } from '@/router/routes';
 import { getTypedEntries } from '@/utils/typedEntries';
 import PageLayout from '@/layouts/PageLayout';
 import MovieDetails from '@/pages/MovieDetails';
+import ShowDetails from '@/pages/ShowDetails';
 import ScrollToTop from '@/components/ScrollToTop';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
 
           <Route path="/catalog/movies/:slug" element={<MovieDetails />} />
 
-          {/* <Route path="/catalog/shows/:slug" element={<ShowDetails />} /> */}
+          <Route path="/catalog/shows/:slug" element={<ShowDetails />} />
         </Route>
       </Routes>
     </>

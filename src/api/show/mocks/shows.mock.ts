@@ -218,25 +218,134 @@ export const showsMock: ShowDto[] = [
       },
     ],
 
-    cast: [],
+    cast: [
+      {
+        id: 'winona-ryder',
+        firstName: 'Winona',
+        lastName: 'Ryder',
+        country: {
+          en: 'USA',
+          ru: 'США',
+        },
+        avatar: '/images/persons/cast/winona-ryder.jpg',
+      },
+      {
+        id: 'david-harbour',
+        firstName: 'David',
+        lastName: 'Harbour',
+        country: {
+          en: 'USA',
+          ru: 'США',
+        },
+        avatar: '/images/persons/cast/david-harbour.jpg',
+      },
+      {
+        id: 'natalia-dyer',
+        firstName: 'Natalia',
+        lastName: 'Dyer',
+        country: {
+          en: 'USA',
+          ru: 'США',
+        },
+        avatar: '/images/persons/cast/natalia-dyer.jpg',
+      },
+      {
+        id: 'finn-wolfhard',
+        firstName: 'Finn',
+        lastName: 'Wolfhard',
+        country: {
+          en: 'Canada',
+          ru: 'Канада',
+        },
+        avatar: '/images/persons/cast/finn-wolfhard.jpg',
+      },
+      {
+        id: 'gaten-matarazzo',
+        firstName: 'Gaten',
+        lastName: 'Matarazzo',
+        country: {
+          en: 'USA',
+          ru: 'США',
+        },
+        avatar: '/images/persons/cast/gaten-matarazzo.jpg',
+      },
+      {
+        id: 'caleb-mclaughlin',
+        firstName: 'Caleb',
+        lastName: 'McLaughlin',
+        country: {
+          en: 'USA',
+          ru: 'США',
+        },
+        avatar: '/images/persons/cast/caleb-mclaughlin.jpg',
+      },
+      {
+        id: 'noah-schnapp',
+        firstName: 'Noah',
+        lastName: 'Schnapp',
+        country: {
+          en: 'Canada',
+          ru: 'Канада',
+        },
+        avatar: '/images/persons/cast/noah-schnapp.jpg',
+      },
+      {
+        id: 'sadie-sink',
+        firstName: 'Sadie',
+        lastName: 'Sink',
+        country: {
+          en: 'USA',
+          ru: 'США',
+        },
+        avatar: '/images/persons/cast/sadie-sink.jpg',
+      },
+      {
+        id: 'joe-keery',
+        firstName: 'Joe',
+        lastName: 'Keery',
+        country: {
+          en: 'USA',
+          ru: 'США',
+        },
+        avatar: '/images/persons/cast/joe-keery.jpg',
+      },
+      {
+        id: 'maya-hawke',
+        firstName: 'Maya',
+        lastName: 'Hawke',
+        country: {
+          en: 'USA',
+          ru: 'США',
+        },
+        avatar: '/images/persons/cast/maya-hawke.jpg',
+      },
+    ],
     director: {
       id: 'duffer-brothers',
       firstName: 'The Duffer',
       lastName: 'Brothers',
       country: { en: 'USA', ru: 'США' },
-      avatar: '/images/persons/duffer-brothers.jpg',
+      avatar: '/images/persons/director/duffer-brothers.jpg',
     },
     music: {
       id: 'kyle-dixon',
       firstName: 'Kyle',
       lastName: 'Dixon',
       country: { en: 'USA', ru: 'США' },
-      avatar: '/images/persons/kyle-dixon.jpg',
+      avatar: '/images/persons/music/kyle-dixon.jpg',
     },
 
     ratings: [
-      { platform: 'IMDb', rating: 4.5, ratingCount: 1200000 },
-      { platform: 'StreamVibe', rating: 4, ratingCount: 8600 },
+      {
+        platform: 'IMDb',
+        rating: 8.6,
+        ratingCount: 1500000,
+      },
+      {
+        platform: 'Rotten Tomatoes',
+        rating: 8.8,
+        ratingCount: 500,
+      },
     ],
 
     reviews: [
