@@ -1,0 +1,132 @@
+@use '@/styles/helpers' as *;
+
+.media-details {
+  --mediaDetailsPaddingTop: #{fluid(100, 60)};
+
+  padding-top: var(--mediaDetailsPaddingTop);
+  padding-bottom: var(--section-padding-y);
+  &__action {
+    &-icon {
+      width: fluid-to-laptop(15, 12);
+      height: auto;
+
+      &-wrapper {
+        padding: 7px;
+      }
+    }
+  }
+
+  &__reviews {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  &__groups {
+    display: grid;
+    row-gap: fluid(30, 20);
+  }
+
+  &__group {
+    display: grid;
+    row-gap: fluid-to-laptop(14, 10);
+  }
+
+  &__title {
+    font-size: fluid(18, 14);
+    color: var(--color-gray-60);
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+  }
+
+  &__navigation {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__description {
+    color: var(--color-white);
+    font-size: fluid(18, 14);
+    font-weight: 500;
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+
+    &-text {
+      font-size: fluid-to-laptop(18, 14);
+      color: var(--color-white);
+      font-weight: 500;
+    }
+  }
+}
+
+.details-block {
+  --page-top-offset: #{fluid(100, 60)};
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32.5%;
+  grid-template-rows: repeat(var(--detailsBlockRows), auto);
+  row-gap: fluid(30, 20);
+  column-gap: 20px;
+  align-items: start;
+
+  &__main-item {
+    grid-column: 1;
+    min-width: 0;
+    width: 100%;
+  }
+
+  &__aside-wrapper {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    align-self: stretch;
+    min-height: 0;
+    min-width: 0;
+  }
+
+  &__aside {
+    position: sticky;
+    top: calc(var(--page-top-offset) + 20px);
+    max-height: calc(100vh - var(--page-top-offset) - 40px);
+    overflow-y: auto;
+
+    padding: fluid(50, 24);
+    background-color: var(--color-black-10);
+    border: var(--border);
+    border-radius: var(--border-radius-m);
+    min-width: 0;
+
+    @-moz-document url-prefix() {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-black-06) var(--color-black-25);
+    }
+
+    @include scrollbar;
+  }
+
+  @include tablet {
+    display: flex;
+    flex-direction: column;
+
+    &__main-item {
+      min-width: 0;
+      width: 100%;
+    }
+
+    &__aside-wrapper {
+      display: contents;
+    }
+
+    &__aside {
+      position: static;
+      max-height: none;
+      overflow: visible;
+      width: 100%;
+      min-width: 0;
+    }
+  }
+}

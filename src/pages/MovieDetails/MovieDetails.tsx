@@ -1,90 +1,28 @@
 import './MovieDetails.scss';
 
-import React, { useRef, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+
 import { useParams } from 'react-router-dom';
 
-import clsx from 'clsx';
+import MediaDetailsPage from '@/components/MediaDetailsPage';
+import CatalogSectionSkeleton from '@/components/CatalogSectionSkeleton';
+import DetailsBlockSkeleton from '@/components/DetailsBlockSkeleton';
 
-import { CURRENT_USER_ID } from '@/constants/user';
-
-import type { UserReview } from '@/api/user/user.types';
-import type { ReviewFormValues } from '@/components/ReviewModal/ReviewModal';
-
-import { Helmet } from 'react-helmet-async';
 import { getTitle } from '@/utils/seo';
 import { useLanguage } from '@/i18n/LanguageProvider';
 import { useMovie } from '@/hooks/useMovie';
-import { useUserState } from '@/hooks/useUserState';
-
-import Plus from '@/assets/icons/plus.svg?react';
-import Calendar from '@/assets/icons/calendar.svg?react';
-import Lang from '@/assets/icons/lang.svg?react';
-import Star from '@/assets/icons/star.svg?react';
-import Tiles from '@/assets/icons/tiles.svg?react';
-import Edit from '@/assets/icons/edit.svg?react';
-
-import LinkButton from '@/components/Button';
-import MovieBannerCard from '@/components/MovieBannerCard';
-import CatalogSectionSkeleton from '@/components/CatalogSectionSkeleton';
-import DetailsBlockSkeleton from '@/components/DetailsBlockSkeleton';
-import InfoPanel from '@/components/InfoPanel/InfoPanel';
-import Slider from '@/components/Slider';
-import SliderNavigation from '@/components/Slider/components/SliderNavigation';
-import PersonCard from '@/components/PersonCard';
-import ReviewCard from '@/components/ReviewCard';
-import Tags from '@/components/Tags';
-import Ratings from '@/components/Ratings';
-import ReviewModal from '@/components/ReviewModal';
-
-import { mapUserReviewToReviewItem } from '@/api/user/user.mapper';
 
 export default function MovieDetails() {
-  const castPrevRef = useRef<HTMLButtonElement>(null);
-  const castNextRef = useRef<HTMLButtonElement>(null);
-
-  const reviewsPrevRef = useRef<HTMLButtonElement>(null);
-  const reviewsNextRef = useRef<HTMLButtonElement>(null);
-  const reviewsPaginationRef = useRef<HTMLDivElement>(null);
-
-  const reviewButtonRef = useRef<HTMLButtonElement>(null);
-
-  const [isCastLocked, setIsCastLocked] = useState(true);
-  const [isReviewsLocked, setIsReviewsLocked] = useState(true);
-
   const { t, language } = useLanguage();
   const { slug } = useParams();
   const { movie, isInitialLoading, error } = useMovie(language, slug);
-  const {
-    isLoading: isUserStateLoading,
-    error: userStateError,
-    handleToggleLike,
-    handleTogglePlaylist,
-    isInPlaylist,
-    handleToggleMuted,
-    isMuted,
-    userState,
-    isLiked,
-    getReviewForEntity,
-    handleAddReview,
-    handleUpdateReview,
-    handleDeleteReview,
-  } = useUserState(CURRENT_USER_ID);
-
-  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
-
-  const isInitialPageLoading = isInitialLoading || (isUserStateLoading && !userState);
 
   const titleId = 'movie-banner-title';
   const entityLabel = t(`catalogEntity.movie.title`);
 
-  const title = getTitle(movie?.title || '', entityLabel);
+  const title = movie ? getTitle(movie.title, entityLabel) : getTitle(entityLabel);
 
-  const getDisplayedCountry = (country: string | null): string | undefined => {
-    if (!country) return undefined;
-    return language === 'en' ? `From ${country}` : country;
-  };
-
-  if (isInitialPageLoading)
+  if (isInitialLoading) {
     return (
       <>
         <Helmet>
@@ -95,342 +33,19 @@ export default function MovieDetails() {
         <DetailsBlockSkeleton />
       </>
     );
+  }
 
   if (error || !movie) {
     return null;
   }
 
-  if (userStateError || !userState) {
-    return null;
-  }
-
-  const userReview = getReviewForEntity(movie.id, 'movie');
-
-  const reviewModalMode = userReview ? 'edit' : 'create';
-
-  const currentUserReview = userReview ? mapUserReviewToReviewItem(userReview) : null;
-
-  const displayedReviews = currentUserReview
-    ? [currentUserReview, ...movie.reviews]
-    : movie.reviews;
-
-  async function handleReviewSubmit(values: ReviewFormValues) {
-    if (values.rating === null || !movie) return;
-
-    const nextReview: UserReview = {
-      id: userReview?.id ?? crypto.randomUUID(),
-      entityId: movie.id,
-      entityType: 'movie',
-      authorName: values.authorName,
-      country: values.country.trim() || null,
-      rating: values.rating,
-      text: values.text,
-      createdAt: userReview?.createdAt ?? new Date().toISOString(),
-    };
-
-    if (userReview) {
-      await handleUpdateReview(nextReview);
-    } else {
-      await handleAddReview(nextReview);
-      handleReviewModalClose();
-    }
-
-    setIsReviewModalOpen(false);
-  }
-
-  async function handleReviewDelete() {
-    if (!userReview) return;
-
-    await handleDeleteReview(userReview.id);
-    setIsReviewModalOpen(false);
-  }
-
-  function handleReviewModalClose() {
-    setIsReviewModalOpen(false);
-
-    requestAnimationFrame(() => {
-      reviewButtonRef.current?.focus();
-    });
-  }
-
-  const detailsPanels = [
-    {
-      id: 'description',
-      node: (
-        <InfoPanel
-          className="details-block__main-item"
-          title={t('catalogEntity.movie.description')}
-        >
-          {<p className="movie-details__description">{movie.description}</p>}
-        </InfoPanel>
-      ),
-    },
-    {
-      id: 'cast',
-      node: (
-        <InfoPanel
-          className="details-block__main-item"
-          title={t('catalogEntity.movie.cast')}
-          headerActions={
-            <SliderNavigation
-              prevRef={castPrevRef}
-              nextRef={castNextRef}
-              // paginationRef={paginationRef}
-              hasPagination={false}
-              className={isCastLocked ? 'visually-hidden' : undefined}
-              variant="round"
-            />
-          }
-        >
-          <Slider
-            className="cast-slider"
-            prevRef={castPrevRef}
-            nextRef={castNextRef}
-            onLockChange={setIsCastLocked}
-            options={{
-              slidesPerView: 'auto',
-              slidesPerGroup: 3,
-              spaceBetween: 10,
-              allowTouchMove: true,
-              breakpoints: {
-                1024: {
-                  spaceBetween: 20,
-                  allowTouchMove: false,
-                },
-              },
-            }}
-            hasScrollbarOnMobile={false}
-          >
-            {movie.cast.map(actor => {
-              return (
-                <PersonCard
-                  key={actor.id}
-                  imgSrc={actor.avatar}
-                  displayedName={actor.fullNameShort || actor.fullName}
-                  displayedCountry={getDisplayedCountry(actor.country)}
-                  showTooltip={true}
-                />
-              );
-            })}
-          </Slider>
-        </InfoPanel>
-      ),
-    },
-    {
-      id: 'reviews',
-      node: (
-        <InfoPanel
-          className="details-block__main-item"
-          title={t('catalogEntity.movie.reviews')}
-          headerActions={
-            <LinkButton
-              ref={reviewButtonRef}
-              mode="button"
-              customClass="button--black-08 button--review"
-              onClick={() => setIsReviewModalOpen(true)}
-            >
-              <div className="movie-details__action">
-                <div className="movie-details__action-icon-wrapper">
-                  {userReview ? (
-                    <Edit className="movie-details__action-icon" />
-                  ) : (
-                    <Plus className="movie-details__action-icon" />
-                  )}
-                </div>
-
-                <p className="movie-details__action-text">
-                  {userReview
-                    ? t('catalogEntity.movie.editReview')
-                    : t('catalogEntity.movie.addReview')}
-                </p>
-              </div>
-            </LinkButton>
-          }
-          bottomActions={
-            <div className="movie-details__navigation">
-              <SliderNavigation
-                prevRef={reviewsPrevRef}
-                nextRef={reviewsNextRef}
-                paginationRef={reviewsPaginationRef}
-                hasPagination={true}
-                className={clsx(
-                  'movie-details__reviews-navigation',
-                  isReviewsLocked && 'is-hidden'
-                )}
-                variant="round"
-              />
-            </div>
-          }
-        >
-          <div className="movie-details__reviews">
-            <Slider
-              className="review-slider"
-              prevRef={reviewsPrevRef}
-              nextRef={reviewsNextRef}
-              paginationRef={reviewsPaginationRef}
-              onLockChange={setIsReviewsLocked}
-              options={{
-                slidesPerView: 1,
-                slidesPerGroup: 1,
-                spaceBetween: 16,
-                allowTouchMove: true,
-                breakpoints: {
-                  1441: {
-                    slidesPerView: 2,
-                    slidesPerGroup: 2,
-                    spaceBetween: 20,
-                  },
-                },
-              }}
-              hasScrollbarOnMobile={false}
-            >
-              {displayedReviews.map(review => (
-                <ReviewCard
-                  name={review.authorName}
-                  ratingValue={review.rating}
-                  text={review.text}
-                  country={review.country}
-                  key={review.id}
-                  isOwn={review.id === userReview?.id}
-                ></ReviewCard>
-              ))}
-            </Slider>
-          </div>
-        </InfoPanel>
-      ),
-    },
-  ].filter(Boolean);
-
   return (
-    <>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={t('catalogEntity.movie.meta')} />
-      </Helmet>
-      <section className="movies-banner container" aria-labelledby={titleId}>
-        <h1 className="visually-hidden" id={titleId}>
-          {movie.title}
-        </h1>
-        <MovieBannerCard
-          title={movie.title}
-          description={movie.description}
-          images={[movie.preview]}
-          liked={isLiked(movie.id)}
-          added={isInPlaylist(movie.id)}
-          isMuted={isMuted}
-          onLikeToggle={() => handleToggleLike(movie.id)}
-          onPlaylistToggle={() => handleTogglePlaylist(movie.id)}
-          onMuteToggle={handleToggleMuted}
-        />
-      </section>
-
-      <section
-        className="details-block container"
-        style={
-          {
-            '--detailsBlockRows': detailsPanels.length,
-          } as React.CSSProperties
-        }
-      >
-        {detailsPanels.map((panel, index) => (
-          <React.Fragment key={panel.id}>
-            {panel.node}
-
-            {index === 0 && (
-              <div className="details-block__aside-wrapper">
-                <aside className="details-block__aside">
-                  <div className="movie-details__groups">
-                    {/* RELEASE */}
-                    <div className="movie-details__group">
-                      <h3 className="movie-details__title">
-                        <Calendar />
-                        <span>{t('catalogEntity.movie.release')}</span>
-                      </h3>
-                      <div className="movie-details__description">
-                        <span className="h6">{movie.releaseDate}</span>
-                      </div>
-                    </div>
-
-                    {/* LANGS */}
-                    <div className="movie-details__group">
-                      <h3 className="movie-details__title">
-                        <Lang />
-                        <span>{t('catalogEntity.movie.languages')}</span>
-                      </h3>
-                      <Tags tags={movie.languages} />
-                    </div>
-
-                    {/* RATINGS */}
-                    <div className="movie-details__group">
-                      <h3 className="movie-details__title">
-                        <Star />
-                        <span>{t('catalogEntity.movie.ratings')}</span>
-                      </h3>
-                      <Ratings ratings={movie.ratings} />
-                    </div>
-
-                    {/* GENRES */}
-                    <div className="movie-details__group">
-                      <h3 className="movie-details__title">
-                        <Tiles />
-                        <span>{t('catalogEntity.movie.genres')}</span>
-                      </h3>
-                      <Tags tags={movie.genres} />
-                    </div>
-
-                    {/* DIRECTOR */}
-                    <div className="movie-details__group">
-                      <h3 className="movie-details__title">{t('catalogEntity.movie.director')}</h3>
-                      {movie.director && (
-                        <PersonCard
-                          imgSrc={movie.director?.avatar || ''}
-                          displayedName={movie.director?.fullName}
-                          displayedCountry={movie.director?.country || undefined}
-                          showTooltip={false}
-                          variant="extended"
-                        />
-                      )}
-                    </div>
-
-                    {/* MUSIC */}
-                    <div className="movie-details__group">
-                      <h3 className="movie-details__title">{t('catalogEntity.movie.music')}</h3>
-                      {movie.music && (
-                        <PersonCard
-                          imgSrc={movie.music?.avatar || ''}
-                          displayedName={movie.music?.fullName}
-                          displayedCountry={movie.music?.country || undefined}
-                          showTooltip={false}
-                          variant="extended"
-                        />
-                      )}
-                    </div>
-                  </div>
-                </aside>
-              </div>
-            )}
-          </React.Fragment>
-        ))}
-      </section>
-
-      {/* MODAL */}
-      <ReviewModal
-        mode={reviewModalMode}
-        isOpen={isReviewModalOpen}
-        initialValues={
-          userReview
-            ? {
-                authorName: userReview.authorName,
-                country: userReview.country ?? '',
-                rating: userReview.rating,
-                text: userReview.text,
-              }
-            : undefined
-        }
-        onClose={handleReviewModalClose}
-        onSubmit={handleReviewSubmit}
-        onDelete={userReview ? handleReviewDelete : undefined}
-      />
-    </>
+    <MediaDetailsPage
+      entity={movie}
+      titleId={titleId}
+      pageTitle={title}
+      entityType="movie"
+      metaDescription={t('catalogEntity.movie.meta')}
+    />
   );
 }

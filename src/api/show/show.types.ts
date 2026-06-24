@@ -1,12 +1,5 @@
 import type { Language } from '@/i18n/types';
-import type {
-  PersonDto,
-  Person,
-  RatingItemDto,
-  RatingItem,
-  ReviewItemDto,
-  ReviewItem,
-} from '@/api/movie/movie.types';
+import type { MediaDetailsBaseDto, MediaDetailsBase } from '@/api/media/media.types';
 
 export type EpisodeDto = {
   id: string;
@@ -38,48 +31,10 @@ export type Season = {
   episodes: Episode[];
 };
 
-export type ShowDto = {
-  id: string;
-  slug: string;
-
-  title: Partial<Record<Language, string>>;
-  description: Partial<Record<Language, string>>;
-  preview: string;
-
-  releaseDate: string;
-
-  languages: Partial<Record<Language, string>>[];
-  genres: Partial<Record<Language, string>>[];
-
+export type ShowDto = MediaDetailsBaseDto & {
   seasons: SeasonDto[];
-
-  cast: PersonDto[];
-  director?: PersonDto;
-  music?: PersonDto;
-
-  ratings: RatingItemDto[];
-  reviews: ReviewItemDto[];
 };
 
-export type Show = {
-  id: string;
-  slug: string;
-
-  title: string;
-  description: string;
-  preview: string;
-
-  releaseDate: string;
-
-  languages: string[];
-  genres: string[];
-
+export type Show = MediaDetailsBase & {
   seasons: Season[];
-
-  cast: Person[];
-  director: Person | null;
-  music: Person | null;
-
-  ratings: RatingItem[];
-  reviews: ReviewItem[];
 };
