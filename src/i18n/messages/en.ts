@@ -309,6 +309,7 @@ const en: Messages = {
       genres: 'Genres',
       director: 'Director',
       music: 'Music',
+      seasons: 'Seasons and Episodes',
     },
 
     reviewModal: {
@@ -335,6 +336,10 @@ const en: Messages = {
     editRating: 'Edit rating value',
     increaseRating: 'Increase rating',
     decreaseRating: 'Decrease rating',
+  },
+
+  player: {
+    playButton: 'Play video',
   },
 };
 

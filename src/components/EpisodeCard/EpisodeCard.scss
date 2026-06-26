@@ -1,0 +1,196 @@
+@use '@/styles/helpers' as *;
+
+.episode-card {
+  --gradientOpacity: 1;
+  --gradientColor: var(--color-black-10);
+
+  display: grid;
+  grid-template-columns: fluid-to-laptop(60, 30) 172px 1fr;
+  align-items: center;
+  gap: fluid-to-laptop(20, 18);
+  padding-block: 40px;
+
+  @include laptop {
+    padding-top: 30px;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'player number'
+      'body body';
+    padding: 20px;
+    background-color: var(--color-black-08);
+    border-radius: var(--border-radius-s);
+  }
+
+  &__number {
+    font-size: fluid-to-laptop(30, 24);
+    font-weight: 600;
+
+    @include mobile {
+      grid-area: number;
+    }
+  }
+
+  &__player {
+    position: relative;
+    overflow: hidden;
+
+    @include hover {
+      --gradientOpacity: 0;
+
+      .episode-card__preview {
+        transform: scale(1.06);
+      }
+
+      .episode-card__play-button {
+        background-color: var(--color-red-60);
+      }
+    }
+
+    &.is-preview-visible::after {
+      position: absolute;
+      inset: 0;
+      content: '';
+      background: linear-gradient(180deg, transparent 0%, var(--color-black-10) 100%);
+      opacity: var(--gradientOpacity);
+      transition-duration: var(--transition-duration);
+      pointer-events: none;
+      z-index: 2;
+      margin: -2px;
+      padding: 2px;
+      border-radius: calc(var(--border-radius-m) + 2px);
+    }
+
+    border-radius: var(--border-radius-l);
+    border: var(--border);
+
+    @include mobile {
+      grid-area: player;
+    }
+  }
+
+  &__video,
+  &__preview {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__video {
+    width: 172px;
+    height: 118px;
+    object-fit: cover;
+
+    @include mobile {
+      width: 100%;
+      height: 200px;
+    }
+
+    @include mobile-s {
+      height: 118px;
+    }
+  }
+
+  &__preview {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    object-fit: cover;
+    will-change: transform;
+    transition: transform var(--transition-duration) cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  }
+
+  &__play-button {
+    @include abs-center;
+    @include flex-center;
+    @include square(50px);
+    z-index: 3;
+
+    padding: 0;
+    color: var(--color-gray-90);
+    background-color: color-mix(in srgb, var(--color-black) 60%, transparent);
+
+    border: none;
+    border-radius: 50%;
+
+    &-icon {
+      @include square(30px);
+    }
+  }
+
+  &__body {
+    display: grid;
+    row-gap: fluid-to-laptop(14, 10);
+
+    @include mobile {
+      grid-area: body;
+    }
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px 16px;
+
+    @include mobile {
+      flex-direction: column-reverse;
+      align-items: start;
+    }
+  }
+
+  &__duration {
+    flex-shrink: 0;
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    column-gap: 4px;
+    padding: fluid-to-laptop(8, 6) fluid-to-laptop(10, 6);
+    background-color: var(--color-black-08);
+    border: var(--border);
+    border-radius: var(--border-radius-s);
+
+    span {
+      white-space: nowrap;
+    }
+
+    svg {
+      flex-shrink: 0;
+      @include square(30px);
+    }
+
+    @include laptop {
+      border-radius: var(--border-radius-xs);
+    }
+  }
+
+  &__spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 3;
+
+    width: 32px;
+    height: 32px;
+
+    border: 3px solid rgb(255 255 255 / 30%);
+    border-top-color: white;
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+.episode-card__play-button.is-clicked {
+  animation: var(--buttonPressAnimation);
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

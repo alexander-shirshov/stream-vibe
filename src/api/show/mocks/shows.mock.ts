@@ -47,6 +47,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 49,
             preview: '/images/shows/stranger-things/s1/e1.jpg',
+            video: '/videos/example.mp4',
           },
           {
             id: 'stranger-things-s1-e2',
@@ -60,6 +61,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 56,
             preview: '/images/shows/stranger-things/s1/e2.jpg',
+            video: '/videos/example.mp4',
           },
           {
             id: 'stranger-things-s1-e3',
@@ -70,6 +72,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 52,
             preview: '/images/shows/stranger-things/s1/e3.jpg',
+            video: '/videos/example.mp4',
           },
           {
             id: 'stranger-things-s1-e4',
@@ -80,6 +83,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 51,
             preview: '/images/shows/stranger-things/s1/e4.jpg',
+            video: '/videos/example.mp4',
           },
           {
             id: 'stranger-things-s1-e5',
@@ -93,6 +97,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 53,
             preview: '/images/shows/stranger-things/s1/e5.jpg',
+            video: '/videos/example.mp4',
           },
         ],
       },
@@ -110,6 +115,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 48,
             preview: '/images/shows/stranger-things/s2/e1.jpg',
+            video: '/videos/example.mp4',
           },
           {
             id: 'stranger-things-s2-e2',
@@ -123,6 +129,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 56,
             preview: '/images/shows/stranger-things/s2/e2.jpg',
+            video: '/videos/example.mp4',
           },
           {
             id: 'stranger-things-s2-e3',
@@ -133,6 +140,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 51,
             preview: '/images/shows/stranger-things/s2/e3.jpg',
+            video: '/videos/example.mp4',
           },
           {
             id: 'stranger-things-s2-e4',
@@ -143,6 +151,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 46,
             preview: '/images/shows/stranger-things/s2/e4.jpg',
+            video: '/videos/example.mp4',
           },
           {
             id: 'stranger-things-s2-e5',
@@ -153,6 +162,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 58,
             preview: '/images/shows/stranger-things/s2/e5.jpg',
+            video: '/videos/example.mp4',
           },
         ],
       },
@@ -170,6 +180,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 50,
             preview: '/images/shows/stranger-things/s3/e1.jpg',
+            video: '/videos/example.mp4',
           },
           {
             id: 'stranger-things-s3-e2',
@@ -180,6 +191,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 49,
             preview: '/images/shows/stranger-things/s3/e2.jpg',
+            video: '/videos/example.mp4',
           },
           {
             id: 'stranger-things-s3-e3',
@@ -193,6 +205,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 49,
             preview: '/images/shows/stranger-things/s3/e3.jpg',
+            video: '/videos/example.mp4',
           },
           {
             id: 'stranger-things-s3-e4',
@@ -203,6 +216,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 52,
             preview: '/images/shows/stranger-things/s3/e4.jpg',
+            video: '/videos/example.mp4',
           },
           {
             id: 'stranger-things-s3-e5',
@@ -213,6 +227,7 @@ export const showsMock: ShowDto[] = [
             },
             durationMinutes: 51,
             preview: '/images/shows/stranger-things/s3/e5.jpg',
+            video: '/videos/example.mp4',
           },
         ],
       },
@@ -367,6 +382,66 @@ export const showsMock: ShowDto[] = [
         text: {
           en: 'The atmosphere is incredible, and the characters make even the weirdest moments feel emotional.',
           ru: 'Атмосфера невероятная, а персонажи делают даже самые странные моменты эмоциональными.',
+        },
+      },
+      {
+        id: 'stranger-things-review-3',
+        authorName: 'Sophie Martin',
+        country: { en: 'France', ru: 'Франция' },
+        rating: 5,
+        text: {
+          en: 'One of the best modern TV shows. Every season feels bigger without losing its charm.',
+          ru: 'Один из лучших современных сериалов. Каждый сезон становится масштабнее, не теряя своего очарования.',
+        },
+      },
+      {
+        id: 'stranger-things-review-4',
+        authorName: 'Lucas Weber',
+        country: { en: 'Germany', ru: 'Германия' },
+        rating: 4.5,
+        text: {
+          en: 'The soundtrack alone deserves praise, but the cast and storytelling are just as memorable.',
+          ru: 'Один только саундтрек заслуживает похвалы, но актерский состав и история не менее запоминающиеся.',
+        },
+      },
+      {
+        id: 'stranger-things-review-5',
+        authorName: 'Olivia Brown',
+        country: { en: 'Canada', ru: 'Канада' },
+        rating: 4,
+        text: {
+          en: 'A great blend of adventure, mystery and horror. The young cast carries the show brilliantly.',
+          ru: 'Отличное сочетание приключений, мистики и хоррора. Молодой актерский состав справляется великолепно.',
+        },
+      },
+      {
+        id: 'stranger-things-review-6',
+        authorName: 'Mateo Rossi',
+        country: { en: 'Italy', ru: 'Италия' },
+        rating: 3.5,
+        text: {
+          en: 'Some episodes are slower than others, but the emotional moments always pay off.',
+          ru: 'Некоторые эпизоды развиваются медленнее, но эмоциональные моменты всегда окупают ожидание.',
+        },
+      },
+      {
+        id: 'stranger-things-review-7',
+        authorName: 'Ava Thompson',
+        country: { en: 'Australia', ru: 'Австралия' },
+        rating: 5,
+        text: {
+          en: 'An unforgettable mix of 80s nostalgia and supernatural suspense. I could not stop watching.',
+          ru: 'Незабываемое сочетание атмосферы 80-х и сверхъестественной интриги. Невозможно оторваться от просмотра.',
+        },
+      },
+      {
+        id: 'stranger-things-review-8',
+        authorName: 'Ethan Walker',
+        country: { en: 'New Zealand', ru: 'Новая Зеландия' },
+        rating: 4.5,
+        text: {
+          en: 'The world-building keeps expanding while the core friendships remain the heart of the story.',
+          ru: 'Мир сериала постоянно расширяется, но дружба героев по-прежнему остается сердцем всей истории.',
         },
       },
     ],

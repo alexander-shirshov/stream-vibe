@@ -307,6 +307,7 @@ export interface Messages {
       genres: string;
       director: string;
       music: string;
+      seasons: string;
     };
 
     reviewModal: {
@@ -340,5 +341,9 @@ export interface Messages {
     editRating: string;
     increaseRating: string;
     decreaseRating: string;
+  };
+
+  player: {
+    playButton: string;
   };
 }

@@ -301,6 +301,7 @@ const ru: Messages = {
       genres: 'Жанры',
       director: 'Режиссёр',
       music: 'Композитор',
+      seasons: 'Сезоны и эпизоды',
     },
 
     reviewModal: {
@@ -327,6 +328,10 @@ const ru: Messages = {
     editRating: 'Изменить значение рейтинга',
     increaseRating: 'Увеличить рейтинг',
     decreaseRating: 'Уменьшить рейтинг',
+  },
+
+  player: {
+    playButton: 'Воспроизведение',
   },
 };
 

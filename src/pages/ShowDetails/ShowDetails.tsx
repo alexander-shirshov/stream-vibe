@@ -10,6 +10,9 @@ import { getTitle } from '@/utils/seo';
 import { useLanguage } from '@/i18n/LanguageProvider';
 import { useShow } from '@/hooks/useShow';
 
+import InfoPanel from '@/components/InfoPanel/InfoPanel';
+import Seasons from '@/components/Seasons';
+
 export default function ShowDetails() {
   const { t, language } = useLanguage();
   const { slug } = useParams();
@@ -37,8 +40,21 @@ export default function ShowDetails() {
     return null;
   }
 
+  const SeasonsPanel = (
+    <>
+      <InfoPanel
+        className="details-block__main-item"
+        title={t(`catalogEntity.show.seasons`)}
+        bigTitle
+      >
+        {<Seasons seasons={show.seasons}></Seasons>}
+      </InfoPanel>
+    </>
+  );
+
   return (
     <MediaDetailsPage
+      topPanel={SeasonsPanel}
       entity={show}
       titleId={titleId}
       pageTitle={title}

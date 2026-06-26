@@ -1,0 +1,16 @@
+@use '@/styles/helpers' as *;
+
+.seasons {
+  &__list {
+    @include mobile {
+      display: grid;
+      row-gap: 20px;
+    }
+  }
+
+  &__item {
+    @include mobile-above {
+      border-top: var(--border);
+    }
+  }
+}

@@ -11,6 +11,7 @@ function mapEpisodeDto(dto: EpisodeDto, language: Language): Episode {
     description: getLocalizedText(dto.description, language),
     durationMinutes: dto.durationMinutes,
     preview: dto.preview ?? FALLBACK_EPISODE_PREVIEW,
+    video: dto.video,
   };
 }
 

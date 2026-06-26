@@ -1,8 +1,6 @@
 @use '@/styles/helpers' as *;
 
 .button {
-  --buttonPressAnimation: button-press 0.28s cubic-bezier(0.2, 0, 0.2, 1);
-
   @include flex-center(true);
 
   padding: fluid-to-laptop(18, 14) fluid-to-laptop(24, 20);
@@ -102,18 +100,4 @@
 .button.is-pressed,
 .link.is-pressed {
   animation: var(--buttonPressAnimation);
-}
-
-@keyframes button-press {
-  0% {
-    scale: 1;
-  }
-
-  45% {
-    scale: 0.965;
-  }
-
-  100% {
-    scale: 1;
-  }
 }

@@ -3,15 +3,19 @@ import './AccordionGroup.scss';
 import React, { Children, isValidElement } from 'react';
 
 type AccordionGroupsProps = {
+  className?: string;
   columns: number;
   children: React.ReactNode;
   isOrderedList?: boolean;
+  variant?: 'default' | 'dark';
 };
 
 export default function AccordionGroup({
+  className,
   columns,
   children,
   isOrderedList = true,
+  variant = 'default',
 }: AccordionGroupsProps) {
   const ListTag = isOrderedList ? 'ol' : 'ul';
 
@@ -21,7 +25,9 @@ export default function AccordionGroup({
   return (
     <ListTag
       className={clsx(
+        className,
         'accordion-group',
+        `accordion-group--${variant}`,
         columns > 1 && `accordion-group--${columns}-columns`,
         isOrderedList && 'accordion-group--has-counter'
       )}

@@ -21,5 +21,10 @@
   &__title {
     font-size: fluid(18, 14);
     color: var(--color-gray-60);
+
+    &--big {
+      font-size: fluid(24, 18);
+      color: var(--color-white);
+    }
   }
 }

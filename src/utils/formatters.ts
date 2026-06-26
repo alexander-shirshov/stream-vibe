@@ -5,13 +5,17 @@ type DurationLabels = {
   minutes: string;
 };
 
-export function formatDuration(minutes: number, labels: DurationLabels): string {
+export function formatDuration(
+  minutes: number,
+  labels: DurationLabels,
+  separator: string = ''
+): string {
   const hours = Math.floor(minutes / 60);
   const restMinutes = minutes % 60;
 
   if (hours && restMinutes) return `${hours}${labels.hours} ${restMinutes}${labels.minutes}`;
   if (hours) return `${hours}${labels.hours}`;
-  return `${restMinutes}${labels.minutes}`;
+  return `${restMinutes}${separator}${labels.minutes}`;
 }
 
 export function formatViews(value: number): string {

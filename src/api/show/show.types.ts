@@ -7,6 +7,7 @@ export type EpisodeDto = {
   description: Partial<Record<Language, string>>;
   durationMinutes: number;
   preview?: string;
+  video: string;
 };
 
 export type Episode = {
@@ -15,6 +16,7 @@ export type Episode = {
   description: string;
   durationMinutes: number;
   preview: string;
+  video: string;
 };
 
 export type SeasonDto = {
