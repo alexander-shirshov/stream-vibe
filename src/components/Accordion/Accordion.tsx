@@ -2,7 +2,6 @@ import './Accordion.scss';
 import clsx from 'clsx';
 
 import Arrow from '@/assets/icons/arrow-right.svg?react';
-import LinkButton from '@/components/Button';
 
 type AccordionProps = {
   title: string;

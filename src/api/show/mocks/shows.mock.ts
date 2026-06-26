@@ -164,6 +164,64 @@ export const showsMock: ShowDto[] = [
             preview: '/images/shows/stranger-things/s2/e5.jpg',
             video: '/videos/example.mp4',
           },
+          {
+            id: 'stranger-things-s2-e6',
+            title: { en: 'Chapter One: MADMAX', ru: 'Глава первая: МЭДМАКС' },
+            description: {
+              en: 'A new girl arrives in Hawkins, and Will struggles with visions from another world.',
+              ru: 'В Хоукинсе появляется новая девочка, а Уилла преследуют видения из другого мира.',
+            },
+            durationMinutes: 48,
+            preview: '/images/shows/stranger-things/s2/e1.jpg',
+            video: '/videos/example.mp4',
+          },
+          {
+            id: 'stranger-things-s2-e7',
+            title: {
+              en: 'Chapter Two: Trick or Treat, Freak',
+              ru: 'Глава вторая: Кошелёк или жизнь, чудик',
+            },
+            description: {
+              en: 'Halloween brings costumes, secrets and another terrifying sign that the danger is not gone.',
+              ru: 'Хэллоуин приносит костюмы, тайны и новый жуткий знак, что опасность не исчезла.',
+            },
+            durationMinutes: 56,
+            preview: '/images/shows/stranger-things/s2/e2.jpg',
+            video: '/videos/example.mp4',
+          },
+          {
+            id: 'stranger-things-s2-e8',
+            title: { en: 'Chapter Three: The Pollywog', ru: 'Глава третья: Головастик' },
+            description: {
+              en: 'Dustin finds something strange in the trash, while Will’s connection to the Upside Down deepens.',
+              ru: 'Дастин находит странное существо, а связь Уилла с Изнанкой становится сильнее.',
+            },
+            durationMinutes: 51,
+            preview: '/images/shows/stranger-things/s2/e3.jpg',
+            video: '/videos/example.mp4',
+          },
+          {
+            id: 'stranger-things-s2-e9',
+            title: { en: 'Chapter Four: Will the Wise', ru: 'Глава четвёртая: Уилл Мудрый' },
+            description: {
+              en: 'Will gives the group a disturbing clue, and Hopper discovers something buried beneath Hawkins.',
+              ru: 'Уилл даёт тревожную подсказку, а Хоппер находит нечто скрытое под Хоукинсом.',
+            },
+            durationMinutes: 46,
+            preview: '/images/shows/stranger-things/s2/e4.jpg',
+            video: '/videos/example.mp4',
+          },
+          {
+            id: 'stranger-things-s2-e10',
+            title: { en: 'Chapter Five: Dig Dug', ru: 'Глава пятая: Диг Даг' },
+            description: {
+              en: 'Nancy and Jonathan chase the truth, while Hopper fights to survive underground.',
+              ru: 'Нэнси и Джонатан ищут правду, а Хоппер пытается выжить под землёй.',
+            },
+            durationMinutes: 58,
+            preview: '/images/shows/stranger-things/s2/e5.jpg',
+            video: '/videos/example.mp4',
+          },
         ],
       },
       {

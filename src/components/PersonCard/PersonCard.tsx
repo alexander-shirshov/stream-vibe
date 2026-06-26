@@ -1,5 +1,4 @@
 import './PersonCard.scss';
-import clsx from 'clsx';
 
 const FALLBACK_AVATAR = '/images/persons/default-avatar.jpg';
 

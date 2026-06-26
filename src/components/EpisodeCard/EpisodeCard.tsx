@@ -1,5 +1,5 @@
 import './EpisodeCard.scss';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import type { Episode } from '@/api/show/show.types';
 
@@ -12,6 +12,7 @@ import clsx from 'clsx';
 
 type EpisodeProps = Episode & {
   number: number;
+  onPlay: () => void;
 };
 
 const FALLBACK_PREVIEW = '/images/shows/default-episode-preview.jpg';
@@ -21,15 +22,10 @@ export default function EpisodeCard({
   description,
   durationMinutes,
   preview,
-  video,
   number,
+  onPlay,
 }: EpisodeProps) {
   const { t } = useLanguage();
-
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const [isPreviewVisible, setIsPreviewVisible] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
 
   const [isClicked, setIsClicked] = useState(false);
 
@@ -42,80 +38,37 @@ export default function EpisodeCard({
     ' '
   );
 
-  const handlePlay = async () => {
-    const videoElement = videoRef.current;
-
-    if (!videoElement) return;
-
-    setIsClicked(false);
-
-    requestAnimationFrame(() => {
-      setIsClicked(true);
-    });
-
-    setIsLoading(true);
-
-    try {
-      await videoElement.play();
-    } catch {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <div className="episode-card">
       <div className="episode-card__number">{number}</div>
-      <div className={clsx('episode-card__player', isPreviewVisible && 'is-preview-visible')}>
-        <video
-          ref={videoRef}
-          src={video}
-          className="episode-card__video"
-          width={172}
-          height={118}
-          onWaiting={() => setIsLoading(true)}
-          onPlaying={() => {
-            setIsLoading(false);
-            setIsPreviewVisible(false);
-          }}
-          onPause={() => {
-            setIsLoading(false);
-            setIsPreviewVisible(true);
-          }}
-          onEnded={() => {
-            setIsLoading(false);
-            setIsPreviewVisible(true);
-          }}
-          onError={() => {
-            setIsLoading(false);
-            setIsPreviewVisible(true);
+      <div className={clsx('episode-card__player', 'is-preview-visible')}>
+        <img
+          src={preview}
+          className="episode-card__preview"
+          alt=""
+          onError={e => {
+            if (e.currentTarget.src.endsWith(FALLBACK_PREVIEW)) return;
+            e.currentTarget.src = FALLBACK_PREVIEW;
           }}
         />
-        {isPreviewVisible && (
-          <img
-            src={preview}
-            className="episode-card__preview"
-            alt=""
-            onError={e => {
-              if (e.currentTarget.src.endsWith(FALLBACK_PREVIEW)) return;
-              e.currentTarget.src = FALLBACK_PREVIEW;
-            }}
-          />
-        )}
+        <button
+          type="button"
+          className={clsx('episode-card__play-button', isClicked && 'is-clicked')}
+          aria-label={t('player.playButton')}
+          title={t('player.playButton')}
+          onClick={() => {
+            setIsClicked(false);
 
-        {isLoading && <div className="episode-card__spinner" />}
+            requestAnimationFrame(() => {
+              setIsClicked(true);
+            });
 
-        {isPreviewVisible && !isLoading && (
-          <button
-            type="button"
-            className={clsx('episode-card__play-button', isClicked && 'is-clicked')}
-            aria-label={t('player.playButton')}
-            title={t('player.playButton')}
-            onClick={handlePlay}
-            onAnimationEnd={() => setIsClicked(false)}
-          >
-            <PlayCircle className="episode-card__play-button-icon" />
-          </button>
-        )}
+            onPlay();
+          }}
+          onAnimationEnd={() => setIsClicked(false)}
+        >
+          <PlayCircle className="episode-card__play-button-icon" />
+        </button>
       </div>
       <div className="episode-card__body">
         <div className="episode-card__info">
