@@ -345,5 +345,9 @@ export interface Messages {
 
   player: {
     playButton: string;
+    pauseButton: string;
+    playNext: string;
+    playPrev: string;
+    progress: string;
   };
 }

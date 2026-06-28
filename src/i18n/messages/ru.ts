@@ -332,6 +332,10 @@ const ru: Messages = {
 
   player: {
     playButton: 'Воспроизведение',
+    pauseButton: 'Пауза',
+    playNext: 'Воспроизвести следующий',
+    playPrev: 'Воспроизвести предыдущий',
+    progress: 'Прогресс вопсроизведения',
   },
 };
 

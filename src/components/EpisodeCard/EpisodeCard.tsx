@@ -16,6 +16,7 @@ type EpisodeProps = Episode & {
 };
 
 const FALLBACK_PREVIEW = '/images/shows/default-episode-preview.jpg';
+const CLICK_ANIMATION_DELAY = 140;
 
 export default function EpisodeCard({
   title,
@@ -37,9 +38,25 @@ export default function EpisodeCard({
     },
     ' '
   );
+  function handlePlayClick() {
+    setIsClicked(false);
+
+    requestAnimationFrame(() => {
+      setIsClicked(true);
+    });
+
+    window.setTimeout(() => {
+      onPlay();
+    }, CLICK_ANIMATION_DELAY);
+  }
 
   return (
-    <div className="episode-card">
+    <button
+      type="button"
+      className="episode-card"
+      onClick={handlePlayClick}
+      aria-label={`${t('player.playButton')}: ${title}`}
+    >
       <div className="episode-card__number">{number}</div>
       <div className={clsx('episode-card__player', 'is-preview-visible')}>
         <img
@@ -51,24 +68,13 @@ export default function EpisodeCard({
             e.currentTarget.src = FALLBACK_PREVIEW;
           }}
         />
-        <button
-          type="button"
+        <span
           className={clsx('episode-card__play-button', isClicked && 'is-clicked')}
-          aria-label={t('player.playButton')}
-          title={t('player.playButton')}
-          onClick={() => {
-            setIsClicked(false);
-
-            requestAnimationFrame(() => {
-              setIsClicked(true);
-            });
-
-            onPlay();
-          }}
+          aria-hidden={true}
           onAnimationEnd={() => setIsClicked(false)}
         >
           <PlayCircle className="episode-card__play-button-icon" />
-        </button>
+        </span>
       </div>
       <div className="episode-card__body">
         <div className="episode-card__info">
@@ -82,6 +88,6 @@ export default function EpisodeCard({
           <p>{description}</p>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

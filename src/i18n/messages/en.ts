@@ -340,6 +340,10 @@ const en: Messages = {
 
   player: {
     playButton: 'Play video',
+    pauseButton: 'Stop video',
+    playNext: 'Next episode',
+    playPrev: 'Previous episode',
+    progress: 'Video progress',
   },
 };
 

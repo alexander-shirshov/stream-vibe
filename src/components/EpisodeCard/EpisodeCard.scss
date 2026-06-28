@@ -4,11 +4,25 @@
   --gradientOpacity: 1;
   --gradientColor: var(--color-black-10);
 
+  width: 100%;
+  padding-inline: 0;
+  border: 0;
+
+  color: inherit;
+  text-align: left;
+  background: transparent;
+  cursor: pointer;
+
   display: grid;
   grid-template-columns: fluid-to-laptop(60, 30) 172px 1fr;
   align-items: center;
   gap: fluid-to-laptop(20, 18);
   padding-block: 40px;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-red-45);
+    outline-offset: 4px;
+  }
 
   @include laptop {
     padding-top: 30px;
@@ -84,7 +98,6 @@
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
 
     position: absolute;
     inset: 0;
