@@ -350,4 +350,33 @@ export interface Messages {
     playPrev: string;
     progress: string;
   };
+
+  supportPage: {
+    pageTitle: string;
+    meta: string;
+    heading: string;
+    description: string;
+    form: {
+      name: {
+        label: string;
+        placeholder: string;
+      };
+      lastName: {
+        label: string;
+        placeholder: string;
+      };
+      email: {
+        label: string;
+        placeholder: string;
+      };
+      phone: {
+        label: string;
+        placeholder: string;
+      };
+      message: {
+        label: string;
+        placeholder: string;
+      };
+    };
+  };
 }

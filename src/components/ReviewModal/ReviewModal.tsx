@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import RatingInput from '@/components/RatingInput';
 import LinkButton from '@/components/Button';
 import FormLabel from '@/components/FormLabel';
+import CharsCounter from '@/components/CharsCounter';
 
 import { useLanguage } from '@/i18n/LanguageProvider';
 
@@ -253,17 +254,12 @@ export default function ReviewModal({
                 onChange={event => setText(event.target.value)}
               />
               {!isReadMode && (
-                <span
-                  className={clsx(
-                    'review-modal__counter',
-                    trimmedText.length < MIN_REVIEW_LENGTH / 2 && 'review-modal__counter--alert',
-                    trimmedText.length > MIN_REVIEW_LENGTH / 2 &&
-                      trimmedText.length < MIN_REVIEW_LENGTH &&
-                      'review-modal__counter--attention'
-                  )}
-                >
-                  {trimmedText.length}/{MAX_REVIEW_LENGTH}
-                </span>
+                <CharsCounter
+                  className="review-modal__counter"
+                  minLength={MIN_REVIEW_LENGTH}
+                  maxLength={MAX_REVIEW_LENGTH}
+                  currentLength={trimmedText.length}
+                />
               )}
             </FormLabel>
 

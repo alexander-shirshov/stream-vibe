@@ -1,0 +1,104 @@
+@use '@/styles/helpers' as *;
+
+.feedback {
+  display: grid;
+  gap: 50px fluid-to-laptop(80, 50);
+  padding-block: var(--section-padding-y);
+
+  @include mobile-above {
+    grid-template-columns: 33.5% 1fr;
+  }
+
+  &__body {
+    display: grid;
+    row-gap: fluid(50, 30);
+  }
+
+  &__info {
+    display: grid;
+    row-gap: fluid-to-laptop(14, 10);
+  }
+
+  &__image {
+    width: 100%;
+    background-color: var(--color-black-06);
+    border: 6px solid var(--color-black-15);
+    border-radius: var(--border-radius-xs);
+
+    @include laptop {
+      border-radius: var(--border-radius-xxxs);
+    }
+  }
+
+  &__form {
+    display: grid;
+    gap: fluid(50, 20) fluid-to-laptop(50, 20);
+    padding: fluid(50, 24);
+    background-color: var(--color-black-06);
+    border: var(--border);
+    border-radius: var(--border-radius-l);
+
+    @include laptop {
+      border-radius: var(--border-radius-m);
+    }
+
+    @include mobile-s-above {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    row-gap: fluid-to-laptop(16, 12);
+
+    &--wide {
+      grid-column: -1/1;
+    }
+
+    & .form-label__title {
+      font-weight: 600;
+      color: var(--color-white);
+      font-size: fluid-to-laptop(18, 16);
+    }
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    padding-inline: fluid-to-laptop(20, 16);
+    color: var(--color-white);
+    background-color: var(--color-black-08);
+    border: var(--border);
+    border-radius: var(--border-radius-s);
+    transition: border-color var(--transition-duration);
+    @include dark-autofill;
+
+    @include laptop {
+      border-radius: var(--border-radius-xs);
+    }
+
+    @include hover {
+      border-color: var(--color-gray-90);
+    }
+
+    &:disabled {
+      @include disabled;
+    }
+
+    &::placeholder {
+      color: var(--color-gray-60);
+    }
+  }
+
+  &__input {
+    height: fluid-to-laptop(67, 53);
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: fluid(163, 109);
+    padding-block: fluid-to-laptop(20, 16);
+  }
+}

@@ -76,6 +76,18 @@ svg * {
   transition-duration: var(--transition-duration);
 }
 
+input,
+textarea,
+button,
+a,
+select,
+label {
+  &:focus-visible {
+    outline: 2px solid rgb(229 0 0 / 0.75);
+    outline-offset: 5px;
+  }
+}
+
 button {
   -webkit-tap-highlight-color: transparent;
 }

@@ -321,7 +321,7 @@ const ru: Messages = {
   },
 
   formLabel: {
-    required: 'Оязательное поле',
+    required: 'Обязательное поле',
   },
 
   RatingInput: {
@@ -336,6 +336,40 @@ const ru: Messages = {
     playNext: 'Воспроизвести следующий',
     playPrev: 'Воспроизвести предыдущий',
     progress: 'Прогресс вопсроизведения',
+  },
+
+  supportPage: {
+    pageTitle: 'Поддержка',
+    meta: 'Страница поддержки StreamVibe',
+    heading: 'Рады видеть вас на нашей странице поддержки!',
+    description:
+      'Мы всегда готовы помочь, если у вас возникли вопросы или проблемы при использовании StreamVibe.',
+    form: {
+      name: {
+        label: 'Имя',
+        placeholder: 'Введите ваше имя',
+      },
+
+      lastName: {
+        label: 'Фамилия',
+        placeholder: 'Введите вашу фамилию',
+      },
+
+      email: {
+        label: 'Электронная почта',
+        placeholder: 'Введите адрес электронной почты',
+      },
+
+      phone: {
+        label: 'Номер телефона',
+        placeholder: '+7 (999) 999-99-99',
+      },
+
+      message: {
+        label: 'Сообщение',
+        placeholder: 'Чуваки, вы лучшие...',
+      },
+    },
   },
 };
 

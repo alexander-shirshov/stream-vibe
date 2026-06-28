@@ -1,5 +1,4 @@
 import type { Messages } from '../types';
-import RatingInput from '../../components/RatingInput/RatingInput';
 
 const en: Messages = {
   lang: {
@@ -344,6 +343,37 @@ const en: Messages = {
     playNext: 'Next episode',
     playPrev: 'Previous episode',
     progress: 'Video progress',
+  },
+
+  supportPage: {
+    pageTitle: 'Support',
+    meta: 'StreamVibe Support page',
+    heading: 'Welcome to our support page!',
+    description: `We're here to help you with any problems you may be having with our product.`,
+    form: {
+      name: {
+        label: 'First Name',
+        placeholder: 'Enter First Name',
+      },
+
+      lastName: {
+        label: 'Last Name',
+        placeholder: 'Enter Last Name',
+      },
+      email: {
+        label: 'Email',
+        placeholder: 'Enter your Email',
+      },
+
+      phone: {
+        label: 'Phone Number',
+        placeholder: '(999) 999 99-99',
+      },
+      message: {
+        label: 'Message',
+        placeholder: 'Love u guyz...',
+      },
+    },
   },
 };
 
