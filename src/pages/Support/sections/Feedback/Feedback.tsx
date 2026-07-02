@@ -32,6 +32,10 @@ export default function Feedback() {
 
   const canSubmit = isNameValid && isTextValid && agreed;
 
+  function handleCheckboxCheck(event: React.ChangeEvent<HTMLInputElement>): void {
+    setAgreed(event.target.checked);
+  }
+
   return (
     <section className="feedback container" aria-labelledby={titleId}>
       <div className="feedback__body">
@@ -132,6 +136,8 @@ export default function Feedback() {
           <Checkbox
             className="feedback__field-agreement"
             label={t('supportPage.agreement')}
+            checked={agreed}
+            onChange={handleCheckboxCheck}
             isRequired
           />
           <LinkButton mode="button" type="submit" customClass="feedback__form-submit-button">
