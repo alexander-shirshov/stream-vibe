@@ -350,6 +350,8 @@ const en: Messages = {
     meta: 'StreamVibe Support page',
     heading: 'Welcome to our support page!',
     description: `We're here to help you with any problems you may be having with our product.`,
+    agreement: 'I agree with Terms of Use and Privacy Policy',
+    submit: 'Send Message',
     form: {
       name: {
         label: 'First Name',

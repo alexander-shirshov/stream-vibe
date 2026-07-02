@@ -5,6 +5,8 @@ import FormLabel from '@/components/FormLabel';
 
 import { useLanguage } from '@/i18n/LanguageProvider';
 import CharsCounter from '@/components/CharsCounter';
+import Checkbox from '@/components/Checkbox';
+import LinkButton from '@/components/Button';
 
 const MIN_NAME_LENGTH = 2;
 const MIN_MESSAGE_LENGTH = 10;
@@ -125,6 +127,17 @@ export default function Feedback() {
             minLength={MIN_MESSAGE_LENGTH}
           />
         </FormLabel>
+
+        <div className="feedback__field feedback__field--wide feedback__field--actions">
+          <Checkbox
+            className="feedback__field-agreement"
+            label={t('supportPage.agreement')}
+            isRequired
+          />
+          <LinkButton mode="button" type="submit" customClass="feedback__form-submit-button">
+            {t('supportPage.submit')}
+          </LinkButton>
+        </div>
       </form>
     </section>
   );

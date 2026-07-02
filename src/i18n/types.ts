@@ -356,6 +356,8 @@ export interface Messages {
     meta: string;
     heading: string;
     description: string;
+    agreement: string;
+    submit: string;
     form: {
       name: {
         label: string;
