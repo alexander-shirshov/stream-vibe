@@ -96,6 +96,11 @@
       border-color: var(--color-gray-90);
     }
 
+    &:focus-within {
+      outline: none;
+      border-color: var(--color-gray-90);
+    }
+
     &:disabled {
       @include disabled;
     }

@@ -1,0 +1,48 @@
+@use '@/styles/helpers' as *;
+
+.phone-input {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: fluid-to-laptop(24, 12);
+  width: 100%;
+
+  &__control {
+    width: 100%;
+    height: fluid-to-laptop(67, 53);
+    padding-inline: fluid-to-laptop(20, 16);
+    color: var(--color-white);
+    background-color: var(--color-black-08);
+    border: var(--border);
+    border-radius: var(--border-radius-s);
+    transition:
+      color var(--transition-duration),
+      border-color var(--transition-duration),
+      background-color var(--transition-duration);
+
+    @include dark-autofill;
+
+    @include laptop {
+      border-radius: var(--border-radius-xs);
+    }
+
+    @include no-focus-outline;
+
+    @include hover {
+      border-color: var(--color-gray-90);
+    }
+
+    &:disabled {
+      @include disabled;
+    }
+
+    &::placeholder {
+      color: var(--color-gray-60);
+    }
+  }
+}
+
+.phone-input__control:focus-visible,
+.country-prefix-select__button:focus-visible,
+.country-prefix-select__search-control:focus-visible {
+  border-color: var(--color-gray-90);
+}

@@ -7,10 +7,18 @@ import { useLanguage } from '@/i18n/LanguageProvider';
 import CharsCounter from '@/components/CharsCounter';
 import Checkbox from '@/components/Checkbox';
 import LinkButton from '@/components/Button';
+import PhoneInput, { type PhoneInputValue } from '@/components/PhoneInput';
 
 const MIN_NAME_LENGTH = 2;
 const MIN_MESSAGE_LENGTH = 10;
 const MAX_MESSAGE_LENGTH = 800;
+const DEFAULT_PHONE_VALUE: PhoneInputValue = {
+  countryCode: 'IN',
+  callingCode: '91',
+  nationalNumber: '',
+  e164: '',
+  isValid: false,
+};
 
 export default function Feedback() {
   const titleId = 'feedback-title';
@@ -19,9 +27,11 @@ export default function Feedback() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
   const [agreed, setAgreed] = useState(false);
   const [message, setMessage] = useState('');
+  const [phone, setPhone] = useState<PhoneInputValue>(() => ({
+    ...DEFAULT_PHONE_VALUE,
+  }));
 
   const trimmedName = firstName.trim();
   const trimmedMessage = message.trim();
@@ -31,6 +41,12 @@ export default function Feedback() {
     trimmedMessage.length >= MIN_MESSAGE_LENGTH && trimmedMessage.length <= MAX_MESSAGE_LENGTH;
 
   const canSubmit = isNameValid && isTextValid && agreed;
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
+    event.preventDefault();
+
+    console.log(phone);
+  }
 
   function handleCheckboxCheck(event: React.ChangeEvent<HTMLInputElement>): void {
     setAgreed(event.target.checked);
@@ -49,7 +65,7 @@ export default function Feedback() {
         </div>
         <img className="feedback__image" src="/src/assets/images/support/1.png" loading="lazy" />
       </div>
-      <form className="feedback__form">
+      <form className="feedback__form" onSubmit={handleSubmit}>
         <FormLabel
           label={t('supportPage.form.name.label')}
           required
@@ -101,13 +117,15 @@ export default function Feedback() {
           className="feedback__field"
           htmlFor="phone"
         >
-          <input
+          <PhoneInput
             id="phone"
-            className="feedback__input"
+            name="phone"
             value={phone}
-            onChange={event => setPhone(event.target.value)}
-            inputMode="tel"
-            placeholder="(699) 699-69-69"
+            onChange={setPhone}
+            required
+            placeholder="999 999 99-99"
+            countrySearchPlaceholder="Search country or code"
+            countryEmptyMessage="No countries found"
           />
         </FormLabel>
 

@@ -79,6 +79,12 @@
   cursor: not-allowed;
 }
 
+@mixin no-focus-outline {
+  &:focus-within {
+    outline: none;
+  }
+}
+
 @mixin scrollbar($thumb: var(--color-black-06), $track: var(--color-black-25), $width: 4px) {
   @-moz-document url-prefix() {
     scrollbar-width: thin;
