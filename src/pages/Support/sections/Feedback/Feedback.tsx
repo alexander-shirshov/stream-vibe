@@ -124,8 +124,8 @@ export default function Feedback() {
             onChange={setPhone}
             required
             placeholder="999 999 99-99"
-            countrySearchPlaceholder="Search country or code"
-            countryEmptyMessage="No countries found"
+            countrySearchPlaceholder={t('supportPage.form.phone.countryPlaceholder')}
+            countryEmptyMessage={t('supportPage.form.phone.countryEmptyMessage')}
           />
         </FormLabel>
 

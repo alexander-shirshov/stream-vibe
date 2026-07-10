@@ -370,6 +370,8 @@ const en: Messages = {
       phone: {
         label: 'Phone Number',
         placeholder: '(999) 999 99-99',
+        countryPlaceholder: 'Найти страну или код',
+        countryEmptyMessage: 'Страны не найдены',
       },
       message: {
         label: 'Message',

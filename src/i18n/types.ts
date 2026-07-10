@@ -374,6 +374,8 @@ export interface Messages {
       phone: {
         label: string;
         placeholder: string;
+        countryPlaceholder: string;
+        countryEmptyMessage: string;
       };
       message: {
         label: string;

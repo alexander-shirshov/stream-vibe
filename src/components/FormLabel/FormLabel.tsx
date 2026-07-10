@@ -20,12 +20,12 @@ export default function FormLabel({
   const { t } = useLanguage();
 
   return (
-    <label
-      className={clsx('form-label', className)}
-      htmlFor={htmlFor}
-      title={required ? t('formLabel.required') : undefined}
-    >
-      <span className="form-label__title">
+    <div className={clsx('form-label', className)}>
+      <label
+        className="form-label__title"
+        htmlFor={htmlFor}
+        title={required ? t('formLabel.required') : undefined}
+      >
         {label}
 
         {required && (
@@ -33,9 +33,9 @@ export default function FormLabel({
             *
           </span>
         )}
-      </span>
+      </label>
 
       {children}
-    </label>
+    </div>
   );
 }

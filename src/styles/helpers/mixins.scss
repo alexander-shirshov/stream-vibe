@@ -85,7 +85,12 @@
   }
 }
 
-@mixin scrollbar($thumb: var(--color-black-06), $track: var(--color-black-25), $width: 4px) {
+@mixin scrollbar(
+  $thumb: var(--color-black-06),
+  $track: var(--color-black-25),
+  $hover: var(--color-black-08),
+  $width: 4px
+) {
   @-moz-document url-prefix() {
     scrollbar-width: thin;
     scrollbar-color: $thumb $track;
@@ -107,7 +112,7 @@
       transition: var(--transition-duration);
 
       @include hover {
-        background: var(--color-black-08);
+        background: $hover;
       }
     }
   }

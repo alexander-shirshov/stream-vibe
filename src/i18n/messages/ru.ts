@@ -365,6 +365,8 @@ const ru: Messages = {
       phone: {
         label: 'Номер телефона',
         placeholder: '+7 (999) 999-99-99',
+        countryPlaceholder: 'Search country or code',
+        countryEmptyMessage: 'No countries found',
       },
 
       message: {

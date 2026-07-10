@@ -41,6 +41,8 @@
       border-color: var(--color-gray-90);
     }
 
+    @include no-focus-outline;
+
     &:disabled {
       @include disabled;
     }
@@ -147,7 +149,13 @@
     max-height: 250px;
     overflow-y: auto;
     overscroll-behavior: contain;
-    @include scrollbar;
+    padding-inline-end: 8px;
+    @include scrollbar(
+      $thumb: var(--color-red-45),
+      $track: var(--color-black-25),
+      $hover: var(--color-red-60),
+      $width: 4px
+    );
   }
 
   &__option {
@@ -177,6 +185,12 @@
     &.is-selected {
       color: var(--color-white);
       border-color: var(--color-gray-60);
+      background-color: var(--color-black-12);
+    }
+
+    &.is-active {
+      color: var(--color-white);
+      border-color: var(--color-gray-90);
       background-color: var(--color-black-08);
     }
   }
