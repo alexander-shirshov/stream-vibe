@@ -4,6 +4,7 @@ import { useEffect, useCallback, useId, useMemo, useRef, useState } from 'react'
 import type { KeyboardEvent as ReactKeyboardEvent } from 'react';
 
 import type { PhoneCountry } from '@/constants/countries';
+import CountryFlag from '@/components/CountryFlag';
 
 type CountryPrefixSelectProps = {
   value: PhoneCountry;
@@ -15,7 +16,66 @@ type CountryPrefixSelectProps = {
 };
 
 function normalizeSearchValue(value: string): string {
-  return value.trim().toLowerCase().replace(/^\+/, '');
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/^\+/, '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+function isNumericSearch(value: string): boolean {
+  return /^\d+$/.test(value);
+}
+function getSearchRank(country: PhoneCountry, searchQuery: string): number | null {
+  const normalizedName = normalizeSearchValue(country.name);
+  const normalizedCountryCode = normalizeSearchValue(country.countryCode);
+  const normalizedCallingCode = normalizeSearchValue(country.callingCode);
+
+  if (isNumericSearch(searchQuery)) {
+    if (normalizedCallingCode === searchQuery) {
+      return 0;
+    }
+
+    if (normalizedCallingCode.startsWith(searchQuery)) {
+      return 1;
+    }
+
+    if (normalizedCallingCode.includes(searchQuery)) {
+      return 2;
+    }
+
+    return null;
+  }
+
+  if (normalizedCountryCode === searchQuery) {
+    return 0;
+  }
+
+  if (normalizedName === searchQuery) {
+    return 1;
+  }
+
+  if (normalizedCountryCode.startsWith(searchQuery)) {
+    return 2;
+  }
+
+  if (normalizedName.startsWith(searchQuery)) {
+    return 3;
+  }
+
+  const hasWordStartingWithQuery = normalizedName
+    .split(/\s+/)
+    .some(word => word.startsWith(searchQuery));
+
+  if (hasWordStartingWithQuery) {
+    return 4;
+  }
+
+  if (normalizedName.includes(searchQuery)) {
+    return 5;
+  }
+
+  return null;
 }
 
 export default function CountryPrefixSelect({
@@ -31,6 +91,7 @@ export default function CountryPrefixSelect({
   const buttonRef = useRef<HTMLButtonElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const listboxRef = useRef<HTMLDivElement>(null);
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -43,17 +104,23 @@ export default function CountryPrefixSelect({
       return options;
     }
 
-    return options.filter(country => {
-      const normalizedName = country.name.toLowerCase();
-      const normalizedCountryCode = country.countryCode.toLowerCase();
-      const normalizedCallingCode = country.callingCode.toLowerCase();
+    return options
+      .map((country, index) => ({
+        country,
+        index,
+        rank: getSearchRank(country, normalizedSearchQuery),
+      }))
+      .filter(
+        (item): item is { country: PhoneCountry; index: number; rank: number } => item.rank !== null
+      )
+      .sort((a, b) => {
+        if (a.rank !== b.rank) {
+          return a.rank - b.rank;
+        }
 
-      return (
-        normalizedName.includes(normalizedSearchQuery) ||
-        normalizedCountryCode.includes(normalizedSearchQuery) ||
-        normalizedCallingCode.includes(normalizedSearchQuery)
-      );
-    });
+        return a.index - b.index;
+      })
+      .map(({ country }) => country);
   }, [normalizedSearchQuery, options]);
 
   const activeOption = activeOptionIndex >= 0 ? filteredOptions[activeOptionIndex] : undefined;
@@ -144,12 +211,19 @@ export default function CountryPrefixSelect({
       return;
     }
 
+    if (normalizedSearchQuery) {
+      setActiveOptionIndex(filteredOptions.length > 0 ? 0 : -1);
+      listboxRef.current?.scrollTo({ top: 0 });
+
+      return;
+    }
+
     const selectedOptionIndex = filteredOptions.findIndex(
       country => country.countryCode === value.countryCode
     );
 
     setActiveOptionIndex(selectedOptionIndex >= 0 ? selectedOptionIndex : 0);
-  }, [filteredOptions, isExpanded, value.countryCode]);
+  }, [filteredOptions, isExpanded, normalizedSearchQuery, value.countryCode]);
 
   useEffect(() => {
     if (!isExpanded || activeOptionIndex < 0) {
@@ -198,7 +272,7 @@ export default function CountryPrefixSelect({
         onClick={handleButtonClick}
       >
         <span className="country-prefix-select__flag" aria-hidden="true">
-          {value.flag}
+          <CountryFlag countryCode={value.countryCode} title={value.name} />
         </span>
         <span className="country-prefix-select__calling-code">+{value.callingCode}</span>
         <span className="country-prefix-select__arrow" aria-hidden="true" />
@@ -227,6 +301,7 @@ export default function CountryPrefixSelect({
             id={listboxId}
             role="listbox"
             aria-label="Country calling code"
+            ref={listboxRef}
           >
             {filteredOptions.length > 0 ? (
               filteredOptions.map((country, index) => {
@@ -253,7 +328,7 @@ export default function CountryPrefixSelect({
                     onClick={() => handleCountrySelect(country)}
                   >
                     <span className="country-prefix-select__option-flag" aria-hidden="true">
-                      {country.flag}
+                      <CountryFlag countryCode={country.countryCode} title={country.name} />
                     </span>
                     <span className="country-prefix-select__option-name">{country.name}</span>
                     <span className="country-prefix-select__option-code">

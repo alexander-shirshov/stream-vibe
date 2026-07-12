@@ -372,7 +372,7 @@ const en: Messages = {
       phone: {
         label: 'Phone Number',
         placeholder: '(999) 999 99-99',
-        countryPlaceholder: 'Search country or code',
+        countryPlaceholder: 'Search country or +code',
         countryEmptyMessage: 'No countries found',
         noPhoneError: 'Enter your phone number',
         invalidPhoneError: 'Enter a valid phone number',

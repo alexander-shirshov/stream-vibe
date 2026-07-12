@@ -1,5 +1,6 @@
 import './Feedback.scss';
 import { useState } from 'react';
+import { getCountryCallingCode, type CountryCode } from 'libphonenumber-js';
 
 import FormLabel from '@/components/FormLabel';
 
@@ -10,29 +11,39 @@ import LinkButton from '@/components/Button';
 import Tooltip from '@/components/Tooltip';
 import PhoneInput, { type PhoneInputValue } from '@/components/PhoneInput';
 
+import { getLocale, type Language } from '@/i18n/types';
+
+const DEFAULT_PHONE_COUNTRY_BY_LANGUAGE: Record<Language, CountryCode> = {
+  ru: 'RU',
+  en: 'US',
+};
+function getDefaultPhoneValue(language: Language): PhoneInputValue {
+  const countryCode = DEFAULT_PHONE_COUNTRY_BY_LANGUAGE[language];
+
+  return {
+    countryCode,
+    callingCode: getCountryCallingCode(countryCode),
+    nationalNumber: '',
+    e164: '',
+    isValid: false,
+  };
+}
+
 const MIN_NAME_LENGTH = 2;
 const MIN_MESSAGE_LENGTH = 10;
 const MAX_MESSAGE_LENGTH = 800;
-const DEFAULT_PHONE_VALUE: PhoneInputValue = {
-  countryCode: 'IN',
-  callingCode: '91',
-  nationalNumber: '',
-  e164: '',
-  isValid: false,
-};
 
 export default function Feedback() {
   const titleId = 'feedback-title';
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const locale = getLocale(language);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [agreed, setAgreed] = useState(false);
   const [message, setMessage] = useState('');
-  const [phone, setPhone] = useState<PhoneInputValue>(() => ({
-    ...DEFAULT_PHONE_VALUE,
-  }));
+  const [phone, setPhone] = useState<PhoneInputValue>(() => getDefaultPhoneValue(language));
 
   const trimmedName = firstName.trim();
   const trimmedMessage = message.trim();
@@ -194,6 +205,7 @@ export default function Feedback() {
               }}
               isInvalid={Boolean(phoneErrorMessage)}
               required
+              locale={locale}
               placeholder="999 999 99-99"
               countrySearchPlaceholder={t('supportPage.form.phone.countryPlaceholder')}
               countryEmptyMessage={t('supportPage.form.phone.countryEmptyMessage')}

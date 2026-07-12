@@ -88,6 +88,7 @@
     row-gap: 8px;
     width: max-content;
     min-width: fluid-to-laptop(360, 280);
+    max-width: calc(100vw - 52px);
     max-height: 320px;
     overflow: hidden;
     padding: 8px;

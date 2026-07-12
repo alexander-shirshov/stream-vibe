@@ -367,7 +367,7 @@ const ru: Messages = {
       phone: {
         label: 'Номер телефона',
         placeholder: '+7 (999) 999-99-99',
-        countryPlaceholder: 'Найти страну или код',
+        countryPlaceholder: 'Найти страну или +код',
         countryEmptyMessage: 'Страны не найдены',
         noPhoneError: 'Введите номер телефона',
         invalidPhoneError: 'Проверьте корректность ввода номера телефона',

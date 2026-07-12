@@ -1,7 +1,9 @@
+import type { CountryCode } from 'libphonenumber-js';
 import type { FocusEventHandler } from 'react';
+import type { Locale } from '@/i18n/types';
 
 export type PhoneInputValue = {
-  countryCode: string;
+  countryCode: CountryCode;
   callingCode: string;
   nationalNumber: string;
   e164: string;
@@ -20,4 +22,5 @@ export type PhoneInputProps = {
   disabled?: boolean;
   isInvalid?: boolean;
   onFocus?: FocusEventHandler<HTMLDivElement>;
+  locale?: Locale;
 };

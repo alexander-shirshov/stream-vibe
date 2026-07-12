@@ -28,9 +28,9 @@
       @include hide;
     }
 
-    &:user-invalid {
-      border-color: var(--color-red-45);
-    }
+    // &:user-invalid {
+    //   border-color: var(--color-red-45);
+    // }
 
     &:disabled {
       &,

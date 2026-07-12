@@ -1,14 +1,12 @@
 import './PhoneInput.scss';
 
 import clsx from 'clsx';
-import type { ChangeEvent } from 'react';
+import { type ChangeEvent, useMemo } from 'react';
 import { AsYouType, parsePhoneNumberFromString } from 'libphonenumber-js';
 
 import type { PhoneInputProps, PhoneInputValue } from './PhoneInput.types';
 import CountryPrefixSelect from '@/components/CountryPrefixSelect';
-import { PHONE_COUNTRIES, type PhoneCountry } from '@/constants/countries';
-
-const DEFAULT_COUNTRY = PHONE_COUNTRIES[0];
+import { getPhoneCountries, type PhoneCountry } from '@/constants/countries';
 
 function getDigits(value: string): string {
   return value.replace(/\D/g, '');
@@ -28,10 +26,6 @@ function getE164(callingCode: string, nationalNumber: string): string {
   return digits ? `+${callingCode}${digits}` : '';
 }
 
-function getCountryByCode(countryCode: string): PhoneCountry {
-  return PHONE_COUNTRIES.find(country => country.countryCode === countryCode) ?? DEFAULT_COUNTRY;
-}
-
 function formatNationalNumber(country: PhoneCountry, value: string): string {
   const digits = getDigits(value);
 
@@ -40,57 +34,6 @@ function formatNationalNumber(country: PhoneCountry, value: string): string {
   }
 
   return new AsYouType(country.countryCode).input(digits);
-}
-
-function getNextPhoneValue(country: PhoneCountry, rawValue: string): PhoneInputValue {
-  const sanitizedValue = sanitizePhoneInput(rawValue);
-
-  if (!sanitizedValue.trim()) {
-    return {
-      countryCode: country.countryCode,
-      callingCode: country.callingCode,
-      nationalNumber: '',
-      e164: '',
-      isValid: false,
-    };
-  }
-
-  const isInternational = isInternationalPhoneValue(sanitizedValue);
-
-  if (isInternational) {
-    const parsedPhoneNumber = parsePhoneNumberFromString(sanitizedValue);
-
-    if (parsedPhoneNumber?.country) {
-      const parsedCountry = getCountryByCode(parsedPhoneNumber.country);
-
-      return {
-        countryCode: parsedCountry.countryCode,
-        callingCode: parsedCountry.callingCode,
-        nationalNumber: parsedPhoneNumber.formatNational(),
-        e164: parsedPhoneNumber.number,
-        isValid: parsedPhoneNumber.isValid(),
-      };
-    }
-
-    return {
-      countryCode: country.countryCode,
-      callingCode: country.callingCode,
-      nationalNumber: sanitizedValue,
-      e164: '',
-      isValid: false,
-    };
-  }
-
-  const formattedNationalNumber = formatNationalNumber(country, sanitizedValue);
-  const parsedPhoneNumber = parsePhoneNumberFromString(sanitizedValue, country.countryCode);
-
-  return {
-    countryCode: country.countryCode,
-    callingCode: country.callingCode,
-    nationalNumber: formattedNationalNumber,
-    e164: parsedPhoneNumber?.number ?? getE164(country.callingCode, sanitizedValue),
-    isValid: parsedPhoneNumber?.isValid() ?? false,
-  };
 }
 
 export default function PhoneInput({
@@ -105,15 +48,77 @@ export default function PhoneInput({
   disabled,
   isInvalid,
   onFocus,
+  locale = 'en-US',
 }: PhoneInputProps) {
-  const selectedCountry = getCountryByCode(value.countryCode);
+  const phoneCountries = useMemo(() => getPhoneCountries(locale), [locale]);
+
+  function getCountryByCode(countries: PhoneCountry[], countryCode: string): PhoneCountry {
+    return countries.find(country => country.countryCode === countryCode) ?? countries[0];
+  }
+
+  const selectedCountry = getCountryByCode(phoneCountries, value.countryCode);
 
   function handleCountryChange(country: PhoneCountry): void {
-    onChange(getNextPhoneValue(country, value.nationalNumber));
+    onChange(getNextPhoneValue(phoneCountries, country, value.nationalNumber));
   }
 
   function handleNationalNumberChange(event: ChangeEvent<HTMLInputElement>): void {
-    onChange(getNextPhoneValue(selectedCountry, event.target.value));
+    onChange(getNextPhoneValue(phoneCountries, selectedCountry, event.target.value));
+  }
+
+  function getNextPhoneValue(
+    countries: PhoneCountry[],
+    country: PhoneCountry,
+    rawValue: string
+  ): PhoneInputValue {
+    const sanitizedValue = sanitizePhoneInput(rawValue);
+
+    if (!sanitizedValue.trim()) {
+      return {
+        countryCode: country.countryCode,
+        callingCode: country.callingCode,
+        nationalNumber: '',
+        e164: '',
+        isValid: false,
+      };
+    }
+
+    const isInternational = isInternationalPhoneValue(sanitizedValue);
+
+    if (isInternational) {
+      const parsedPhoneNumber = parsePhoneNumberFromString(sanitizedValue);
+
+      if (parsedPhoneNumber?.country) {
+        const parsedCountry = getCountryByCode(countries, parsedPhoneNumber.country);
+
+        return {
+          countryCode: parsedCountry.countryCode,
+          callingCode: parsedCountry.callingCode,
+          nationalNumber: parsedPhoneNumber.formatNational(),
+          e164: parsedPhoneNumber.number,
+          isValid: parsedPhoneNumber.isValid(),
+        };
+      }
+
+      return {
+        countryCode: country.countryCode,
+        callingCode: country.callingCode,
+        nationalNumber: sanitizedValue,
+        e164: '',
+        isValid: false,
+      };
+    }
+
+    const formattedNationalNumber = formatNationalNumber(country, sanitizedValue);
+    const parsedPhoneNumber = parsePhoneNumberFromString(sanitizedValue, country.countryCode);
+
+    return {
+      countryCode: country.countryCode,
+      callingCode: country.callingCode,
+      nationalNumber: formattedNationalNumber,
+      e164: parsedPhoneNumber?.number ?? getE164(country.callingCode, sanitizedValue),
+      isValid: parsedPhoneNumber?.isValid() ?? false,
+    };
   }
 
   return (
@@ -122,7 +127,7 @@ export default function PhoneInput({
 
       <CountryPrefixSelect
         value={selectedCountry}
-        options={PHONE_COUNTRIES}
+        options={phoneCountries}
         onChange={handleCountryChange}
         searchPlaceholder={countrySearchPlaceholder}
         emptyMessage={countryEmptyMessage}

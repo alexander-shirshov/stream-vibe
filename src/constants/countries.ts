@@ -1,53 +1,28 @@
-import type { CountryCode } from 'libphonenumber-js';
+import { getCountries, getCountryCallingCode, type CountryCode } from 'libphonenumber-js';
+import type { Locale } from '@/i18n/types';
 
 export type PhoneCountry = {
   countryCode: CountryCode;
   name: string;
   callingCode: string;
-  flag: string;
 };
 
-export const PHONE_COUNTRIES: PhoneCountry[] = [
-  {
-    countryCode: 'IN',
-    name: 'India',
-    callingCode: '91',
-    flag: '🇮🇳',
-  },
-  {
-    countryCode: 'AM',
-    name: 'Armenia',
-    callingCode: '374',
-    flag: '🇦🇲',
-  },
-  {
-    countryCode: 'NL',
-    name: 'Netherlands',
-    callingCode: '31',
-    flag: '🇳🇱',
-  },
-  {
-    countryCode: 'US',
-    name: 'United States',
-    callingCode: '1',
-    flag: '🇺🇸',
-  },
-  {
-    countryCode: 'GB',
-    name: 'United Kingdom',
-    callingCode: '44',
-    flag: '🇬🇧',
-  },
-  {
-    countryCode: 'GE',
-    name: 'Georgia',
-    callingCode: '995',
-    flag: '🇬🇪',
-  },
-  {
-    countryCode: 'RU',
-    name: 'Russia',
-    callingCode: '7',
-    flag: '🇷🇺',
-  },
-];
+const DEFAULT_LOCALE: Locale = 'en-US';
+
+function getCountryName(countryCode: CountryCode, locale: Locale): string {
+  const displayNames = new Intl.DisplayNames([locale], {
+    type: 'region',
+  });
+
+  return displayNames.of(countryCode) ?? countryCode;
+}
+
+export function getPhoneCountries(locale: Locale = DEFAULT_LOCALE): PhoneCountry[] {
+  return getCountries()
+    .map(countryCode => ({
+      countryCode,
+      name: getCountryName(countryCode, locale),
+      callingCode: getCountryCallingCode(countryCode),
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name, locale));
+}
