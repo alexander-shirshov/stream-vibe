@@ -5,6 +5,10 @@
   gap: 50px fluid-to-laptop(80, 50);
   padding-block: var(--section-padding-y);
 
+  &__phone-tooltip {
+    width: 100%;
+  }
+
   @include mobile-above {
     grid-template-columns: 33.5% 1fr;
   }

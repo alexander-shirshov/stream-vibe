@@ -1,5 +1,7 @@
+import type { CountryCode } from 'libphonenumber-js';
+
 export type PhoneCountry = {
-  countryCode: string;
+  countryCode: CountryCode;
   name: string;
   callingCode: string;
   flag: string;

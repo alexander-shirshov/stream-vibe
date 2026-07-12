@@ -19,19 +19,41 @@
   --tooltip-border-radius: 4px;
   --tooltip-pointer-border-color: transparent;
 
+  &.is-active {
+    &::before,
+    &::after {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
   &--error {
     --tooltip-bg: #f44336;
-    animation: shake 0.2s 2;
 
-    input,
-    select {
-      border-color: red !important;
+    &.is-active {
+      animation: shake 0.2s 2;
     }
   }
 
   &--info {
     --tooltip-bg: var(--color-black-30);
     --tooltip-border-radius: var(--border-radius-m);
+
+    @include hover {
+      &::before,
+      &::after {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    &:focus-within {
+      &::before,
+      &::after {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
   }
 
   // Общие стили для тултипа
@@ -71,30 +93,21 @@
     z-index: 1001;
   }
 
-  @include hover {
+  &.tooltip--empty {
     &::before,
     &::after {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
-
-  &:focus-visible {
-    &::before,
-    &::after {
-      opacity: 1;
-      visibility: visible;
+      content: none;
     }
   }
 }
 
-.tooltip:hover::before,
-.tooltip:hover::after,
-.tooltip:focus::before,
-.tooltip:focus::after {
-  opacity: 1;
-  visibility: visible;
-}
+// .tooltip:hover::before,
+// .tooltip:hover::after,
+// .tooltip:focus::before,
+// .tooltip:focus::after {
+//   opacity: 1;
+//   visibility: visible;
+// }
 
 // Позиционирование СНИЗУ (по умолчанию)
 .tooltip--bottom {

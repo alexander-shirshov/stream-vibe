@@ -350,6 +350,7 @@ const ru: Messages = {
       name: {
         label: 'Имя',
         placeholder: 'Введите ваше имя',
+        invalidError: '',
       },
 
       lastName: {
@@ -360,18 +361,25 @@ const ru: Messages = {
       email: {
         label: 'Электронная почта',
         placeholder: 'Введите адрес электронной почты',
+        noEmailError: '',
       },
 
       phone: {
         label: 'Номер телефона',
         placeholder: '+7 (999) 999-99-99',
-        countryPlaceholder: 'Search country or code',
-        countryEmptyMessage: 'No countries found',
+        countryPlaceholder: 'Найти страну или код',
+        countryEmptyMessage: 'Страны не найдены',
+        noPhoneError: 'Введите номер телефона',
+        invalidPhoneError: 'Проверьте корректность ввода номера телефона',
       },
 
       message: {
         label: 'Сообщение',
         placeholder: 'Чуваки, вы лучшие...',
+        invalidError: '',
+      },
+      agreement: {
+        agreementError: '',
       },
     },
   },

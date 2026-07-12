@@ -356,6 +356,7 @@ const en: Messages = {
       name: {
         label: 'First Name',
         placeholder: 'Enter First Name',
+        invalidError: '',
       },
 
       lastName: {
@@ -365,17 +366,24 @@ const en: Messages = {
       email: {
         label: 'Email',
         placeholder: 'Enter your Email',
+        noEmailError: '',
       },
 
       phone: {
         label: 'Phone Number',
         placeholder: '(999) 999 99-99',
-        countryPlaceholder: 'Найти страну или код',
-        countryEmptyMessage: 'Страны не найдены',
+        countryPlaceholder: 'Search country or code',
+        countryEmptyMessage: 'No countries found',
+        noPhoneError: 'Enter your phone number',
+        invalidPhoneError: 'Enter a valid phone number',
       },
       message: {
         label: 'Message',
         placeholder: 'Love u guyz...',
+        invalidError: '',
+      },
+      agreement: {
+        agreementError: '',
       },
     },
   },

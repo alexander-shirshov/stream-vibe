@@ -6,6 +6,13 @@
   column-gap: fluid-to-laptop(24, 12);
   width: 100%;
 
+  &.is-invalid {
+    .country-prefix-select__button,
+    .phone-input__control {
+      border-color: var(--color-red-45);
+    }
+  }
+
   &__control {
     width: 100%;
     height: fluid-to-laptop(67, 53);

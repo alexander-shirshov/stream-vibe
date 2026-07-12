@@ -7,6 +7,7 @@ import { useLanguage } from '@/i18n/LanguageProvider';
 import CharsCounter from '@/components/CharsCounter';
 import Checkbox from '@/components/Checkbox';
 import LinkButton from '@/components/Button';
+import Tooltip from '@/components/Tooltip';
 import PhoneInput, { type PhoneInputValue } from '@/components/PhoneInput';
 
 const MIN_NAME_LENGTH = 2;
@@ -40,12 +41,69 @@ export default function Feedback() {
   const isTextValid =
     trimmedMessage.length >= MIN_MESSAGE_LENGTH && trimmedMessage.length <= MAX_MESSAGE_LENGTH;
 
-  const canSubmit = isNameValid && isTextValid && agreed;
+  const validationRules = [
+    {
+      name: 'phone',
+      isInvalid: () => !phone.nationalNumber.trim() || !phone.isValid,
+      getMessage: () =>
+        !phone.nationalNumber.trim()
+          ? t('supportPage.form.phone.noPhoneError')
+          : t('supportPage.form.phone.invalidPhoneError'),
+    },
+    {
+      name: 'firstName',
+      isInvalid: () => !isNameValid,
+      getMessage: () => t('supportPage.form.name.invalidError'),
+    },
+    {
+      name: 'email',
+      isInvalid: () => !email.trim(),
+      getMessage: () => t('supportPage.form.email.noEmailError'),
+    },
+
+    {
+      name: 'message',
+      isInvalid: () => !isTextValid,
+      getMessage: () => t('supportPage.form.message.invalidError'),
+    },
+    {
+      name: 'agreement',
+      isInvalid: () => !agreed,
+      getMessage: () => t('supportPage.form.agreement.agreementError'),
+    },
+  ] as const;
+  type FeedbackErrorField = (typeof validationRules)[number]['name'];
+
+  const [activeError, setActiveError] = useState<{
+    field: FeedbackErrorField;
+    message: string;
+  } | null>(null);
+
+  const phoneErrorMessage = activeError?.field === 'phone' ? activeError.message : undefined;
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
-    console.log(phone);
+    const firstInvalidRule = validationRules.find(rule => rule.isInvalid());
+
+    if (firstInvalidRule) {
+      setActiveError({
+        field: firstInvalidRule.name,
+        message: firstInvalidRule.getMessage(),
+      });
+
+      return;
+    }
+
+    setActiveError(null);
+
+    console.log({
+      firstName,
+      lastName,
+      email,
+      phone,
+      message,
+    });
   }
 
   function handleCheckboxCheck(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -65,7 +123,7 @@ export default function Feedback() {
         </div>
         <img className="feedback__image" src="/src/assets/images/support/1.png" loading="lazy" />
       </div>
-      <form className="feedback__form" onSubmit={handleSubmit}>
+      <form className="feedback__form" onSubmit={handleSubmit} noValidate>
         <FormLabel
           label={t('supportPage.form.name.label')}
           required
@@ -117,16 +175,30 @@ export default function Feedback() {
           className="feedback__field"
           htmlFor="phone"
         >
-          <PhoneInput
-            id="phone"
-            name="phone"
-            value={phone}
-            onChange={setPhone}
-            required
-            placeholder="999 999 99-99"
-            countrySearchPlaceholder={t('supportPage.form.phone.countryPlaceholder')}
-            countryEmptyMessage={t('supportPage.form.phone.countryEmptyMessage')}
-          />
+          <Tooltip
+            className="feedback__phone-tooltip"
+            message={phoneErrorMessage}
+            variant="error"
+            direction="bottom-right"
+            isActive={Boolean(phoneErrorMessage)}
+          >
+            <PhoneInput
+              id="phone"
+              name="phone"
+              value={phone}
+              onChange={setPhone}
+              onFocus={() => {
+                if (activeError?.field === 'phone') {
+                  setActiveError(null);
+                }
+              }}
+              isInvalid={Boolean(phoneErrorMessage)}
+              required
+              placeholder="999 999 99-99"
+              countrySearchPlaceholder={t('supportPage.form.phone.countryPlaceholder')}
+              countryEmptyMessage={t('supportPage.form.phone.countryEmptyMessage')}
+            />
+          </Tooltip>
         </FormLabel>
 
         <FormLabel

@@ -362,6 +362,7 @@ export interface Messages {
       name: {
         label: string;
         placeholder: string;
+        invalidError: string;
       };
       lastName: {
         label: string;
@@ -370,16 +371,23 @@ export interface Messages {
       email: {
         label: string;
         placeholder: string;
+        noEmailError: string;
       };
       phone: {
         label: string;
         placeholder: string;
         countryPlaceholder: string;
         countryEmptyMessage: string;
+        noPhoneError: string;
+        invalidPhoneError: string;
       };
       message: {
         label: string;
         placeholder: string;
+        invalidError: string;
+      };
+      agreement: {
+        agreementError: string;
       };
     };
   };

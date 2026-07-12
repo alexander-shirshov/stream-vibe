@@ -1,3 +1,5 @@
+import type { FocusEventHandler } from 'react';
+
 export type PhoneInputValue = {
   countryCode: string;
   callingCode: string;
@@ -16,4 +18,6 @@ export type PhoneInputProps = {
   countryEmptyMessage?: string;
   required?: boolean;
   disabled?: boolean;
+  isInvalid?: boolean;
+  onFocus?: FocusEventHandler<HTMLDivElement>;
 };
