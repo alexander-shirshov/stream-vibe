@@ -1,5 +1,5 @@
 import './Ratings.scss';
-import type { RatingItem } from '@/api/movie/movie.types';
+import type { RatingItem } from '@/api/media/media.types';
 import RatingStars from '@/components/RatingStars';
 
 type RatingsProps = {

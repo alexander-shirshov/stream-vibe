@@ -6,7 +6,7 @@ import type {
   UserReview,
 } from './user.types';
 
-import type { ReviewItem } from '@/api/movie/movie.types';
+import type { ReviewItem } from '@/api/media/media.types';
 
 export function mapUserCatalogDto(dto: UserCatalogDto): UserCatalog {
   return {

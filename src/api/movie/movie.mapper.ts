@@ -1,13 +1,12 @@
+import type { MovieDto, Movie } from './movie.types';
 import type {
-  MovieDto,
   Person,
   PersonDto,
   RatingItem,
   RatingItemDto,
   ReviewItem,
   ReviewItemDto,
-  Movie,
-} from './movie.types';
+} from '@/api/media/media.types';
 import { getLocalizedText, type Language } from '@/i18n/types';
 import { MAX_PERSON_NAME_PART_LENGTH } from '@/constants/names';
 import { normalizeRating, normalizeRatingCount } from '@/api/utils/rating';
