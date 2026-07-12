@@ -1,0 +1,56 @@
+@use '@/styles/helpers' as *;
+
+.plans-comparison {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+
+  &__table {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &__tabs {
+    display: grid;
+    row-gap: fluid-to-laptop(24, 20);
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+
+    .tabs,
+    .tabs__content {
+      min-width: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .tabs-navigation {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .tabs-navigation__button {
+      white-space: normal;
+      text-align: center;
+      flex: 1;
+      min-width: 0;
+      min-inline-size: 0;
+      padding-inline: fluid-to-laptop(18, 10);
+    }
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 22px;
+    margin-left: 8px;
+    padding-inline: 6px;
+    color: var(--color-white);
+    font-size: 12px;
+    font-weight: 500;
+    background-color: var(--color-red-45);
+    border-radius: 2px;
+    vertical-align: middle;
+  }
+}

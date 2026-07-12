@@ -400,6 +400,59 @@ const en: Messages = {
       },
     },
   },
+
+  subscriptionsPage: {
+    pageTitle: 'Subscriptions',
+    meta: 'StreamVibe Subscriptions page',
+    comparison: {
+      title: 'Compare our plans and find the right one for you',
+      descr:
+        "StreamVibe offers three different plans to fit your needs: Basic, Standard, and Premium. Compare the features of each plan and choose the one that's right for you.",
+
+      featuresTitle: 'Features',
+      popularBadge: 'Popular',
+
+      features: {
+        price: 'Price',
+        content: 'Content',
+        devices: 'Devices',
+        freeTrial: 'Free Trial',
+        cancelAnytime: 'Cancel Anytime',
+        hdr: 'HDR',
+        dolbyAtmos: 'Dolby Atmos',
+        adFree: 'Ad-Free',
+        offlineViewing: 'Offline Viewing',
+        familySharing: 'Family Sharing',
+      },
+
+      values: {
+        basicContent:
+          'Access to a wide selection of movies and shows, including some new releases.',
+        standardContent:
+          'Access to a wider selection of movies and shows, including most new releases and exclusive content.',
+        premiumContent:
+          'Access to the widest selection of movies and shows, including all new releases and offline viewing.',
+
+        oneDevice: 'Watch on one device simultaneously',
+        twoDevices: 'Watch on two devices simultaneously',
+        fourDevices: 'Watch on four devices simultaneously',
+
+        sevenDays: '7 Days',
+        yes: 'Yes',
+        no: 'No',
+
+        selectTitles: 'Yes, for select titles.',
+        allTitles: 'Yes, for all titles.',
+        fiveMembers: 'Yes, up to 5 family members.',
+        sixMembers: 'Yes, up to 6 family members.',
+      },
+
+      pricePeriods: {
+        month: 'Month',
+        year: 'Year',
+      },
+    },
+  },
 };
 
 export default en;

@@ -394,6 +394,57 @@ const ru: Messages = {
       },
     },
   },
+  subscriptionsPage: {
+    pageTitle: 'Подписки',
+    meta: 'Страница подписок StreamVibe',
+    comparison: {
+      title: 'Сравните планы и найдите подходящий',
+      descr:
+        'StreamVibe предлагает три разных плана под ваши задачи: Basic, Standard и Premium. Сравните возможности каждого плана и выберите тот, который подходит именно вам.',
+
+      featuresTitle: 'Возможности',
+      popularBadge: 'Популярный',
+
+      features: {
+        price: 'Цена',
+        content: 'Контент',
+        devices: 'Устройства',
+        freeTrial: 'Пробный период',
+        cancelAnytime: 'Отмена в любое время',
+        hdr: 'HDR',
+        dolbyAtmos: 'Dolby Atmos',
+        adFree: 'Без рекламы',
+        offlineViewing: 'Офлайн-просмотр',
+        familySharing: 'Семейный доступ',
+      },
+
+      values: {
+        basicContent: 'Доступ к большой подборке фильмов и сериалов, включая некоторые новинки.',
+        standardContent:
+          'Доступ к расширенной подборке фильмов и сериалов, включая большинство новинок и эксклюзивный контент.',
+        premiumContent:
+          'Доступ к самой широкой подборке фильмов и сериалов, включая все новинки и офлайн-просмотр.',
+
+        oneDevice: 'Просмотр на одном устройстве одновременно',
+        twoDevices: 'Просмотр на двух устройствах одновременно',
+        fourDevices: 'Просмотр на четырёх устройствах одновременно',
+
+        sevenDays: '7 дней',
+        yes: 'Да',
+        no: 'Нет',
+
+        selectTitles: 'Да, для выбранных тайтлов.',
+        allTitles: 'Да, для всех тайтлов.',
+        fiveMembers: 'Да, до 5 членов семьи.',
+        sixMembers: 'Да, до 6 членов семьи.',
+      },
+
+      pricePeriods: {
+        month: 'на месяц',
+        year: 'на год',
+      },
+    },
+  },
 };
 
 export default ru;

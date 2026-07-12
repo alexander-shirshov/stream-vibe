@@ -9,8 +9,14 @@ import Tabs from '@/components/Tabs';
 import TabsNavigation from '@/components/Tabs/components/TabsNavigation';
 import type { TabItem } from '@/components/Tabs/Tabs';
 import { sectionIds } from '@/constants/navConfig';
+import type { BillingPeriod } from '@/config/planItems';
 
-export default function Plans() {
+type PlansProps = {
+  activeBillingPeriod?: BillingPeriod;
+  onBillingPeriodChange?: (period: BillingPeriod) => void;
+};
+
+export default function Plans({ activeBillingPeriod, onBillingPeriodChange }: PlansProps) {
   const { t } = useLanguage();
 
   const tabsItems = useMemo<TabItem[]>(() => {
@@ -30,11 +36,30 @@ export default function Plans() {
     });
   }, [t]);
 
-  const [activeTabIndex, setActiveTabIndex] = useState<number>((): number => {
+  const [internalActiveTabIndex, setInternalActiveTabIndex] = useState<number>(() => {
     const index = planGroups.findIndex(group => group.isActive);
 
     return index >= 0 ? index : 0;
   });
+
+  const controlledActiveTabIndex =
+    activeBillingPeriod !== undefined
+      ? planGroups.findIndex(group => group.title === activeBillingPeriod)
+      : -1;
+
+  const activeTabIndex =
+    controlledActiveTabIndex >= 0 ? controlledActiveTabIndex : internalActiveTabIndex;
+
+  function handleTabChange(nextIndex: number): void {
+    const nextPeriod = planGroups[nextIndex]?.title;
+
+    if (nextPeriod && onBillingPeriodChange) {
+      onBillingPeriodChange(nextPeriod);
+      return;
+    }
+
+    setInternalActiveTabIndex(nextIndex);
+  }
 
   return (
     <Section
@@ -47,7 +72,7 @@ export default function Plans() {
           title={t('plans.title')}
           items={tabsItems}
           activeTabIndex={activeTabIndex}
-          onChange={setActiveTabIndex}
+          onChange={handleTabChange}
         />
       }
     >

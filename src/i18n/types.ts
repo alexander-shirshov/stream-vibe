@@ -400,4 +400,49 @@ export interface Messages {
       };
     };
   };
+
+  subscriptionsPage: {
+    pageTitle: string;
+    meta: string;
+    comparison: {
+      title: string;
+      descr: string;
+      featuresTitle: string;
+      popularBadge: string;
+
+      features: {
+        price: string;
+        content: string;
+        devices: string;
+        freeTrial: string;
+        cancelAnytime: string;
+        hdr: string;
+        dolbyAtmos: string;
+        adFree: string;
+        offlineViewing: string;
+        familySharing: string;
+      };
+
+      values: {
+        basicContent: string;
+        standardContent: string;
+        premiumContent: string;
+        oneDevice: string;
+        twoDevices: string;
+        fourDevices: string;
+        sevenDays: string;
+        yes: string;
+        no: string;
+        selectTitles: string;
+        allTitles: string;
+        fiveMembers: string;
+        sixMembers: string;
+      };
+
+      pricePeriods: {
+        month: string;
+        year: string;
+      };
+    };
+  };
 }

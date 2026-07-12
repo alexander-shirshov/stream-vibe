@@ -56,6 +56,7 @@ export default function TabsNavigation({
       }
 
       resizeTimeoutRef.current = window.setTimeout(() => {
+        updateIndicatorPos();
         setIsResizing(false);
       }, 150);
     }
