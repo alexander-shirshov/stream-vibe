@@ -352,21 +352,32 @@ const en: Messages = {
     description: `We're here to help you with any problems you may be having with our product.`,
     agreement: 'I agree with Terms of Use and Privacy Policy',
     submit: 'Send Message',
+    submitStatus: {
+      successTitle: 'Your message has been sent',
+      successDescription:
+        'Thanks for reaching out! We’ll review your message and reply to your email as soon as possible.',
+      sendAnother: 'Send another message',
+      sending: 'Sending...',
+      errorTitle: 'Something went wrong',
+      errorDescription: 'We couldn’t send your message. Please try again.',
+    },
     form: {
       name: {
         label: 'First Name',
         placeholder: 'Enter First Name',
-        invalidError: '',
+        invalidError: 'Enter your first name — at least 2 letters',
       },
 
       lastName: {
         label: 'Last Name',
         placeholder: 'Enter Last Name',
       },
+
       email: {
         label: 'Email',
         placeholder: 'Enter your Email',
-        noEmailError: '',
+        noEmailError: 'Enter your email address',
+        invalidEmailError: 'Enter a valid email address',
       },
 
       phone: {
@@ -377,13 +388,15 @@ const en: Messages = {
         noPhoneError: 'Enter your phone number',
         invalidPhoneError: 'Enter a valid phone number',
       },
+
       message: {
         label: 'Message',
         placeholder: 'Love u guyz...',
-        invalidError: '',
+        invalidError: 'Enter a message from 10 to 800 characters',
       },
+
       agreement: {
-        agreementError: '',
+        agreementError: 'Please accept the Terms of Use and Privacy Policy',
       },
     },
   },

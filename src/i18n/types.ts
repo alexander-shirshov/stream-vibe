@@ -358,6 +358,14 @@ export interface Messages {
     description: string;
     agreement: string;
     submit: string;
+    submitStatus: {
+      successTitle: string;
+      successDescription: string;
+      sendAnother: string;
+      sending: string;
+      errorTitle: string;
+      errorDescription: string;
+    };
     form: {
       name: {
         label: string;
@@ -372,6 +380,7 @@ export interface Messages {
         label: string;
         placeholder: string;
         noEmailError: string;
+        invalidEmailError: string;
       };
       phone: {
         label: string;

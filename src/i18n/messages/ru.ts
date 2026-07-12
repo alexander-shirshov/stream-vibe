@@ -346,40 +346,51 @@ const ru: Messages = {
     description:
       'Мы всегда готовы помочь, если у вас возникли вопросы или проблемы при использовании StreamVibe.',
     submit: 'Отправить',
+    submitStatus: {
+      successTitle: 'Ваше сообщение отправлено',
+      successDescription:
+        'Спасибо за обращение! Мы рассмотрим сообщение и ответим вам на почту как можно скорее.',
+      sendAnother: 'Отправить ещё одно сообщение',
+      sending: 'Отправляем...',
+      errorTitle: 'Что-то пошло не так',
+      errorDescription: 'Не удалось отправить сообщение. Попробуйте ещё раз.',
+    },
     form: {
       name: {
         label: 'Имя',
-        placeholder: 'Введите ваше имя',
-        invalidError: '',
+        placeholder: 'Введите имя',
+        invalidError: 'Введите имя — минимум 2 буквы',
       },
 
       lastName: {
         label: 'Фамилия',
-        placeholder: 'Введите вашу фамилию',
+        placeholder: 'Введите фамилию',
       },
 
       email: {
-        label: 'Электронная почта',
-        placeholder: 'Введите адрес электронной почты',
-        noEmailError: '',
+        label: 'Email',
+        placeholder: 'Введите ваш Email',
+        noEmailError: 'Введите email',
+        invalidEmailError: 'Введите корректный email',
       },
 
       phone: {
         label: 'Номер телефона',
-        placeholder: '+7 (999) 999-99-99',
+        placeholder: '(999) 999 99-99',
         countryPlaceholder: 'Найти страну или +код',
         countryEmptyMessage: 'Страны не найдены',
         noPhoneError: 'Введите номер телефона',
-        invalidPhoneError: 'Проверьте корректность ввода номера телефона',
+        invalidPhoneError: 'Введите корректный номер телефона',
       },
 
       message: {
         label: 'Сообщение',
-        placeholder: 'Чуваки, вы лучшие...',
-        invalidError: '',
+        placeholder: 'Опишите вашу проблему...',
+        invalidError: 'Введите сообщение от 10 до 800 символов',
       },
+
       agreement: {
-        agreementError: '',
+        agreementError: 'Примите условия использования и политику конфиденциальности',
       },
     },
   },

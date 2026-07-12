@@ -5,8 +5,12 @@
   gap: 50px fluid-to-laptop(80, 50);
   padding-block: var(--section-padding-y);
 
-  &__phone-tooltip {
+  &__field-tooltip {
     width: 100%;
+  }
+
+  &__agreement-tooltip {
+    max-width: 100%;
   }
 
   @include laptop-above {
@@ -94,6 +98,7 @@
     border: var(--border);
     border-radius: var(--border-radius-s);
     transition: border-color var(--transition-duration);
+
     @include dark-autofill;
 
     @include laptop {
@@ -107,6 +112,10 @@
     &:focus-within {
       outline: none;
       border-color: var(--color-gray-90);
+    }
+
+    &.is-invalid {
+      border-color: var(--color-red-45);
     }
 
     &:disabled {
@@ -126,5 +135,60 @@
     resize: vertical;
     min-height: fluid(163, 109);
     padding-block: fluid-to-laptop(20, 16);
+  }
+
+  //SUBMIT
+
+  &__submit-result {
+    display: flex;
+    align-items: center;
+    min-height: 100%;
+    padding: fluid(50, 24);
+    background-color: var(--color-black-06);
+    border: var(--border);
+    border-radius: var(--border-radius-l);
+
+    @include laptop {
+      border-radius: var(--border-radius-m);
+    }
+  }
+
+  &__submit-result-inner {
+    display: grid;
+    row-gap: fluid-to-laptop(20, 16);
+    max-width: 620px;
+  }
+
+  &__submit-result-title {
+    margin: 0;
+    color: var(--color-white);
+  }
+
+  &__submit-result-description {
+    margin: 0;
+    color: var(--color-gray-60);
+  }
+
+  &__submit-result-button {
+    justify-self: start;
+    margin-top: fluid-to-laptop(12, 8);
+
+    @include mobile-s {
+      justify-self: stretch;
+    }
+  }
+
+  &__submit-error {
+    display: grid;
+    row-gap: 6px;
+    padding: 14px 16px;
+    color: var(--color-white);
+    background-color: rgb(244 67 54 / 0.12);
+    border: 1px solid var(--color-red-45);
+    border-radius: var(--border-radius-xs);
+
+    span {
+      color: var(--color-gray-60);
+    }
   }
 }
