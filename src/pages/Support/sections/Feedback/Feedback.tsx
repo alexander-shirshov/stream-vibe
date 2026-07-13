@@ -11,6 +11,7 @@ import Checkbox from '@/components/Checkbox';
 import LinkButton from '@/components/Button';
 import Tooltip from '@/components/Tooltip';
 import PhoneInput, { type PhoneInputValue } from '@/components/PhoneInput';
+import supportImage from '@/assets/images/support/1.png';
 
 import { getLocale, type Language } from '@/i18n/types';
 
@@ -198,7 +199,7 @@ export default function Feedback() {
             <p>{t('supportPage.description')}</p>
           </div>
         </div>
-        <img className="feedback__image" src="/src/assets/images/support/1.png" loading="lazy" />
+        <img className="feedback__image" src={supportImage} alt="" loading="lazy" />
       </div>
 
       {isSubmitted ? (
