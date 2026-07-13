@@ -6,7 +6,7 @@ import type {
 } from '@/constants/navConfig';
 import './Footer.scss';
 import clsx from 'clsx';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { scrollToHash } from '@/utils/hashScroll';
 import { getPathFromFooterNavLink } from '@/utils/links';
 import { useLanguage } from '@/i18n/LanguageProvider';

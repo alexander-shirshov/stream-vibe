@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '@/i18n/LanguageProvider';
 import { getTitle } from '@/utils/seo';

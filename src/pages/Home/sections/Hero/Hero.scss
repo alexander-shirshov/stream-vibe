@@ -124,6 +124,13 @@
   transform-origin: center;
 }
 
+@supports (-webkit-touch-callout: none) {
+  //ios fix
+  .hero__play-icon foreignObject {
+    display: none;
+  }
+}
+
 .hero__play-icon .play-glass-icon__ring-fill-stop-1,
 .hero__play-icon .play-glass-icon__ring-fill-stop-2,
 .hero__play-icon .play-glass-icon__ring-stroke-stop-1,
