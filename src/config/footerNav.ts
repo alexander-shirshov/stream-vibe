@@ -10,10 +10,10 @@ export const footerNavSections: FooterSection[] = [
   {
     main: { route: 'home', labelKey: 'home' },
     links: [
-      { href: '#categories', labelKey: 'homeCategories' },
-      { href: '#devices', labelKey: 'homeDevices' },
-      { href: '#pricing', labelKey: 'homePricing' },
-      { href: '#faq', labelKey: 'homeFaq' },
+      { route: 'home', hash: sectionIds.categories, labelKey: 'homeCategories' },
+      { route: 'home', hash: sectionIds.devices, labelKey: 'homeDevices' },
+      { route: 'home', hash: sectionIds.pricing, labelKey: 'homePricing' },
+      { route: 'home', hash: sectionIds.faq, labelKey: 'homeFaq' },
     ],
   },
   {
@@ -36,13 +36,31 @@ export const footerNavSections: FooterSection[] = [
   },
   {
     main: { route: 'support', labelKey: 'support' },
-    links: [{ href: '#contact', labelKey: 'supportContact' }],
+    links: [
+      {
+        route: 'support',
+        hash: sectionIds.support,
+        labelKey: 'supportContact',
+      },
+    ],
   },
   {
-    main: { route: 'subscriptions', labelKey: 'subscriptions' },
+    main: {
+      route: 'subscriptions',
+      hash: sectionIds.subscriptionsPlans,
+      labelKey: 'subscriptions',
+    },
     links: [
-      { href: '#plans', labelKey: 'subscriptionsPlans' },
-      { href: '#features', labelKey: 'subscriptionsFeatures' },
+      {
+        route: 'subscriptions',
+        hash: sectionIds.subscriptionsPlans,
+        labelKey: 'subscriptionsPlans',
+      },
+      {
+        route: 'subscriptions',
+        hash: sectionIds.subscriptionsComparison,
+        labelKey: 'subscriptionsFeatures',
+      },
     ],
   },
 ];

@@ -11,6 +11,7 @@ import { getLocale } from '@/i18n/types';
 
 import { useLanguage } from '@/i18n/LanguageProvider';
 import { useIsBelowBreakpoint } from '@/hooks/useBreakpoints';
+import { sectionIds } from '@/constants/navConfig';
 
 import {
   planComparisonRows,
@@ -125,6 +126,7 @@ export default function PlansComparison({ activeBillingPeriod }: PlansComparison
 
   return (
     <Section
+      id={sectionIds.subscriptionsComparison}
       className="plans-comparison"
       title={t('subscriptionsPage.comparison.title')}
       titleId="plans-comparison-title"

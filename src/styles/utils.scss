@@ -52,6 +52,12 @@
   overflow: hidden;
 }
 
+.section,
+.collections__group,
+.hash-section {
+  scroll-margin-top: 100px;
+}
+
 .modal {
   position: fixed;
   inset: 0;

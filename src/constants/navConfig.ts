@@ -26,6 +26,11 @@ export const sectionIds = {
   showsNew: 'showsNew',
   showsPopular: 'showsPopular',
   showsMustWatch: 'showsMustWatch',
+
+  subscriptionsPlans: 'subscriptionsPlans',
+  subscriptionsComparison: 'subscriptionsComparison',
+
+  support: 'support',
 } as const;
 
 export type SectionId = (typeof sectionIds)[keyof typeof sectionIds];

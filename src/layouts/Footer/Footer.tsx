@@ -6,7 +6,8 @@ import type {
 } from '@/constants/navConfig';
 import './Footer.scss';
 import clsx from 'clsx';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import { scrollToHash } from '@/utils/hashScroll';
 import { getPathFromFooterNavLink } from '@/utils/links';
 import { useLanguage } from '@/i18n/LanguageProvider';
 import LinkButton from '@/components/Button';
@@ -30,11 +31,23 @@ export default function Footer({ navSections, socialSection, extraSection }: Foo
     }
 
     const path = getPathFromFooterNavLink(link);
+    const pathname = path.split('#')[0];
+
+    const handleClick = () => {
+      if (!link.hash) return;
+
+      const isCurrentPage = location.pathname === pathname;
+
+      if (isCurrentPage) {
+        scrollToHash(link.hash);
+      }
+    };
 
     return (
       <NavLink
         to={path}
-        end={path === '/'}
+        end={pathname === '/'}
+        onClick={handleClick}
         className={({ isActive }) => clsx(className, isActive && 'is-active')}
       >
         {t(`footerLink.${link.labelKey}`)}

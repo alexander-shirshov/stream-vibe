@@ -6,9 +6,14 @@ import { Categories } from './sections/Categories/Categories';
 import Devices from './sections/Devices';
 import Questions from '@/pages/Home/sections/Questions';
 import Plans from './sections/Plans/index';
+import { useHashScroll } from '@/hooks/useHashScroll';
+import { useIsBelowBreakpoint } from '@/hooks/useBreakpoints';
 
 export default function Home() {
   const { t } = useLanguage();
+  const isMobile = useIsBelowBreakpoint('mobile');
+
+  useHashScroll(isMobile);
 
   return (
     <>
